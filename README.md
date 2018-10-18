@@ -1,1 +1,2 @@
 # atter
+npm run sever
