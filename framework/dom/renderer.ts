@@ -1,22 +1,20 @@
 export class Renderer {
-    private renderElements: HTMLCollectionOf<Element>[] = [];
+    private renderElements: ShadowRoot[] = [];
 
     constructor() {
     }
 
     public renderTo(selector: string, template: string): void {
-        let elementsToRenderIn: HTMLCollectionOf<Element> = this.renderElements[selector];
-        if(!elementsToRenderIn) {
-            elementsToRenderIn = document.getElementsByTagName(selector);
-            this.renderElements[selector] = elementsToRenderIn; 
+        let elementToRenderIn: ShadowRoot = this.renderElements[selector];
+        if(!elementToRenderIn) {
+            elementToRenderIn = document.querySelector(selector).attachShadow({ mode: 'closed'});
+            this.renderElements[selector] = elementToRenderIn;
         }
 
-        this.render(elementsToRenderIn, template);
+        this.render(elementToRenderIn, template);
     }
 
-    private render(elements: HTMLCollectionOf<Element>, template: string): void {
-        for(const element of elements) {
+    private render(element: ShadowRoot, template: string): void {
             element.innerHTML = template;
-        }
     }
 }

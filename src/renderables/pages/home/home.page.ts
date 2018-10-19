@@ -13,9 +13,5 @@ export class HomePage {
 
     constructor() {
         this.elements.push(this.counterValue.toString());
-        setTimeout(() => {
-            this.counterValue++;
-            this.elements.push(this.counterValue.toString());
-        }, 1000);
     }
 }
