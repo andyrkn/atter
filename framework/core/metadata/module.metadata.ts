@@ -1,8 +1,8 @@
 import { Route } from "../../router/route";
-import { PagesDeclaration } from "./pages-declaration";
+import { RenderableDeclaration } from "./renderable-declaration";
 
 export interface ModuleMetadata {
-    pagesDeclaration?: PagesDeclaration,
+    renderableDeclaration?: RenderableDeclaration,
     injectable?: Function[],
     route?: Route[]
 }

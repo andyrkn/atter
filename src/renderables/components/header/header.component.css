@@ -1,0 +1,9 @@
+ul {
+    display: flex;
+}
+
+ul li {
+    color:  red;
+    font-size: 20px;
+    list-style: none;
+}

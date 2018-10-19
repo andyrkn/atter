@@ -10,7 +10,7 @@ import { NavigationState } from "./router/utils/navigation-state.enum";
 export function startApplication<T>(application: Application<T>): void {
     AppContainer.mergeMetadata();
 
-    const pagesOrchestrator = AppContainer.pagesOrchestrator;
+    const pagesOrchestrator = AppContainer.orchestrator;
     const renderer = new Renderer();
     const styleHandler = new StyleHandler();
 
@@ -22,6 +22,6 @@ export function startApplication<T>(application: Application<T>): void {
     // this instances will be injected into pages later on
     // DependencyInjection.register(Renderer, renderer) etc... or something similar;
     const pageManipulatorHandler = new PageManipulatorHandler(router, renderer, styleHandler, instanceManager);
-
+    
     const routingManager = new RoutingManager(pagesOrchestrator, navigationState, pageManipulatorHandler);
 }

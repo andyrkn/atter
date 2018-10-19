@@ -1,8 +1,8 @@
-import { Page } from "@web/core";
 import { UrlTree } from "@web/router";
+import { Renderable } from "@web/core";
 
-@Page({
-    folder: 'login',
+@Renderable({
+    folder: 'pages/login',
     templateUrl: '/login.page.html',
     styleUrl: '/login.page.html'
 })

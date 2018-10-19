@@ -1,12 +1,12 @@
 import { Module } from "@web/core";
-import { HomePage } from "./pages/home/home.page";
 import { appRoute } from "./app.routing";
-import { LoginPage } from "./pages/login/login.page";
-import { NotFoundPage } from "./pages/not-found/not-found.page";
+import { HomePage } from "./renderables/pages/home/home.page";
+import { LoginPage } from "./renderables/pages/login/login.page";
+import { NotFoundPage } from "./renderables/pages/not-found/not-found.page";
 
 @Module({
-    pagesDeclaration: {
-        pagesFolder: 'src/pages',
+    renderableDeclaration: {
+        folderPath: 'src/renderables',
         declarations: [
             HomePage,
             LoginPage,

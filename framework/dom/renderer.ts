@@ -5,7 +5,7 @@ export class Renderer {
         this.renderElement = document.getElementsByTagName('render-container')[0];
     }
 
-    public renderToRouter(template: string): void {
+    public renderTo(selector: string, template: string): void {
         this.render(this.renderElement, template);
     }
 

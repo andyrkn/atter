@@ -1,7 +1,7 @@
-import { Page } from "@web/core";
+import { Renderable } from "@web/core";
 
-@Page({
-    folder: 'not-found',
+@Renderable({
+    folder: 'pages/not-found',
     templateUrl: './not-found.page.html',
     styleUrl: './not-found.page.css'
 })

@@ -1,17 +1,16 @@
 import { ModuleMetadata } from "../metadata/module.metadata";
-import { PagesOrchestrator } from "./utils/pages-orchestrator";
-import { PageMetadata } from "../metadata/page.metadata";
+import { RenderableOrchestrator } from "./utils/renderable-orchestrator";
+import { RenderableMetadata } from "../metadata/renderable.metadata";
 import { TrackChangesMetadata } from "../metadata/track-changes.metadata";
 
 export class AppContainer {
 
-    private static _pagesOrchestrator: PagesOrchestrator = new PagesOrchestrator();
+    private static _renderableOrchestrator: RenderableOrchestrator = new RenderableOrchestrator();
     private static modules: ModuleMetadata[] = [];
     private static trackChanges: TrackChangesMetadata[] = [];
 
-
-    public static addPage(targetClass: Function, pageMetadata: PageMetadata): void {
-        this._pagesOrchestrator.addPage(targetClass, pageMetadata);
+    public static addRenderable(targetClass: Function, pageMetadata: RenderableMetadata): void {
+        this._renderableOrchestrator.addPage(targetClass, pageMetadata);
     }
 
     public static addModule(moduleMetadata: ModuleMetadata): void {
@@ -22,21 +21,21 @@ export class AppContainer {
         this.trackChanges.push(trackChangesPropertyMetadata);
     }
 
-    public static get pagesOrchestrator(): PagesOrchestrator {
-        return this._pagesOrchestrator;
+    public static get orchestrator(): RenderableOrchestrator {
+        return this._renderableOrchestrator;
     }
 
     public static mergeMetadata(): void {
         for(const mod of this.modules) {
-            if (mod.route && mod.pagesDeclaration) {
+            if (mod.route && mod.renderableDeclaration) {
                 for (const route of mod.route) {
-                    this.pagesOrchestrator.setPathToPage(route.page.name, route.path, mod.pagesDeclaration.pagesFolder);
+                    this.orchestrator.setPathToPage(route.page.name, route.path, mod.renderableDeclaration.folderPath);
                 }
             }
         }
 
         for (const property of this.trackChanges) {
-            this.pagesOrchestrator.addTrackChangesProperty(property.targetClass.name, property.propertyName);
+            this.orchestrator.addTrackChangesProperty(property.targetClass.name, property.propertyName);
         }
     }
 }

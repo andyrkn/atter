@@ -1,4 +1,4 @@
-import { PagesOrchestrator, PageManipulator } from "@web/core";
+import { RenderableOrchestrator, RenderableManipulator } from "@web/core";
 import { UrlTree } from "./utils/url-tree";
 import { Handler } from "@web/core/utils/handler";
 import { Subject } from "rxjs";
@@ -6,21 +6,21 @@ import { NavigationState } from "./utils/navigation-state.enum";
 
 export class RoutingManager {
     
-    constructor(pagesOrchestrator: PagesOrchestrator, navigationSate: Subject<NavigationState>, pageManuipulatorHandler: Handler<PageManipulator> ) {
+    constructor(pagesOrchestrator: RenderableOrchestrator, navigationSate: Subject<NavigationState>, pageManuipulatorHandler: Handler<RenderableManipulator> ) {
         addEventListener('hashchange', () => this.handleRouteChange(pagesOrchestrator, navigationSate, pageManuipulatorHandler));
         addEventListener('load', () => this.handleRouteChange(pagesOrchestrator, navigationSate, pageManuipulatorHandler));
     }
 
-    private handleRouteChange(pagesOrchestrator: PagesOrchestrator, navigationState: Subject<NavigationState>, pageManuipulatorHandler: Handler<PageManipulator>): void  {
+    private handleRouteChange(pagesOrchestrator: RenderableOrchestrator, navigationState: Subject<NavigationState>, pageManuipulatorHandler: Handler<RenderableManipulator>): void  {
         navigationState.next(NavigationState.Start);
         
         const urlTree: UrlTree = new UrlTree();
-        const page: PageManipulator = pagesOrchestrator.getPageFor(urlTree);
+        const page: RenderableManipulator = pagesOrchestrator.getPageFor(urlTree);
 
         if (page) {
             pageManuipulatorHandler.handle(page);
         } else {
-            const defaultPage: PageManipulator = pagesOrchestrator.getDefaultPage();
+            const defaultPage: RenderableManipulator = pagesOrchestrator.getDefaultPage();
             if (defaultPage) {
                 pageManuipulatorHandler.handle(defaultPage);
             }

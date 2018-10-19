@@ -1,9 +1,9 @@
-import { PagesOrchestrator } from "./utils/pages-orchestrator";
+import { RenderableOrchestrator } from "./utils/renderable-orchestrator";
 
 export class InstanceManager {
-    private pageOrchestrator: PagesOrchestrator;
+    private pageOrchestrator: RenderableOrchestrator;
 
-    constructor(pageOrchestrator: PagesOrchestrator) {
+    constructor(pageOrchestrator: RenderableOrchestrator) {
         this.pageOrchestrator = pageOrchestrator;
     }
 
