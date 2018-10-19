@@ -32,6 +32,10 @@ export class AppContainer {
                     this.orchestrator.setPathToPage(route.page.name, route.path, mod.renderableDeclaration.folderPath);
                 }
             }
+
+            for (const component of this.orchestrator.getComponents()) {
+                component.setFolderPath(mod.renderableDeclaration.folderPath);
+            }
         }
 
         for (const property of this.trackChanges) {

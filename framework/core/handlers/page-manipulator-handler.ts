@@ -1,10 +1,10 @@
 import { InstanceManager, RenderableManipulator } from "@web/core";
 import { StyleHandler, Renderer } from "@web/dom";
-import { Router } from "../router";
-import { NavigationState } from "../utils/navigation-state.enum";
-
+import { Router } from "@web/router";
 import { RenderableManipulatorHandler } from "./renderable-manipulator-handler";
+
 import { Subject } from "rxjs";
+import { NavigationState } from "@web/router/utils/navigation-state.enum";
 
 export class PageManipulatorHandler extends RenderableManipulatorHandler {
     
@@ -26,7 +26,7 @@ export class PageManipulatorHandler extends RenderableManipulatorHandler {
         return this.whenToUnwatchSubject;
     }
 
-    protected whereToRender(component: RenderableManipulator): string {
+    protected whereToRender(page: RenderableManipulator): string {
         return 'render-container';
     }
 }

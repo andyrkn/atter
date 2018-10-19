@@ -1,15 +1,22 @@
 export class Renderer {
-    private renderElement: Element;
+    private renderElements: HTMLCollectionOf<Element>[] = [];
 
     constructor() {
-        this.renderElement = document.getElementsByTagName('render-container')[0];
     }
 
     public renderTo(selector: string, template: string): void {
-        this.render(this.renderElement, template);
+        let elementsToRenderIn: HTMLCollectionOf<Element> = this.renderElements[selector];
+        if(!elementsToRenderIn) {
+            elementsToRenderIn = document.getElementsByTagName(selector);
+            this.renderElements[selector] = elementsToRenderIn; 
+        }
+
+        this.render(elementsToRenderIn, template);
     }
 
-    private render(element: Element, template: string): void {
-        element.innerHTML = template;
+    private render(elements: HTMLCollectionOf<Element>, template: string): void {
+        for(const element of elements) {
+            element.innerHTML = template;
+        }
     }
 }

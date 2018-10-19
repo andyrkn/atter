@@ -1,5 +1,6 @@
 import { InstanceManager, RenderableManipulator } from "@web/core";
 import { Renderer, StyleHandler } from "@web/dom";
+
 import { Subject } from "rxjs";
 
 import { RenderableManipulatorHandler } from "./renderable-manipulator-handler";

@@ -51,8 +51,11 @@ export class RenderableManipulator {
 
     public setPathTo(value: RoutePath, folder: string): void {
         this.path = value;
-        this.folder = folder;
+        this.setFolderPath(folder);
+    }
 
+    public setFolderPath(folder: string): void {
+        this.folder = folder;
     }
 
     public addTrackProperty(value: string): void {
@@ -85,7 +88,7 @@ export class RenderableManipulator {
     }
 
     public get isComponent(): boolean {
-        return !this.metadata.styleUrl && !this.path;
+        return this.metadata.selector && !this.path;
     }
 
     public get selector(): string {

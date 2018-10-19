@@ -1,6 +1,7 @@
 import { Handler, RenderableManipulator, InstanceManager } from "@web/core";
 import { Renderer, StyleHandler } from "@web/dom";
 import { Subscription, Subject } from "rxjs";
+
 import * as WatchJS from 'melanke-watchjs';
 
 export abstract class RenderableManipulatorHandler implements Handler<RenderableManipulator> {
@@ -15,7 +16,6 @@ export abstract class RenderableManipulatorHandler implements Handler<Renderable
     }
 
     public handle(objectToHandle: RenderableManipulator): void {
-        const interpretation: Function = objectToHandle.getInterpretation();
         let context: Function = this.instanceManager.getInstance(objectToHandle.renderableClass.prototype.constructor);
 
         const contextChangeSubject: Subject<boolean> = new Subject();

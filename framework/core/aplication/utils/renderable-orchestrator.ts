@@ -11,7 +11,7 @@ export class RenderableOrchestrator {
     }
 
     public setPathToPage(pageClassName: string, path: string, pageFolder: string): void {
-        var pageToSetPath = this.renderables.find((x: RenderableManipulator) => x.hasClassName(pageClassName));
+        const pageToSetPath = this.renderables.find((x: RenderableManipulator) => x.hasClassName(pageClassName));
         if (pageToSetPath) {
             const routePath = new RoutePath(path);
             pageToSetPath.setPathTo(routePath, pageFolder);

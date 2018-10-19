@@ -1,8 +1,7 @@
 import { Module } from "@web/core";
 import { appRoute } from "./app.routing";
-import { HomePage } from "./renderables/pages/home/home.page";
-import { LoginPage } from "./renderables/pages/login/login.page";
-import { NotFoundPage } from "./renderables/pages/not-found/not-found.page";
+import { HomePage, LoginPage, NotFoundPage } from "./renderables/pages";
+import { HeaderComponent } from "./renderables/components";
 
 @Module({
     renderableDeclaration: {
@@ -10,7 +9,8 @@ import { NotFoundPage } from "./renderables/pages/not-found/not-found.page";
         declarations: [
             HomePage,
             LoginPage,
-            NotFoundPage
+            NotFoundPage,
+            HeaderComponent
         ]
     },
     route: appRoute

@@ -1,17 +1,28 @@
 import { RenderableOrchestrator, RenderableManipulator } from "@web/core";
+import { PageManipulatorHandler } from "@web/core/handlers";
 import { UrlTree } from "./utils/url-tree";
-import { Handler } from "@web/core/utils/handler";
-import { Subject } from "rxjs";
 import { NavigationState } from "./utils/navigation-state.enum";
 
+import { Subject } from "rxjs";
+
 export class RoutingManager {
-    
-    constructor(pagesOrchestrator: RenderableOrchestrator, navigationSate: Subject<NavigationState>, pageManuipulatorHandler: Handler<RenderableManipulator> ) {
-        addEventListener('hashchange', () => this.handleRouteChange(pagesOrchestrator, navigationSate, pageManuipulatorHandler));
-        addEventListener('load', () => this.handleRouteChange(pagesOrchestrator, navigationSate, pageManuipulatorHandler));
+
+    private orchestrator: RenderableOrchestrator;
+    private navigationState: Subject<NavigationState>;
+    private handler: PageManipulatorHandler;
+
+    constructor(pagesOrchestrator: RenderableOrchestrator, navigationState: Subject<NavigationState>, pageManuipulatorHandler: PageManipulatorHandler ) {
+        this.orchestrator = pagesOrchestrator;
+        this.navigationState = navigationState;
+        this.handler = pageManuipulatorHandler;
     }
 
-    private handleRouteChange(pagesOrchestrator: RenderableOrchestrator, navigationState: Subject<NavigationState>, pageManuipulatorHandler: Handler<RenderableManipulator>): void  {
+    public manage(): void {
+        addEventListener('hashchange', () => this.handleRouteChange(this.orchestrator, this.navigationState, this.handler));
+        addEventListener('load', () => this.handleRouteChange(this.orchestrator, this.navigationState, this.handler));
+    }
+
+    private handleRouteChange(pagesOrchestrator: RenderableOrchestrator, navigationState: Subject<NavigationState>, pageManuipulatorHandler: PageManipulatorHandler): void  {
         navigationState.next(NavigationState.Start);
         
         const urlTree: UrlTree = new UrlTree();
