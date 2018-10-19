@@ -15,6 +15,6 @@ export class Renderer {
     }
 
     private render(element: ShadowRoot, template: string): void {
-            element.innerHTML = template;
+        element.innerHTML = template;
     }
 }

@@ -1,2 +1,2 @@
 # atter
-npm run sever
+npm run seve
