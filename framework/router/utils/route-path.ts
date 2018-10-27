@@ -11,7 +11,7 @@ export class RoutePath {
             this._isDefaultRoutePath = true;
         }
 
-        if (path.indexOf('/') !=0 ) {
+        if (path.indexOf('/') !== 0) {
             path = `/${path}`;
         }
 
@@ -21,7 +21,7 @@ export class RoutePath {
     private normalizePath(path: string): void {
         this._rawPath = path;
         const parameterIndex = path.lastIndexOf(':');
-        if (parameterIndex != -1) {
+        if (parameterIndex !== -1) {
             this._path = this._rawPath.slice(0, parameterIndex - 1);
             this._parameterName = this._rawPath.slice(parameterIndex + 1);
             this._supportsParameter = true;

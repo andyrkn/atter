@@ -1,4 +1,4 @@
 export interface TrackChangesMetadata {
-    targetClass: Function,
-    propertyName: string
+    targetClass: Function;
+    propertyName: string;
 }

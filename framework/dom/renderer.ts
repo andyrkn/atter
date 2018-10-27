@@ -6,8 +6,8 @@ export class Renderer {
 
     public renderTo(selector: string, template: string): void {
         let elementToRenderIn: ShadowRoot = this.renderElements[selector];
-        if(!elementToRenderIn) {
-            elementToRenderIn = document.querySelector(selector).attachShadow({ mode: 'closed'});
+        if (!elementToRenderIn) {
+            elementToRenderIn = document.querySelector(selector).attachShadow({ mode: 'closed' });
             this.renderElements[selector] = elementToRenderIn;
         }
 

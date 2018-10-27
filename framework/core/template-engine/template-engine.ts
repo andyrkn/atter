@@ -1,10 +1,10 @@
 export class TemplateEngine {
 
-    public static interpret(tempalte: string): Function {
-        let interpretation: Function = new Function("obj",
+    public static interpret(template: string): Function {
+        const interpretation: Function = new Function("obj",
             "var p=[],print=function(){p.push.apply(p,arguments);};" +
             "with(obj){p.push('" +
-            tempalte
+            template
                 .replace(/[\r\t\n]/g, " ")
                 .split("<<").join("\t")
                 .replace(/((^|\>>)[^\t]*)'/g, "$1\r")

@@ -21,11 +21,11 @@ export function startApplication<T>(application: Application<T>): void {
 
     const instanceManager = new InstanceManager(orchestrator);
     // TODO: add instances to dependency injection container (for now we only need router instance)
-    // this instances will be injected into pages later on
+    // these instances will be injected into pages later on
     // DependencyInjection.register(Renderer, renderer) etc... or something similar;
-    const componentManipulatorHandler =  new ComponentManipulatorHandler(renderer, styleHandler, instanceManager);
+    const componentManipulatorHandler = new ComponentManipulatorHandler(renderer, styleHandler, instanceManager);
     const pageManipulatorHandler = new PageManipulatorHandler(router, renderer, styleHandler, instanceManager);
-    
+
     const componentManager = new ComponentManager(orchestrator, componentManipulatorHandler);
     componentManager.manage();
 

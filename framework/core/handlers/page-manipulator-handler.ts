@@ -7,7 +7,7 @@ import { Subject } from "rxjs";
 import { NavigationState } from "@web/router/utils/navigation-state.enum";
 
 export class PageManipulatorHandler extends RenderableManipulatorHandler {
-    
+
     private router: Router;
     private whenToUnwatchSubject: Subject<boolean> = new Subject<boolean>();
 

@@ -21,7 +21,7 @@ export class RenderableOrchestrator {
     }
 
     public addTrackChangesProperty(pageClassName: string, propertyName: string): void {
-        var pageToSetTrackChangesProperty = this.renderables.find((x: RenderableManipulator) => x.hasClassName(pageClassName));
+        const pageToSetTrackChangesProperty = this.renderables.find((x: RenderableManipulator) => x.hasClassName(pageClassName));
 
         if (pageToSetTrackChangesProperty) {
             pageToSetTrackChangesProperty.addTrackProperty(propertyName);
@@ -39,6 +39,6 @@ export class RenderableOrchestrator {
     }
 
     public getComponents(): RenderableManipulator[] {
-        return this.renderables.filter((x :RenderableManipulator) => x.isComponent);
+        return this.renderables.filter((x: RenderableManipulator) => x.isComponent);
     }
 }

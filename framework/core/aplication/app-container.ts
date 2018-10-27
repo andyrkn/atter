@@ -17,7 +17,7 @@ export class AppContainer {
         this.modules.push(moduleMetadata);
     }
 
-    public static addTrackChangesProperty(trackChangesPropertyMetadata:  TrackChangesMetadata): void {
+    public static addTrackChangesProperty(trackChangesPropertyMetadata: TrackChangesMetadata): void {
         this.trackChanges.push(trackChangesPropertyMetadata);
     }
 
@@ -26,7 +26,7 @@ export class AppContainer {
     }
 
     public static mergeMetadata(): void {
-        for(const mod of this.modules) {
+        for (const mod of this.modules) {
             if (mod.route && mod.renderableDeclaration) {
                 for (const route of mod.route) {
                     this.orchestrator.setPathToPage(route.page.name, route.path, mod.renderableDeclaration.folderPath);

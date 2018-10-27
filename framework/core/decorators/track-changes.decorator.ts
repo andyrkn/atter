@@ -6,5 +6,5 @@ export function TrackChanges() {
             targetClass: targetObject.constructor,
             propertyName: propertyName
         });
-    }
-};
+    };
+}

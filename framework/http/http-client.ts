@@ -26,13 +26,13 @@ export class HttpClient {
         this.request(req, 'options', body, null, callback, error);
     }
 
-    public request (req, requestVerb, body, headers, callback, error) {
-        var xmlHttp = new XMLHttpRequest();
+    public request(req, requestVerb, body, headers, callback, error) {
+        const xmlHttp = new XMLHttpRequest();
 
         xmlHttp.onreadystatechange = () => {
-            if (xmlHttp.readyState == 4) {
+            if (xmlHttp.readyState === 4) {
                 if (xmlHttp.status >= 400) {
-                    if(error) {
+                    if (error) {
                         error(new HttpResponse(xmlHttp));
                     }
                 } else {
@@ -42,20 +42,20 @@ export class HttpClient {
                     }
                 }
             }
-        }
+        };
 
         xmlHttp.onerror = () => {
-            if(error) {
+            if (error) {
                 error(new HttpResponse(xmlHttp));
             }
-        }
+        };
 
         xmlHttp.open(requestVerb, req, true);
-        
-        // TODO: introduce interceptor 
+
+        // TODO: introduce interceptor
         // TODO: use fetch api maybe
         const token = localStorage.getItem('userToken');
-        if(token) {
+        if (token) {
             xmlHttp.setRequestHeader('authorization', token);
         }
         xmlHttp.send(body);

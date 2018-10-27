@@ -8,7 +8,7 @@ export abstract class RenderableManipulatorHandler implements Handler<Renderable
     protected renderer: Renderer;
     protected styleHandler: StyleHandler;
     protected instanceManager: InstanceManager;
-    
+
     constructor(renderer: Renderer, styleHandler: StyleHandler, instanceManager: InstanceManager) {
         this.renderer = renderer;
         this.styleHandler = styleHandler;
@@ -16,7 +16,7 @@ export abstract class RenderableManipulatorHandler implements Handler<Renderable
     }
 
     public handle(objectToHandle: RenderableManipulator): void {
-        let context: Function = this.instanceManager.getInstance(objectToHandle.renderableClass.prototype.constructor);
+        const context: Function = this.instanceManager.getInstance(objectToHandle.renderableClass.prototype.constructor);
 
         const contextChangeSubject: Subject<boolean> = new Subject();
 
@@ -25,7 +25,7 @@ export abstract class RenderableManipulatorHandler implements Handler<Renderable
 
         const subscription: Subscription = contextChangeSubject.subscribe(() => {
             this.renderTemplate(objectToHandle, context);
-        })
+        });
 
         this.watch(objectToHandle, context, contextChangeSubject);
         this.whenToUnwatch().subscribe(() => this.unwatch(objectToHandle, context, subscription));

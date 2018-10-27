@@ -8,15 +8,15 @@ export class UrlTree {
     constructor() {
 
         this._rawUrl = location.hash.slice(1);
-        if(this.rawUrl.endsWith('/')) {
+        if (this.rawUrl.endsWith('/')) {
             this._rawUrl = this._rawUrl.slice(0, this._rawUrl.lastIndexOf('/'));
         }
 
         this._segments = this._rawUrl.slice(1).split('/');
-        let parameterIndex = this._rawUrl.lastIndexOf('/');
-        if (parameterIndex != 0) {
+        const parameterIndex = this._rawUrl.lastIndexOf('/');
+        if (parameterIndex !== 0) {
             this._hasParameter = true;
-            this._routeParameter = this._rawUrl.slice(parameterIndex +1);
+            this._routeParameter = this._rawUrl.slice(parameterIndex + 1);
             this._rawUrl = this._rawUrl.slice(0, parameterIndex);
         }
     }

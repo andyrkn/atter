@@ -19,13 +19,13 @@ export class RenderableManipulator {
     private style: string;
 
     public static Create(renderableClass: Function, metadata: RenderableMetadata): RenderableManipulator {
-        let pageManipulator = new RenderableManipulator();
+        const pageManipulator = new RenderableManipulator();
         pageManipulator._renderableClass = renderableClass;
         pageManipulator.metadata = metadata;
         return pageManipulator;
     }
 
-    public hasClassName(pageClassName: string) : boolean {
+    public hasClassName(pageClassName: string): boolean {
         return pageClassName === this._renderableClass.name;
     }
 
@@ -107,11 +107,11 @@ export class RenderableManipulator {
 
     private getUrl(relativeUrl: string): string {
         let url = relativeUrl;
-        if (url.indexOf('.') != 0) {
+        if (url.indexOf('.') !== 0) {
             url.slice(1);
         }
 
-        if(url.indexOf('/') !=0 ) {
+        if (url.indexOf('/') !== 0) {
             url = `/${url}`;
         }
 

@@ -5,13 +5,12 @@ export class Utils {
             result = JSON.parse(text);
         } catch {
             result = text;
-        } finally {
-            return result;
         }
+        return result;
     }
 
     public static readTextFile(file: string): string {
-        var xmlhttp = new XMLHttpRequest();
+        const xmlhttp = new XMLHttpRequest();
         xmlhttp.open("GET", file, false);
         xmlhttp.send();
         return xmlhttp.responseText;

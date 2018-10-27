@@ -11,7 +11,8 @@ export class RoutingManager {
     private navigationState: Subject<NavigationState>;
     private handler: PageManipulatorHandler;
 
-    constructor(pagesOrchestrator: RenderableOrchestrator, navigationState: Subject<NavigationState>, pageManuipulatorHandler: PageManipulatorHandler ) {
+    constructor(pagesOrchestrator: RenderableOrchestrator, navigationState: Subject<NavigationState>,
+                pageManuipulatorHandler: PageManipulatorHandler) {
         this.orchestrator = pagesOrchestrator;
         this.navigationState = navigationState;
         this.handler = pageManuipulatorHandler;
@@ -22,9 +23,10 @@ export class RoutingManager {
         addEventListener('load', () => this.handleRouteChange(this.orchestrator, this.navigationState, this.handler));
     }
 
-    private handleRouteChange(pagesOrchestrator: RenderableOrchestrator, navigationState: Subject<NavigationState>, pageManuipulatorHandler: PageManipulatorHandler): void  {
+    private handleRouteChange(pagesOrchestrator: RenderableOrchestrator, navigationState: Subject<NavigationState>,
+                              pageManuipulatorHandler: PageManipulatorHandler): void {
         navigationState.next(NavigationState.Start);
-        
+
         const urlTree: UrlTree = new UrlTree();
         const page: RenderableManipulator = pagesOrchestrator.getPageFor(urlTree);
 

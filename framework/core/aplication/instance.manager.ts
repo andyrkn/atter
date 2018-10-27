@@ -8,10 +8,13 @@ export class InstanceManager {
     }
 
     public getInstance(classToInstantiate: Function): Function {
-        let instance = new classToInstantiate.prototype.constructor();
+        const instance = new classToInstantiate.prototype.constructor();
         // TODO: dependency injection
         // instance.constructor.apply(instance, args)
         // find args
+
+        // console.log(instance);
+
         return instance;
     }
 }

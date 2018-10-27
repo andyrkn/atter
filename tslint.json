@@ -48,6 +48,12 @@
         "no-implicit-dependencies": false,
         "no-empty-interface": false,
         "no-string-literal": false,
-        "no-submodule-imports": false
+        "no-submodule-imports": false,
+        "variable-name": [
+            true,
+            "ban-keywords",
+            "check-format",
+            "allow-leading-underscore"
+        ]
     }
 }
