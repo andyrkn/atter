@@ -1,5 +1,5 @@
 export class StyleHandler {
     public handle(style: string): void {
-        console.log('Should apply css. Style encapsulation');
+        // console.log('Should apply css. Style encapsulation');
     }
 }

@@ -21,6 +21,10 @@ export class AppContainer {
         this.trackChanges.push(trackChangesPropertyMetadata);
     }
 
+    public static addInjectable(targetInjectable: Function) {
+        // console.log(targetInjectable);
+    }
+
     public static get orchestrator(): RenderableOrchestrator {
         return this._renderableOrchestrator;
     }
@@ -30,6 +34,9 @@ export class AppContainer {
             if (mod.route && mod.renderableDeclaration) {
                 for (const route of mod.route) {
                     this.orchestrator.setPathToPage(route.page.name, route.path, mod.renderableDeclaration.folderPath);
+                }
+                for (const injectable of mod.injectable) {
+                    // console.log(injectable);
                 }
             }
 

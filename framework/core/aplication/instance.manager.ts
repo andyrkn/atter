@@ -1,4 +1,5 @@
 import { RenderableOrchestrator } from "./utils/renderable-orchestrator";
+import { TestService } from "@app/services";
 
 export class InstanceManager {
     private pageOrchestrator: RenderableOrchestrator;
@@ -13,7 +14,7 @@ export class InstanceManager {
         // instance.constructor.apply(instance, args)
         // find args
 
-        // console.log(instance);
+        // override test service in args
 
         return instance;
     }

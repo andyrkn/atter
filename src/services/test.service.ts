@@ -1,3 +1,6 @@
+import { Injectable } from "@web/core";
+
+@Injectable()
 export class TestService {
     public _variable: number = 1;
 
