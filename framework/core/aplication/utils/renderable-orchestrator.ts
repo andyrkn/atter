@@ -4,10 +4,12 @@ import { RenderableMetadata } from "@web/core/metadata/renderable.metadata";
 import { RoutePath, UrlTree } from "@web/router";
 
 export class RenderableOrchestrator {
+    private renderingIndex: number = 0;
+
     private renderables: RenderableManipulator[] = [];
 
     public addPage(targetClass: Function, pageMetadata: RenderableMetadata): void {
-        this.renderables.push(RenderableManipulator.Create(targetClass, pageMetadata));
+        this.renderables.push(RenderableManipulator.Create(targetClass, pageMetadata, this.renderingIndex++));
     }
 
     public setPathToPage(pageClassName: string, path: string, pageFolder: string): void {

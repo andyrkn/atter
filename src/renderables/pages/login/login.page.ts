@@ -12,7 +12,11 @@ export class LoginPage {
 
     public id: string;
 
+<<<<<<< HEAD
     constructor(private testService: TestService) {
         this.id = "1";
     }
+=======
+    constructor() { }
+>>>>>>> master
 }

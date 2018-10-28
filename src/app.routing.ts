@@ -8,7 +8,7 @@ export const appRoute: Route[] = [
     },
     {
         page: LoginPage,
-        path: 'login/:id'
+        path: 'login'
     },
     {
         page: NotFoundPage,

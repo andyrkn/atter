@@ -1,3 +1,8 @@
-.h1 {
-    font-size: 200px;
+h1 {
+    font-size: 100px;
+    text-align: center;
+}
+
+.app-description {
+    font-size: 20px;
 }

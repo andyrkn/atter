@@ -1,8 +1,9 @@
 import { Injectable } from "@web/core";
+import { A } from "./A.service";
 
 @Injectable()
 export class TestService {
-    public _variable: number = 1;
+    public _variable: number = 12;
 
     constructor() { }
 
