@@ -1,4 +1,4 @@
-import { Renderable, TrackChanges } from "@web/core";
+import { Renderable } from "@web/core";
 
 @Renderable({
     folder: 'components/header',
