@@ -2,7 +2,7 @@ import { Module } from "@web/core";
 import { appRoute } from "./app.routing";
 import { HomePage, LoginPage, NotFoundPage } from "./renderables/pages";
 import { HeaderComponent } from "./renderables/components";
-import { TestService } from "@app/services";
+import { TestService, NeedyService, A } from "@app/services";
 
 @Module({
     renderableDeclaration: {
@@ -15,7 +15,9 @@ import { TestService } from "@app/services";
         ]
     },
     injectable: [
-        TestService
+        TestService,
+        A,
+        NeedyService
     ],
     route: appRoute
 })

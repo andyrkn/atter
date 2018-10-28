@@ -5,13 +5,17 @@ import { A } from "./A.service";
 export class TestService {
     public _variable: number = 12;
 
-    constructor() { }
+    constructor(private a: A) { }
 
-    public increase() {
+    public increase(): void {
         this._variable++;
     }
 
-    public getVariable() {
+    public getVariable(): number {
         return this._variable;
+    }
+
+    public useAService(): string {
+        return this.a.getAvar();
     }
 }

@@ -1,4 +1,5 @@
 import { TrackChanges, Renderable } from "@web/core";
+import { NeedyService } from "@app/services";
 
 @Renderable({
     folder: 'pages/home',
@@ -7,4 +8,7 @@ import { TrackChanges, Renderable } from "@web/core";
 })
 export class HomePage {
     public appTitle: string = 'Atter';
+    constructor(private needyService: NeedyService) {
+        console.log(this.needyService.useTestService());
+    }
 }

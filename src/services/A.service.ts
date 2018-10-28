@@ -4,7 +4,7 @@ import { Injectable } from "@web/core";
 export class A {
     constructor() { }
 
-    public getAvar() {
+    public getAvar(): string {
         return "class A";
     }
 }
