@@ -11,6 +11,7 @@ export class InstanceManager {
 
     public getInstance(classToInstantiate: Function): Function {
         const instance = new classToInstantiate.prototype.constructor();
+        
         // TODO: dependency injection
         // instance.constructor.apply(instance, args)
         // find args

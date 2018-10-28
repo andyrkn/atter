@@ -37,6 +37,11 @@ nav {
     flex-direction: column;
 }
 
+a {
+    justify-content: center;
+    display: flex;
+}
+
 nav ul {
     display: flex;
     padding: 0;
