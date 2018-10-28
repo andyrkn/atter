@@ -18,5 +18,5 @@ export const appRoute: Route[] = [
     {
         page: NotFoundPage,
         path: '**'
-    },
+    }
 ];
