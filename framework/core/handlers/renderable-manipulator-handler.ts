@@ -16,7 +16,7 @@ export abstract class RenderableManipulatorHandler implements Handler<Renderable
     }
 
     public handle(objectToHandle: RenderableManipulator): void {
-        const context: Function = this.instanceManager.getInstance(objectToHandle.renderableClass.prototype.constructor);
+        const context: Function = this.instanceManager.getInstance(objectToHandle.renderableClass);
 
         const contextChangeSubject: Subject<boolean> = new Subject();
 
@@ -35,12 +35,11 @@ export abstract class RenderableManipulatorHandler implements Handler<Renderable
         const interpretation = renderableManipulator.getInterpretation();
         const toRender: string = interpretation(context);
         const selector = this.whereToRender(renderableManipulator);
-        this.renderer.renderTo(selector, toRender);
+        this.renderer.renderTo(selector, toRender, renderableManipulator.renderingIndex);
     }
 
     private handleStyle(pageManipulator: RenderableManipulator): void {
-        const pageStyle: string = pageManipulator.getStyle();
-        this.styleHandler.handle(pageStyle);
+        this.styleHandler.handle(pageManipulator);
     }
 
     private watch(objectToHandle: RenderableManipulator, context: Function, contextChangeSubject: Subject<boolean>): void {

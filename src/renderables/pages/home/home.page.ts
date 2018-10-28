@@ -6,12 +6,5 @@ import { TrackChanges, Renderable } from "@web/core";
     styleUrl: './home.page.css'
 })
 export class HomePage {
-    private counterValue: number = 0;
-
-    @TrackChanges()
-    public elements: string[] = [];
-
-    constructor() {
-        this.elements.push(this.counterValue.toString());
-    }
+    public appTitle: string = 'Atter';
 }

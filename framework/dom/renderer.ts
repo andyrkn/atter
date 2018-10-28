@@ -1,20 +1,23 @@
+import { Encapsulator } from "./encapsulator";
+
 export class Renderer {
-    private renderElements: ShadowRoot[] = [];
+    private renderElements: Element[] = [];
 
     constructor() {
     }
 
-    public renderTo(selector: string, template: string): void {
-        let elementToRenderIn: ShadowRoot = this.renderElements[selector];
+    public renderTo(selector: string, template: string, renderingIndex: number): void {
+        let elementToRenderIn: Element = this.renderElements[selector];
         if (!elementToRenderIn) {
-            elementToRenderIn = document.querySelector(selector).attachShadow({ mode: 'closed' });
+            elementToRenderIn = document.getElementsByTagName(selector)[0];
             this.renderElements[selector] = elementToRenderIn;
         }
 
-        this.render(elementToRenderIn, template);
+        this.render(elementToRenderIn, template, renderingIndex);
     }
 
-    private render(element: ShadowRoot, template: string): void {
-        element.innerHTML = template;
+    private render(element: Element, template: string, renderingIndex: number): void {
+        const encapsulatedTemplate = Encapsulator.encapsulateTempalte(template, renderingIndex);
+        element.innerHTML = encapsulatedTemplate;
     }
 }

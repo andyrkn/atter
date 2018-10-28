@@ -5,6 +5,7 @@ import { Loader } from "./loader";
 import { TemplateEngine } from "@web/core/template-engine/template-engine";
 
 export class RenderableManipulator {
+    private _renderingIndex: number;
     private path: RoutePath;
     private folder: string;
 
@@ -17,11 +18,13 @@ export class RenderableManipulator {
     private interpretation: Function;
     private styleLoaded: boolean = false;
     private style: string;
+    public styleRendered: boolean = false;
 
-    public static Create(renderableClass: Function, metadata: RenderableMetadata): RenderableManipulator {
+    public static Create(renderableClass: Function, metadata: RenderableMetadata, renderingIndex: number): RenderableManipulator {
         const pageManipulator = new RenderableManipulator();
         pageManipulator._renderableClass = renderableClass;
         pageManipulator.metadata = metadata;
+        pageManipulator._renderingIndex = renderingIndex;
         return pageManipulator;
     }
 
@@ -65,6 +68,10 @@ export class RenderableManipulator {
     public getInterpretation(): Function {
         this.loadIfNeeded();
         return this.interpretation;
+    }
+
+    public get renderingIndex(): number {
+        return this._renderingIndex;
     }
 
     public get propertiesToTrack(): string[] {

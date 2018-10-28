@@ -12,5 +12,5 @@ export class LoginPage {
 
     public id: string;
 
-    constructor(private testService: TestService) { }
+    constructor() { }
 }

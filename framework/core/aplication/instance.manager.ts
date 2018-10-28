@@ -1,4 +1,6 @@
 import { RenderableOrchestrator } from "./utils/renderable-orchestrator";
+import 'reflect-metadata';
+
 
 export class InstanceManager {
     private pageOrchestrator: RenderableOrchestrator;
@@ -12,9 +14,9 @@ export class InstanceManager {
         // TODO: dependency injection
         // instance.constructor.apply(instance, args)
         // find args
-
+        // Reflect.getMetadata('design:paramtypes', target)[0];
         // console.log(instance);
-
+       
         return instance;
     }
 }

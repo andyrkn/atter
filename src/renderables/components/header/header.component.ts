@@ -7,7 +7,4 @@ import { Renderable, TrackChanges } from "@web/core";
     selector: 'header-component'
 })
 export class HeaderComponent {
-
-    @TrackChanges()
-    public headers: string[] = ['test', 'kappa'];
 }
