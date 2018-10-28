@@ -4,7 +4,7 @@ import { AppContainer } from "@web/core/aplication/app-container";
 import { TestService, NeedyService } from "@app/services";
 
 @Renderable({
-    folder: 'pages/login',
+    folderPathRelativeToRenderablesFolder: 'pages/login',
     templateUrl: '/login.page.html',
     styleUrl: '/login.page.css'
 })

@@ -122,6 +122,6 @@ export class RenderableManipulator {
             url = `/${url}`;
         }
 
-        return `${this.folder}/${this.metadata.folder}${url}`;
+        return `${this.folder}/${this.metadata.folderPathRelativeToRenderablesFolder}${url}`;
     }
 }
