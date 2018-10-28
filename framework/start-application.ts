@@ -19,10 +19,9 @@ export function startApplication<T>(application: Application<T>): void {
     const navigationState = new Subject<NavigationState>();
     const router = new Router(navigationState);
 
-    const instanceManager = new InstanceManager(orchestrator);
-    // TODO: add instances to dependency injection container (for now we only need router instance)
-    // these instances will be injected into pages later on
-    // DependencyInjection.register(Renderer, renderer) etc... or something similar;
+    AppContainer.dependencyContainer.instanciateInjectables();
+    const instanceManager = new InstanceManager(orchestrator, AppContainer.dependencyContainer);
+
     const componentManipulatorHandler = new ComponentManipulatorHandler(renderer, styleHandler, instanceManager);
     const pageManipulatorHandler = new PageManipulatorHandler(router, renderer, styleHandler, instanceManager);
 
