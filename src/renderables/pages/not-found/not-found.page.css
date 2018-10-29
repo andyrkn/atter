@@ -1,0 +1,25 @@
+.not-found {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-top: 100px;
+    margin-left: 0;
+    margin-right: 0;
+}
+
+.logo {
+    width: 250px;
+    height: 250px;
+    margin: 75px auto;
+}
+
+.not-found-message {
+    text-align: center;
+    font-size: 40px;
+    font-weight: 500;
+}
+
+.not-found-message.text-danger {
+    font-size: 65px;
+    font-weight: 700;
+}

@@ -2,7 +2,7 @@ import { Renderable } from "@web/core";
 import { Router } from "@web/router";
 
 @Renderable({
-    folder: 'pages/login',
+    folderPathRelativeToRenderablesFolder: 'pages/login',
     templateUrl: '/login.page.html',
     styleUrl: '/login.page.css'
 })

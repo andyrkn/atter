@@ -2,7 +2,7 @@ import { TrackChanges, Renderable } from "@web/core";
 import { NeedyService } from "@app/services";
 
 @Renderable({
-    folder: 'pages/home',
+    folderPathRelativeToRenderablesFolder: 'pages/home',
     templateUrl: './home.page.html',
     styleUrl: './home.page.css'
 })
