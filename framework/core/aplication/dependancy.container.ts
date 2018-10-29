@@ -1,42 +1,36 @@
 import 'reflect-metadata';
 
-export class DependancyContainer {
-    private injectables: Function[] = [];
-    private map: Map<string, Function> = new Map();
+export class DependencyContainer {
+
+    private renderablesMetadata: Function[] = [];
+    private injectablesMetadata: Function[] = [];
+    private injectableClasses: [] = [];
+
+    public addRenderable(renderable: Function): void {
+        this.renderablesMetadata[renderable.name] = Reflect.getMetadata('design:paramtypes', renderable);
+    }
 
     public addInjectable(injectable: Function): void {
-        this.injectables.push(injectable);
+        this.injectablesMetadata[injectable.name] = Reflect.getMetadata('design:paramtypes', injectable);
     }
 
-    public instanciateInjectables(): void {
-        for (const injectable of this.injectables) {
-            this.parseDependencyTree(injectable);
-        }
+    public getRenderableMetadata(renderable: Function): Function[] {
+        return this.renderablesMetadata[renderable.name];
     }
 
-    private parseDependencyTree(injectable: Function): void {
-        const metadata: any = Reflect.getMetadata('design:paramtypes', injectable);
-        if (metadata.length > 0) {
-            const params: Function[] = [];
-            for (const dependency of metadata) {
-                if (dependency) {
-                    params.push(this.map.get(dependency.name));
-                    if (this.map.get(dependency.name) === undefined) {
-                        this.parseDependencyTree(dependency);
-                    }
-                }
-            }
-            if (this.map.get(injectable.name) === undefined) {
-                this.map.set(injectable.name, new injectable.prototype.constructor(...params));
-            }
-        } else {
-            if (this.map.get(injectable.name) === undefined) {
-                this.map.set(injectable.name, new injectable.prototype.constructor());
-            }
-        }
+    public getInjectableMetadata(injectable: Function): Function[] {
+        return this.injectablesMetadata[injectable.name];
     }
 
-    public getInjectable(name: string): Function {
-        return this.map.get(name);
+    public getInjectableClass(injectable: Function): Function {
+        return this.injectableClasses[injectable.name];
+    }
+
+    public setInjectableClass(name: string, injectable: Function): void {
+        this.injectableClasses[name] = injectable;
+    }
+
+    public addRouter(name: string, router: any): void {
+        this.injectableClasses[name] = router;
     }
 }

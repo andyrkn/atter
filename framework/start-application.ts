@@ -13,14 +13,16 @@ export function startApplication<T>(application: Application<T>): void {
     AppContainer.mergeMetadata();
 
     const orchestrator = AppContainer.orchestrator;
+    const dependencyContainer = AppContainer.dependencyContainer;
+
     const renderer = new Renderer();
     const styleHandler = new StyleHandler();
 
     const navigationState = new Subject<NavigationState>();
     const router = new Router(navigationState);
+    dependencyContainer.addRouter('Router', router);
 
-    AppContainer.dependencyContainer.instanciateInjectables();
-    const instanceManager = new InstanceManager(orchestrator, AppContainer.dependencyContainer);
+    const instanceManager = new InstanceManager(dependencyContainer);
 
     const componentManipulatorHandler = new ComponentManipulatorHandler(renderer, styleHandler, instanceManager);
     const pageManipulatorHandler = new PageManipulatorHandler(router, renderer, styleHandler, instanceManager);

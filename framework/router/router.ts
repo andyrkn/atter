@@ -13,7 +13,7 @@ export class Router {
     }
 
     public navigate(path: string, parameter: any = null): void {
-        if (path.indexOf('/') != 0) {
+        if (path.indexOf('/') !== 0) {
             path = '/' + path;
         }
         if (parameter) {

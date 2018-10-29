@@ -2,17 +2,18 @@ import { ModuleMetadata } from "../metadata/module.metadata";
 import { RenderableOrchestrator } from "./utils/renderable-orchestrator";
 import { RenderableMetadata } from "../metadata/renderable.metadata";
 import { TrackChangesMetadata } from "../metadata/track-changes.metadata";
-import { DependancyContainer } from "./dependancy.container";
+import { DependencyContainer } from "./dependancy.container";
 
 export class AppContainer {
 
     private static _renderableOrchestrator: RenderableOrchestrator = new RenderableOrchestrator();
+    private static _dependencyContainer: DependencyContainer = new DependencyContainer();
     private static modules: ModuleMetadata[] = [];
     private static trackChanges: TrackChangesMetadata[] = [];
-    private static dependancyContainer: DependancyContainer = new DependancyContainer();
 
     public static addRenderable(targetClass: Function, pageMetadata: RenderableMetadata): void {
         this._renderableOrchestrator.addPage(targetClass, pageMetadata);
+        this._dependencyContainer.addRenderable(targetClass);
     }
 
     public static addModule(moduleMetadata: ModuleMetadata): void {
@@ -24,11 +25,11 @@ export class AppContainer {
     }
 
     public static addInjectable(targetInjectable: Function): void {
-        this.dependancyContainer.addInjectable(targetInjectable);
+        this._dependencyContainer.addInjectable(targetInjectable);
     }
 
-    public static get dependencyContainer(): DependancyContainer {
-        return this.dependancyContainer;
+    public static get dependencyContainer(): DependencyContainer {
+        return this._dependencyContainer;
     }
 
     public static get orchestrator(): RenderableOrchestrator {

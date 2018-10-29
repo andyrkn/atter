@@ -10,5 +10,6 @@ export class HomePage {
     public appTitle: string = 'Atter';
     constructor(private needyService: NeedyService) {
         console.log(this.needyService.useTestService());
+        this.needyService.increaseVariable();
     }
 }

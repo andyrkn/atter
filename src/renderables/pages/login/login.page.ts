@@ -1,7 +1,5 @@
-import { UrlTree, Router } from "@web/router";
-import { Renderable, TrackChanges } from "@web/core";
-import { AppContainer } from "@web/core/aplication/app-container";
-import { TestService, NeedyService } from "@app/services";
+import { Renderable } from "@web/core";
+import { Router } from "@web/router";
 
 @Renderable({
     folder: 'pages/login',
@@ -10,12 +8,9 @@ import { TestService, NeedyService } from "@app/services";
 })
 export class LoginPage {
 
-    public id: number = this.testService.getVariable();
-    constructor(
-        private testService: TestService,
-        private needyService: NeedyService) {
-
+    public id: number = 1;
+    constructor(private router: Router) {
+        setTimeout(() => { router.navigate("/home"); }, 2000);
         console.log(this.id);
-        this.testService.increase();
     }
 }

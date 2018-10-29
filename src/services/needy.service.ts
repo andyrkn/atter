@@ -12,4 +12,8 @@ export class NeedyService {
     public useTestService(): number {
         return this.testService.getVariable();
     }
+
+    public increaseVariable(): void {
+        this.testService.increase();
+    }
 }
