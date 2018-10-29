@@ -16,14 +16,16 @@
     font-family: 'Open-Sans';
     src: url('fonts/open-sans/OpenSans-Regular.ttf') format('truetype');
 }
+
 /* html setup */
+
 html {
     font-family: 'Open-Sans';
 }
 
 body {
     margin: 0;
-    padding: 0;    
+    padding: 0;
     background: #f5f5f5;
 }
 
@@ -93,7 +95,7 @@ a.secondary {
     color: #67d291;
 }
 
-.text-success,.text-primary {
+.text-success, .text-primary {
     color: #65d0cd;
 }
 
@@ -104,28 +106,27 @@ a.secondary {
 .text-danger {
     color: #FF4076;
 }
+
 /* lists */
 
 ul, ol {
     margin-top: 0;
     margin-bottom: 10px;
 }
+
 ul {
     list-style: outside;
 }
 
 /* buttons */
 
-button, .btn, input[type="button"], input[type="subimt"] {
+button, .btn, input[type="button"], input[type="submit"] {
     cursor: pointer;
-
     display: inline-block;
     height: 36px;
     vertical-align: middle;
-
     padding: 0px 16px;
     margin-bottom: 0;
-
     line-height: 36px;
     font-size: 15px;
     letter-spacing: .5px;
@@ -136,38 +137,38 @@ button, .btn, input[type="button"], input[type="subimt"] {
     white-space: nowrap;
     border: none;
     border-radius: 2px;
-
     transition: box-shadow .25s, background-color .25s;
     outline: none;
 }
 
-button.primary, .btn.primary, input[type="button"].primary, input[type="subimt"].primary {
+button.primary, .btn.primary, input[type="button"].primary, input[type="submit"].primary {
     background-color: #26a69a;
     color: #fff;
 }
 
-button.primary:hover, .btn.primary:hover, input[type="button"].primary:hover, input[type="subimt"].primary:hover {
+button.primary:hover, .btn.primary:hover, input[type="button"].primary:hover, input[type="submit"].primary:hover {
     background-color: #2bbbad;
 }
 
-.btn:hover, button:hover, input[type="button"]:hover, input[type="subimt"]:hover {
-    box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14), 0 3px 1px -2px rgba(0,0,0,0.12), 0 1px 5px 0 rgba(0,0,0,0.2);
+.btn:hover, button:hover, input[type="button"]:hover, input[type="submit"]:hover {
+    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.12), 0 1px 5px 0 rgba(0, 0, 0, 0.2);
 }
-.btn:focus, button:focus, input[type="button"]:focus, input[type="subimt"]:focus,
-.btn:visited, button:visited, input[type="button"]:visited, input[type="subimt"]:visited {
+
+.btn:focus, button:focus, input[type="button"]:focus, input[type="submit"]:focus, .btn:visited, button:visited, input[type="button"]:visited, input[type="submit"]:visited {
     outline: none;
 }
 
 /* containers & grid */
+
 .card {
     background-color: white;
-    box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14), 0 3px 1px -2px rgba(0,0,0,0.12), 0 1px 5px 0 rgba(0,0,0,0.2);
+    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.12), 0 1px 5px 0 rgba(0, 0, 0, 0.2);
     padding: 24px;
     margin: .5rem 0 1rem 0;
     border-radius: 2px;
 }
 
-.card > .card-title:first-child {
+.card>.card-title:first-child {
     width: 100%;
     font-size: 25px;
     padding-bottom: 10px;
