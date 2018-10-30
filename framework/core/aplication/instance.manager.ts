@@ -1,4 +1,3 @@
-import { RenderableOrchestrator } from "./utils/renderable-orchestrator";
 import { DependencyContainer } from "./dependancy.container";
 import { Utils } from "@web/utils";
 
@@ -12,8 +11,6 @@ export class InstanceManager {
     public getInstance(classToInstantiate: Function): Function {
 
         const classArguments: Function[] = this.getRenderableMetadata(classToInstantiate);
-
-        // check if injectables are instantiated
         this.checkInjectables(classArguments);
 
         return this.instantiateClass(classArguments, classToInstantiate);

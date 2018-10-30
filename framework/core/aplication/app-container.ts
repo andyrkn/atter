@@ -42,11 +42,6 @@ export class AppContainer {
                 for (const route of mod.route) {
                     this.orchestrator.setPathToPage(route.page.name, route.path, mod.renderableDeclaration.folderPath);
                 }
-                /*
-                for (const injectable of mod.injectable) {
-                    // console.log(injectable);
-                }
-                */
             }
 
             for (const component of this.orchestrator.getComponents()) {

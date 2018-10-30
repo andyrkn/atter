@@ -20,7 +20,7 @@ export function startApplication<T>(application: Application<T>): void {
 
     const navigationState = new Subject<NavigationState>();
     const router = new Router(navigationState);
-    dependencyContainer.addRouter('Router', router);
+    dependencyContainer.addRouter(Router.name, router);
 
     const instanceManager = new InstanceManager(dependencyContainer);
 

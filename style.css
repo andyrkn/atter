@@ -1,16 +1,36 @@
 /*
     colors: {
-        primary : #65d0cd;
-        secondary #67d291;
+        primary : #2EB7CC;
+        secondary #67CB7D;
         danger: #FF4076;
 
         btn-background: {
-            primary: #26a69a;
+            primary: #26a69a; hover: #2bbbad;
 
             danger: #E57373;
         }
     }
 */
+
+:root {
+    --primary: #2EB7CC;
+    --secondary: #67CB7D;
+    --danger: #FF4076;
+    --bg-primary: #26a69a;
+    --bg-primary-hover: #2bbbad;
+    --bg-info: #2EB7CC;
+    --bg-danger: #E57373;
+    --white: #fff;
+    --light-gray: #f5f5f5;
+    --gray: #6c757d;
+    --gray-dark: #343a40;
+    --breakpoint-xs: 0;
+    --breakpoint-sm: 576px;
+    --breakpoint-md: 768px;
+    --breakpoint-lg: 992px;
+    --breakpoint-xl: 1200px;
+    --box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.12), 0 1px 5px 0 rgba(0, 0, 0, 0.2);
+}
 
 @font-face {
     font-family: 'Open-Sans';
@@ -26,7 +46,7 @@ html {
 body {
     margin: 0;
     padding: 0;
-    background: #f5f5f5;
+    background: var(--light-gray);
 }
 
 * {
@@ -44,15 +64,17 @@ render-container {
     width: 100%;
 }
 
-/* typography a*/
+/* typography */
 
 a {
     text-decoration: none;
-    color: #65d0cd;
+    color: var(--primary);
+    font-weight: 600;
+    font-size: inherit;
 }
 
 a:hover, a:focus {
-    color: #67d291;
+    color: var(--secondary);
 }
 
 h1, h2, h3, h4 {
@@ -87,24 +109,16 @@ p {
     margin: 0 0 10px;
 }
 
-a.primary {
-    color: #65d0cd;
-}
-
-a.secondary {
-    color: #67d291;
-}
-
 .text-success, .text-primary {
-    color: #65d0cd;
+    color: var(--primary);
 }
 
 .text-info {
-    color: #67d291;
+    color: var(--secondary);
 }
 
 .text-danger {
-    color: #FF4076;
+    color: var(--danger);
 }
 
 /* lists */
@@ -115,7 +129,7 @@ ul, ol {
 }
 
 ul {
-    list-style: outside;
+    list-style: circle;
 }
 
 /* buttons */
@@ -141,36 +155,85 @@ button, .btn, input[type="button"], input[type="submit"] {
     outline: none;
 }
 
-button.primary, .btn.primary, input[type="button"].primary, input[type="submit"].primary {
-    background-color: #26a69a;
-    color: #fff;
+button.success, .btn.success, input[type="button"].success, input[type="submit"].success {
+    background-color: var(--secondary);
+    color: var(--white);
 }
 
-button.primary:hover, .btn.primary:hover, input[type="button"].primary:hover, input[type="submit"].primary:hover {
-    background-color: #2bbbad;
+button.danger, .btn.danger, input[type="button"].danger, input[type="submit"].danger {
+    background-color: var(--bg-danger);
+    color: var(--white);
+}
+
+button.info, .btn.info, input[type="button"].info, input[type="submit"].info {
+    background-color: var(--bg-info);
+    color: var(--white);
 }
 
 .btn:hover, button:hover, input[type="button"]:hover, input[type="submit"]:hover {
-    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.12), 0 1px 5px 0 rgba(0, 0, 0, 0.2);
+    box-shadow: var(--box-shadow);
 }
 
 .btn:focus, button:focus, input[type="button"]:focus, input[type="submit"]:focus, .btn:visited, button:visited, input[type="button"]:visited, input[type="submit"]:visited {
     outline: none;
 }
 
-/* containers & grid */
 
-.card {
-    background-color: white;
-    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.12), 0 1px 5px 0 rgba(0, 0, 0, 0.2);
-    padding: 24px;
-    margin: .5rem 0 1rem 0;
-    border-radius: 2px;
+/* containers */
+
+.flex-container {
+    display: flex;
 }
 
-.card>.card-title:first-child {
-    width: 100%;
-    font-size: 25px;
-    padding-bottom: 10px;
-    border-bottom: 1px solid #777;
+.flex-container.column {
+    flex-direction: column;
+}
+
+.flex-container.children-nowidth > * {
+    align-self: flex-start;
+}
+
+.card {
+    display: flex;
+    flex-direction: column;
+
+    background-color: white;
+    box-shadow: var(--box-shadow);
+    padding: 24px;
+    margin: 50px 0 1rem 0;
+    border-radius: 2px;    
+}
+
+.card > .card-title:first-child {
+    color: white;
+    width: auto;
+    font-size: 24px;
+    padding: 15px 20px;
+    background-color: var(--primary);
+    align-self: flex-start;
+
+    box-shadow: var(--box-shadow);
+
+    margin-top: -55px;
+    margin-bottom: 10px;
+}
+
+.card > .card-title:first-child.center {
+    align-self: center;
+}
+
+.card > .card-title:first-child.left {
+    align-self: flex-start;
+}
+
+.card > .card-title:first-child.right {
+    align-self: flex-end;
+}
+
+.card > .card-title:first-child.danger {
+    background-color: var(--bg-danger);
+}
+
+.card > .card-title:first-child.info {
+    background-color: var(--secondary);
 }
