@@ -6,7 +6,7 @@ export class Encapsulator {
     }
 
     public static encapsulateStyle(style: string, renderingIndex: number): string {
-        return style.replace(/([^\r\n ,{}]+)(,(?=[^}]*{)|\s*{)/g, `$1[${this.encapsualtorAttribute(renderingIndex)}]$2`);
+        return style.replace(/([^\r\n ,{}()]+)(,(?=[^}]*{)|\s*{)/g, `$1[${this.encapsualtorAttribute(renderingIndex)}]$2`);
     }
 
     private static encapsualtorAttribute(renderingIndex: number): string {
