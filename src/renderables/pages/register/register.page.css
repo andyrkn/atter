@@ -2,9 +2,13 @@
     display: flex;
     justify-content: center;
 }
-
+.register-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
 .card {
-    margin-top: 100px;
+    margin-top: 10%;
     width: 80%;
 }
 
@@ -73,12 +77,14 @@
     box-sizing: border-box;
 }
 
-.register-button {
-    display: inline-flex;
-    justify-content: center;
+.register-button-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
-.already-registered {
+.already-registered-container {
     display: flex;
-    justify-self: center;
+    flex-direction: column;
+    align-items: center;
 }
