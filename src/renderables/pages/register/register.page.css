@@ -1,0 +1,74 @@
+
+.atter-header-info {
+    display: flex;
+    justify-content: center;
+}
+.sign-up-info{
+    display: flex;
+    justify-content: center;
+    margin-top: 150px;
+}
+.grid-register-container {
+    display: grid;
+    position: relative;
+    justify-content: center;
+    margin-top: 15px;
+    grid-template-columns: repeat(2, 300px);
+    grid-template-rows: repeat(3, 1fr);
+    grid-column-gap: 20px;
+    grid-template-areas:
+        "fn ln"
+        "em ."
+        "pw cpw"
+
+}
+
+.first-name-label {
+    grid-area: fn;
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+}
+
+.last-name-label {
+    grid-area: ln;
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+}
+
+.email-label {
+    grid-area: em;
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+}
+
+.password-label {
+    grid-area: pw;
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+}
+
+.confirm-password-label {
+    grid-area: cpw;
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+}
+
+.register-button{
+    display: flex;
+    justify-content: center;
+}

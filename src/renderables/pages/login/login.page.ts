@@ -10,7 +10,5 @@ export class LoginPage {
 
     public id: number = 1;
     constructor(private router: Router) {
-        setTimeout(() => { router.navigate("/home"); }, 2000);
-        console.log(this.id);
     }
 }

@@ -1,6 +1,6 @@
 import { Module } from "@web/core";
 import { appRoute } from "./app.routing";
-import { HomePage, LoginPage, NotFoundPage } from "./renderables/pages";
+import { HomePage, LoginPage, NotFoundPage, RegisterPage } from "./renderables/pages";
 import { HeaderComponent } from "./renderables/components";
 import { TestService, NeedyService, A } from "@app/services";
 
@@ -11,7 +11,8 @@ import { TestService, NeedyService, A } from "@app/services";
             HomePage,
             LoginPage,
             NotFoundPage,
-            HeaderComponent
+            HeaderComponent,
+            RegisterPage
         ]
     },
     injectable: [

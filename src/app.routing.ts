@@ -1,6 +1,6 @@
 import { Route } from "@web/router";
 
-import { HomePage, LoginPage, NotFoundPage, LayoutPage } from "./renderables/pages";
+import { HomePage, LoginPage, NotFoundPage, LayoutPage, RegisterPage } from "./renderables/pages";
 
 export const appRoute: Route[] = [
     {
@@ -18,5 +18,9 @@ export const appRoute: Route[] = [
     {
         page: NotFoundPage,
         path: '**'
+    },
+    {
+        page: RegisterPage,
+        path: 'register'
     }
 ];
