@@ -1,13 +1,48 @@
-<h1>
-    <<= appTitle>>
-</h1>
+<<if(!loggedIn) {>>
+    <h1>
+        <<= appTitle>>
+    </h1>
 
-<p class="app-description">
-    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's
-    standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a
-    type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting,
-    remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing
-    Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of
-    Lorem Ipsum.
-</p>
-<a href="/#/login/1">change</a>
+    <p class="app-description">
+        Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's
+        standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to
+        make a
+        type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting,
+        remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing
+        Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including
+        versions of
+        Lorem Ipsum.
+    </p>
+    <a href="/#/login/1">change</a>
+
+    <<} else {>>
+
+        <section>
+            <div class="card">
+                <div class="card-title text-primary">MY ACTIVITIES</div>
+                <div class="container">
+                    << for(let activity of myActivities) {>>
+                        <div class="activity-container">
+                            <div class="icon-container">
+                                <div class="act-add-icon"></div>
+                            </div>
+                            <<=activity.name>>
+                        </div>
+                        << }>>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-title text-primary">FOLLOWED ACTIVITIES</div>
+                <div class="container">
+                    << for(let activity of followedActivities) {>>
+                        <div class="activity-container">
+                            <div class="icon-container">
+                                <div class="act-add-icon"></div>
+                            </div>
+                            <<=activity.name>>
+                        </div>
+                        << }>>
+                </div>
+            </div>
+        </section>
+        <<}>>

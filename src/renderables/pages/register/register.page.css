@@ -1,13 +1,22 @@
-
 .atter-header-info {
     display: flex;
     justify-content: center;
 }
-.sign-up-info{
+.register-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.card {
+    margin-top: 10%;
+    width: 80%;
+}
+
+.sign-up-info {
     display: flex;
     justify-content: center;
-    margin-top: 150px;
 }
+
 .grid-register-container {
     display: grid;
     position: relative;
@@ -23,7 +32,7 @@
 
 }
 
-.first-name-label {
+.first-name-input {
     grid-area: fn;
     width: 100%;
     padding: 12px 20px;
@@ -32,7 +41,7 @@
     box-sizing: border-box;
 }
 
-.last-name-label {
+.last-name-input {
     grid-area: ln;
     width: 100%;
     padding: 12px 20px;
@@ -41,7 +50,7 @@
     box-sizing: border-box;
 }
 
-.email-label {
+.email-input {
     grid-area: em;
     width: 100%;
     padding: 12px 20px;
@@ -50,7 +59,7 @@
     box-sizing: border-box;
 }
 
-.password-label {
+.password-input {
     grid-area: pw;
     width: 100%;
     padding: 12px 20px;
@@ -59,7 +68,7 @@
     box-sizing: border-box;
 }
 
-.confirm-password-label {
+.confirm-password-input {
     grid-area: cpw;
     width: 100%;
     padding: 12px 20px;
@@ -68,7 +77,14 @@
     box-sizing: border-box;
 }
 
-.register-button{
+.register-button-container {
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+
+.already-registered-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
