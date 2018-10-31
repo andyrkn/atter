@@ -1,11 +1,61 @@
-.admin-activity-container{
+.admin-activity-container {
     display: grid;
-    justify-content: center;
     margin-top: 15px;
-    grid-template-columns:2.5fr 1.5fr;
+    grid-template-columns: 2.5fr 1.5fr;
     grid-template-rows: 1fr 1fr;
     grid-column-gap: 20px;
     grid-template-areas:
-    "attendees info "
-    ". . "
+        "attendees info "
+        "assesments . "
+}
+
+.attendees-card {
+    grid-area: attendees;
+}
+
+.general-info-card {
+    grid-area: info;
+}
+
+.general-info-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.general-info-table{
+    width: 100%;
+    border-spacing: 0px;
+}
+.general-info-table tr:nth-child(even) {
+    background-color: var(--light-gray);
+}
+
+.general-info-edit-button {
+    display: inline-flex;
+    justify-content: end;
+}
+
+.add-attendee-button {
+    display: inline-flex;
+    justify-content: end;
+}
+.descriptor{
+    text-align:  left;
+    padding:0px;
+    width: 35%
+}
+.value{
+    padding-left: 0px;
+    text-align: right;
+}
+.chosenDay{
+    display: inline-block;
+    background-color:var(--primary);
+    height: 75%;
+    border-radius: 5px;
+}
+.regularDay{
+    background-color:var(--light-gray);
+    display: inline-block;
+    border-radius: 5px;
 }

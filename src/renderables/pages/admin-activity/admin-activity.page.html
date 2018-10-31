@@ -1,13 +1,18 @@
 <section>
-
+    <h1 class="className">
+        <<=classInfo.className>>
+    </h1>
     <div class="admin-activity-container">
-
         <div class="attendees-card">
             <div class="card">
                 <div class="card-title text-primary">
                     Attendees
                 </div>
                 <div class="attendees-container">
+                </div>
+
+                <div class="add-attendee-button">
+                    <button class="btn success"> Add attendee </button>
                 </div>
             </div>
         </div>
@@ -18,11 +23,49 @@
                 </div>
 
                 <div class="general-info-container">
-                    <div> Description </div>
-                    <div> Admin </div>
-                    <div> Meeting Days </div>
-                    <div> Meeting Times</div>
-                    <div> Status </div>
+
+                    <table class="general-info-table">
+                        <tr>
+                            <td class="descriptor"> Description</td>
+                            <td class="value">
+                                <<=classInfo.description>>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="descriptor"> Admin</td>
+                            <td class="value">
+                                <<=classInfo.admin>>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="descriptor"> Meeting Days</td>
+                            <td class="value">
+                                << for(let day of classInfo.weekDays) {>>
+                                    << if(classInfo.meetingDays.includes(day)) {>>
+                                    <span class="chosenDay"> <<=day>> </span>
+                                    <<} else { >>
+                                    <span class="regularDay"><<=day>> </span>
+                                        << } >>  
+
+                                << }>>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="descriptor"> Meeting hours</td>
+                            <td class="value">
+                                <<=classInfo.startingTime>> - <<=classInfo.endingTime>> 
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="descriptor"> Status</td>
+                            <td class="value">
+                                <<=classInfo.status>>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="general-info-edit-button">
+                    <button class="btn success"> Edit info </button>
                 </div>
             </div>
         </div>
