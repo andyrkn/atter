@@ -6,10 +6,10 @@
 
 .card {
     margin-top: 15%;
-    width: 500px;
+    width: 50%;
 }
 
-.email-input {
+.user-input {
     width: 100%;
     padding: 12px 20px;
     margin: 8px 0;
@@ -17,27 +17,16 @@
     box-sizing: border-box;
 }
 
-.password-input {
-    width: 100%;
-    padding: 12px 20px;
-    margin: 8px 0;
-    border: 1px solid #ccc;
-    box-sizing: border-box;
-}
-@media only screen and (min-width: 1000px) {
 .extra-login-container {
     display: flex;
     justify-content: space-between;
 }
-}
-@media only screen and (max-width: 1000px) {
+
+@media only screen and (max-width: 768px) {
     .extra-login-container {
         display: flex;
         flex-direction: column;
-        align-self: center;
-    }
-    .button-container{
-        align-self: center;
+        align-items: center;
     }
 }
 
