@@ -24,10 +24,17 @@
     border: 1px solid #ccc;
     box-sizing: border-box;
 }
-
+@media only screen and (min-width: 1000px) {
 .extra-login-container {
     display: flex;
     justify-content: space-between;
+}
+}
+@media only screen and (max-width: 1000px) {
+    .extra-login-container {
+        display: flex;
+        flex-direction: column;
+    }
 }
 
 .extra-options {
