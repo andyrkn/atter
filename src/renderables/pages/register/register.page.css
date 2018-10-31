@@ -104,7 +104,10 @@
     .extra-register-container {
         display: flex;
         flex-direction:column ;
-        justify-content: center;
+        align-self: center;
+    }
+    .button-container{
+        align-self: center;
     }
 }
 
