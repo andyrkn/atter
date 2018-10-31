@@ -41,12 +41,14 @@
                 <div class="card-title text-primary">FOLLOWED ACTIVITIES</div>
                 <div class="container">
                     << for(let activity of followedActivities) {>>
-                        <div class="activity-container">
-                            <div class="icon-container">
-                                <div class="existing-icon"></div>
+                        <a href="/#/activity/<<=activity.id>>">
+                            <div class="activity-container">
+                                <div class="icon-container">
+                                    <div class="existing-icon"></div>
+                                </div>
+                                <<=activity.name>>
                             </div>
-                            <<=activity.name>>
-                        </div>
+                        </a>
                         << }>>
                             <div class="activity-container">
                                 <div class="icon-container">

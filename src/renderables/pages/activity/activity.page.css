@@ -1,0 +1,88 @@
+.attend-now-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.card {
+    width: 100%;
+}
+
+.attend-card {
+    width: 50% !important;
+    flex-direction: column;
+    align-items: center;
+}
+
+.user-input {
+    width: 50%;
+    padding: 12px 20px;
+    margin-top: 25px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+}
+
+/*
+semi-duplicate with home.page.css
+*/
+
+.activity-container {
+    --activity-width: 150px;
+    --activity-height: 200px;
+    --activity-margin: 20px;
+    --activity-inner-padding: 20px;
+    --icon-container-bottom-margin: 30px;
+}
+
+.container {
+    width: 100%;
+    height: 100%;
+    margin-left: 50px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.activity-container {
+    width: var(--activity-width);
+    height: var(--activity-height);
+    margin: var(--activity-margin);
+    padding: var(--activity-inner-padding);
+    text-align: center;
+    text-overflow: ellipsis;
+    transition: box-shadow .25s;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.icon-container {
+    padding: 10px;
+    width: 100%;
+    height: 70%;
+    margin-bottom: var(--icon-container-bottom-margin);
+}
+
+.existing-icon {
+    background: url("assets/icons/activity-icon.jpg") no-repeat;
+    background-size: 100%;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+}
+
+/*
+semi-duplicate with home.page.css
+*/
+
+@media only screen and (max-width: 768px) {
+    .user-input {
+        width: 100%;
+    }
+}
+
+@media only screen and (max-width: 992px) {
+    .user-input {
+        width: 75%;
+    }
+}

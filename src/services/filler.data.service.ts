@@ -9,13 +9,21 @@ export class FillerDataService {
 
     private _followedActivities: any = [
         {
-            name: 'cristi\'s activity'
+            name: 'arctic activity',
+            id: 1,
+            coordinator: 'Cristi'
         }, {
-            name: 'CLIW'
+            name: 'CLIW',
+            id: 2,
+            coordinator: 'Sergiu'
         }, {
-            name: 'another activity'
+            name: 'another activity',
+            id: 3,
+            coordinator: 'Andrei'
         }, {
-            name: 'cristi\'s activity'
+            name: 'cristi\'s activity',
+            id: 4,
+            coordinator: 'Buraga'
         }
     ];
     private _myActivities: any = [
@@ -42,5 +50,9 @@ export class FillerDataService {
 
     public get followedActivities() {
         return this._followedActivities;
+    }
+
+    public getFollowedActivityId(id: any) {
+        return this._followedActivities[id - 1];
     }
 }
