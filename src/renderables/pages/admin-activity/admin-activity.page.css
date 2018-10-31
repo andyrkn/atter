@@ -1,0 +1,11 @@
+.admin-activity-container{
+    display: grid;
+    justify-content: center;
+    margin-top: 15px;
+    grid-template-columns:2.5fr 1.5fr;
+    grid-template-rows: 1fr 1fr;
+    grid-column-gap: 20px;
+    grid-template-areas:
+    "attendees info "
+    ". . "
+}
