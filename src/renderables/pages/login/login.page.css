@@ -5,7 +5,7 @@
 }
 
 .card {
-    margin-top:15%;
+    margin-top: 15%;
     width: 500px;
 }
 
@@ -25,7 +25,12 @@
     box-sizing: border-box;
 }
 
-.login-button {
-    display: inline-flex;
-    justify-content: center;
+.extra-login-container {
+    display: flex;
+    justify-content: space-between;
+}
+
+.extra-options {
+    display: inherit;
+    flex-direction: column;
 }
