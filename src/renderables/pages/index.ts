@@ -6,3 +6,4 @@ export * from './register/register.page';
 export * from './forgot-password/forgot-password.page';
 export * from './activity/activity.page';
 export * from './dashboard/dashboard.page';
+export * from './admin-activity/admin-activity.page'
