@@ -16,16 +16,6 @@ export class FillerDataService {
             name: 'another activity'
         }, {
             name: 'cristi\'s activity'
-        }, {
-            name: 'CLIW'
-        }, {
-            name: 'another activity'
-        }, {
-            name: 'cristi\'s activity'
-        }, {
-            name: 'CLIW'
-        }, {
-            name: 'another activity'
         }
     ];
     private _myActivities: any = [
@@ -43,10 +33,6 @@ export class FillerDataService {
             name: 'steauta'
         }, {
             name: 'cristi\'s activity'
-        }, {
-            name: 'CLIW'
-        }, {
-            name: 'another activity'
         }
     ];
 

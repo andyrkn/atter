@@ -1,7 +1,6 @@
 import { Route } from "@web/router";
 
-import { HomePage, LoginPage, NotFoundPage, LayoutPage, RegisterPage, ForgotPasswordPage } from "./renderables/pages";
-import { Dashboard } from "./renderables/pages/dashboard/dashboard";
+import { HomePage, LoginPage, NotFoundPage, LayoutPage, RegisterPage, ForgotPasswordPage, Dashboard, Activity } from "./renderables/pages";
 
 export const appRoute: Route[] = [
     {
@@ -27,6 +26,10 @@ export const appRoute: Route[] = [
     {
         page: Dashboard,
         path: 'dashboard'
+    },
+    {
+        page: Activity,
+        path: 'activity'
     },
     {
         page: ForgotPasswordPage,

@@ -38,9 +38,17 @@
     margin-bottom: var(--icon-container-bottom-margin);
 }
 
-.act-add-icon {
+.new-icon {
     background: url("assets/icons/add-new.png") no-repeat;
     background-size: 100%;
     width: 100%;
     height: 100%;
+}
+
+.existing-icon {
+    background: url("assets/icons/activity-icon.jpg") no-repeat;
+    background-size: 100%;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
 }

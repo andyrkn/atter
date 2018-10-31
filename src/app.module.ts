@@ -1,8 +1,7 @@
 import { Module } from "@web/core";
 import { appRoute } from "./app.routing";
-import { HomePage, LoginPage, NotFoundPage, RegisterPage, ForgotPasswordPage } from "./renderables/pages";
+import { HomePage, LoginPage, NotFoundPage, RegisterPage, ForgotPasswordPage, Dashboard, Activity } from "./renderables/pages";
 import { HeaderComponent } from "./renderables/components";
-import { Dashboard } from "./renderables/pages/dashboard/dashboard";
 import { FillerDataService } from "./services/filler.data.service";
 import { UserService } from "./services/user.service";
 
@@ -16,6 +15,7 @@ import { UserService } from "./services/user.service";
             HeaderComponent,
             RegisterPage,
             Dashboard,
+            Activity,
             ForgotPasswordPage
         ]
     },
