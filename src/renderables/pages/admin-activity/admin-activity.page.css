@@ -1,7 +1,8 @@
-.className{
+.className {
     display: flex;
     justify-content: center;
 }
+
 .admin-activity-container {
     display: grid;
     margin-top: 15px;
@@ -17,63 +18,41 @@
     grid-area: attendees;
 }
 
-.general-info-card {
-    grid-area: info;
-}
-
-.general-info-container {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-}
-.general-info-table{
-    width: 100%;
-    border-spacing: 0px;
-}
-.general-info-table tr:nth-child(even) {
-    background-color: var(--light-gray);
-}
-
-.general-info-edit-button {
-    display: inline-flex;
-    justify-content: end;
-}
 
 .add-attendee-button {
     display: inline-flex;
     justify-content: end;
 }
-.descriptor{
-    text-align:  left;
-    padding:0px;
-    width: 35%
-}
-.value{
-    padding-left: 0px;
-    text-align: right;
-}
-.chosenDay{
-    display: inline-block;
-    background-color:var(--primary);
-    height: 75%;
-    border-radius: 5px;
-}
-.regularDay{
-    background-color:var(--light-gray);
-    display: inline-block;
-    border-radius: 5px;
-}
-.assesments-card{
-    grid-area: assesments;
-}
-.general-attendees-table{
-    width: 100%;
-    border-spacing: 0px;
-}
 
-.general-attendees-table tr:nth-child(even) {
-    background-color: var(--light-gray);
-}
 .card-content {
     justify-content: space-between;
+}
+
+.check-in {
+    display: flex;
+    margin-top:5%;
+    flex-direction: column;
+    align-self: center;
+}
+
+.user-input {
+    width: 30%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    border: 1px solid #ccc;
+    align-self: center;
+    text-align: center;
+}
+
+.check-in-button-container {
+    align-self: center;
+}
+.buttons-containment{
+    margin-top:3%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.attendance-cards{
+    margin-top:3%;
 }
