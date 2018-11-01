@@ -1,3 +1,7 @@
+.className{
+    display: flex;
+    justify-content: center;
+}
 .admin-activity-container {
     display: grid;
     margin-top: 15px;
@@ -58,4 +62,15 @@
     background-color:var(--light-gray);
     display: inline-block;
     border-radius: 5px;
+}
+.assesments-card{
+    grid-area: assesments;
+}
+.general-attendees-table{
+    width: 100%;
+    border-spacing: 0px;
+}
+
+.general-attendees-table tr:nth-child(even) {
+    background-color: var(--light-gray);
 }

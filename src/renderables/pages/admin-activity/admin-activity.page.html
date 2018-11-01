@@ -9,6 +9,22 @@
                     Attendees
                 </div>
                 <div class="attendees-container">
+                    <table class="general-attendees-table">
+                            << for(let attendee of classInfo.attenedees) {>>
+                            <tr class="row-attendee">
+                                <td class="first-name-collumn">
+                                    <<=attendee.firstName>>
+                                </td>
+                                <td class="last-name-collumn">
+                                    <<=attendee.lastName>>
+                                </td>
+                                <td class="btn-collumn">
+                                    <button class="btn success"> Edit info</button>
+                                </td>
+                            </tr>
+                            << }>>
+
+                    </table>
                 </div>
 
                 <div class="add-attendee-button">
@@ -42,18 +58,22 @@
                             <td class="value">
                                 << for(let day of classInfo.weekDays) {>>
                                     << if(classInfo.meetingDays.includes(day)) {>>
-                                    <span class="chosenDay"> <<=day>> </span>
-                                    <<} else { >>
-                                    <span class="regularDay"><<=day>> </span>
-                                        << } >>  
+                                        <span class="chosenDay">
+                                            <<=day>>
+                                        </span>
+                                        <<} else {>>
+                                            <span class="regularDay">
+                                                <<=day>>
+                                            </span>
+                                            << }>>
 
-                                << }>>
+                                                << }>>
                             </td>
                         </tr>
                         <tr>
                             <td class="descriptor"> Meeting hours</td>
                             <td class="value">
-                                <<=classInfo.startingTime>> - <<=classInfo.endingTime>> 
+                                <<=classInfo.startingTime>> - <<=classInfo.endingTime>>
                             </td>
                         </tr>
                         <tr>
@@ -69,6 +89,15 @@
                 </div>
             </div>
         </div>
-    </div>
+        <div class="admin-activity-assesments">
+            <div class="assesments-card">
+                <div class="card">
+                    <div class="card-title text-primary">
+                        Assesments
+                    </div>
+                </div>
 
+            </div>
+        </div>
+    </div>
 </section>
