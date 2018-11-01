@@ -2,7 +2,7 @@ import { Route } from "@web/router";
 
 import {
     HomePage, LoginPage, NotFoundPage, LayoutPage,
-    RegisterPage, ForgotPasswordPage, Dashboard, Activity, AdminActivityPage, CreateNewActivityPage
+    RegisterPage, ForgotPasswordPage, Dashboard, Activity, AdminActivityPage, CreateNewActivityPage, FollowActivity
 } from "./renderables/pages";
 
 export const appRoute: Route[] = [
@@ -45,5 +45,9 @@ export const appRoute: Route[] = [
     {
         page: CreateNewActivityPage,
         path: 'create-new-activity'
+    },
+    {
+        page: FollowActivity,
+        path: 'follow-activity'
     }
 ];
