@@ -3,26 +3,25 @@
         <<=classInfo.className>>
     </h1>
     <div>
-        <div>
-
-            << for(let [index, weekCard] of classInfo.checkIns.entries()) {>>
-                    <div class="card">
-                        <div class="card-title text-primary">
-                            <<=weekCard.Date>>
-                        </div>
-                        <section class="card-content">
-                            <main>
-                                << for(let attendee of weekCard.Attendees) {>>
-                                    <<=attendee.FirstName>> <<=attendee.LastName>>
-                                << }>>
-                            </main>
-                            <aside>
-                                <canvas height="230px" width="560px" id="graph-<<=index>>"></canvas>
-                            </aside>
-                        </section>
-                    </div>
-                << }>>
-        </div>
+        << for(let [index, weekCard] of classInfo.checkIns.entries()) {>>
+            <div class="card">
+                <div class="card-title text-primary">
+                    <<=weekCard.Date>>
+                </div>
+                <section class="card-content">
+                    <main>
+                        << for(let attendee of weekCard.Attendees) {>>
+                            <div>
+                                <<=attendee.FirstName>> <<=attendee.LastName>>
+                            </div>
+                            << }>>
+                    </main>
+                    <aside>
+                        <canvas height="230px" width="560px" id="graph-<<=index>>"></canvas>
+                    </aside>
+                </section>
+            </div>
+            << }>>
     </div>
     <div class="general-info-card">
         <div class="card">
@@ -81,14 +80,19 @@
             </div>
         </div>
     </div>
-    <div class="admin-activity-assesments">
-        <div class="assesments-card">
+    <div class="cheating-card">
+        << for(let weekCard of classInfo.checkIns) {>>
             <div class="card">
                 <div class="card-title text-primary">
-                    Assesments
+                    <<=weekCard.Date + " Cheating">>
                 </div>
+                <ul class="cheater-list">
+                << for(let [index, cheater] of weekCard.cheats.entries()) {>>
+                    <li> <<=cheater.FirstName>> <<=cheater.LastName>>  </li>
+                << } >>
+                </ul>
+
             </div>
-        </div>
-    </div>
+            << }>>
     </div>
 </section>

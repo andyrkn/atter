@@ -1,5 +1,9 @@
-import { Renderable } from "@web/core";
-import { ClassInfo } from "./class-info";
+import {
+    Renderable
+} from "@web/core";
+import {
+    ClassInfo
+} from "./class-info";
 import * as Chart from 'chart.js';
 
 @Renderable({
@@ -11,31 +15,35 @@ export class AdminActivityPage {
 
     public id: number = 1;
     public classInfo: ClassInfo = new ClassInfo();
-
     public afterRender(): void {
-        console.log('draww');
         for (const [index, week] of this.classInfo.checkIns.entries()) {
+
+            const keyData = [];
+            const values: any = {};
+            const extractedValues = [];
+            for (const atendee of week.Attendees) {
+                if (keyData.indexOf(atendee.tag) === -1) {
+                    keyData.push(atendee.tag);
+                }
+                if (values[atendee.tag] === undefined) {
+                    values[atendee.tag] = 1;
+                } else {
+                    values[atendee.tag]++;
+                }
+
+            }
+            for (const [index1, record] of keyData.entries()) {
+                extractedValues.push(values[keyData[index1]]);
+            }
             const canvas = document.getElementById(`graph-${index}`) as any;
             const canvasContext = canvas.getContext('2d');
             const chart = new Chart(canvasContext, {
                 type: 'bar',
                 data: {
-                    labels: [
-                        "2015-01",
-                        "2015-02",
-                        "2015-03",
-                        "2015-04",
-                        "2015-05",
-                        "2015-06",
-                        "2015-07",
-                        "2015-08",
-                        "2015-09",
-                        "2015-10",
-                        "2015-11",
-                        "2015-12"],
+                    labels: keyData,
                     datasets: [{
-                        label: '# of Tomatoes',
-                        data: [12, 19, 3, 5, 2, 3, 20, 3, 5, 6, 2, 1],
+                        label: '# of Attendees',
+                        data: extractedValues,
                         backgroundColor: [
                             'rgba(255, 99, 132, 0.2)',
                             'rgba(54, 162, 235, 0.2)',

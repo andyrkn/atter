@@ -19,18 +19,65 @@ export class ClassInfo {
         this.endingTime = "16:00";
         this.checkIns = [{
             Date: "27.01.2018",
-            Attendees : [{
-                FirstName : "Andrei",
-                LastName : "Mihaila"
-            }]
-        },
-        {
+            Attendees: [{
+                    FirstName: "Andrei",
+                    LastName: "Mihaila",
+                    tag: "CssMaster"
+                },
+                {
+                    FirstName: "Andrei",
+                    LastName: "Mihaila",
+                    tag: "HtmlApprentice"
+                },
+                {
+                    FirstName: "Andrei",
+                    LastName: "Mihaila",
+                    tag: "JsGod"
+                },
+                {
+                    FirstName: "Andrei",
+                    LastName: "Mihaila",
+                    tag: "CssMaster"
+                },
+                {
+                    FirstName: "Andrei",
+                    LastName: "Mihaila",
+                    tag: "CssMaster"
+                }
+            ],
+            cheats: [{
+                    FirstName: "Andreea",
+                    LastName: "Papadie"
+                },
+                {
+                    FirstName: "Matei",
+                    LastName: "Papadie"
+                },
+                {
+                    FirstName: "Mihai",
+                    LastName: "Papadie"
+                }
+            ]
+        }, {
             Date: "28.01.2018",
-            Attendees : [{
-                FirstName : "Andreea",
-                LastName : "Mihaila"
-            }]
-        }
-    ];
+            Attendees: [{
+                FirstName: "Andreea",
+                LastName: "Mihaila",
+                tag: "CssMaster"
+            }],
+            cheats: [{
+                FirstName: "Andreea",
+                LastName: "Papadie"
+            },
+            {
+                FirstName: "Matei",
+                LastName: "Papadie"
+            },
+            {
+                FirstName: "Mihai",
+                LastName: "Papadie"
+            }
+        ]
+        }];
     }
 }
