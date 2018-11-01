@@ -29,6 +29,11 @@ export abstract class RenderableManipulatorHandler implements Handler<Renderable
 
         this.watch(objectToHandle, context, contextChangeSubject);
         this.whenToUnwatch().subscribe(() => this.unwatch(objectToHandle, context, subscription));
+
+        // TODO: Refactor and introduce renderable life hooks and replace this code
+        if (context['afterRender']) {
+            context['afterRender']();
+        }
     }
 
     private renderTemplate(renderableManipulator: RenderableManipulator, context: any): void {

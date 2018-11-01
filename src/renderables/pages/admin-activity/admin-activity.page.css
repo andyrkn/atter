@@ -74,3 +74,6 @@
 .general-attendees-table tr:nth-child(even) {
     background-color: var(--light-gray);
 }
+.card-content {
+    justify-content: space-between;
+}

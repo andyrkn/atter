@@ -238,6 +238,11 @@ button.info, .btn.info, input[type="button"].info, input[type="submit"].info {
     justify-content: center;
 }
 
+.card > .card-content {
+    display: flex;
+    flex-direction: row;
+}
+
 .container {
     width: 100%;
     margin-right: auto;
