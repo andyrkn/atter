@@ -3,17 +3,6 @@
     justify-content: center;
 }
 
-.admin-activity-container {
-    display: grid;
-    margin-top: 15px;
-    grid-template-columns: 2.5fr 1.5fr;
-    grid-template-rows: 1fr 1fr;
-    grid-column-gap: 20px;
-    grid-template-areas:
-        "attendees info "
-        "assesments . "
-}
-
 .attendees-card {
     grid-area: attendees;
 }

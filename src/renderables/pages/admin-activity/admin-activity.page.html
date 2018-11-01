@@ -39,12 +39,12 @@
         << for(let weekCard of classInfo.checkIns) {>>
             <div class="card">
                 <div class="card-title text-primary">
-                    <<=weekCard.Date + " Cheating">>
+                    <<=weekCard.Date + " Frauds">>
                 </div>
-                <ul class="cheater-list">
-                    << for(let [index, cheater] of weekCard.cheats.entries()) {>>
+                <ul class="fraud-list">
+                    << for(let [index, fraud] of weekCard.frauds.entries()) {>>
                         <li>
-                            <<=cheater.FirstName>> <<=cheater.LastName>>
+                            <<=fraud.FirstName>> <<=fraud.LastName>>
                         </li>
                         << }>>
                 </ul>

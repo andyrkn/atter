@@ -45,7 +45,7 @@ export class ClassInfo {
                     tag: "CssMaster"
                 }
             ],
-            cheats: [{
+            frauds: [{
                     FirstName: "Andreea",
                     LastName: "Papadie"
                 },
@@ -65,7 +65,7 @@ export class ClassInfo {
                 LastName: "Mihaila",
                 tag: "CssMaster"
             }],
-            cheats: [{
+            frauds: [{
                 FirstName: "Andreea",
                 LastName: "Papadie"
             },
