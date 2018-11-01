@@ -1,4 +1,5 @@
 import { Renderable } from "@web/core";
+import { ClassInfo } from "./class-info";
 
 @Renderable({
     folderPathRelativeToRenderablesFolder: 'pages/admin-activity',
