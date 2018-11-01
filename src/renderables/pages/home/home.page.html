@@ -22,12 +22,14 @@
                 <div class="card-title text-primary">MY ACTIVITIES</div>
                 <div class="container">
                     << for(let activity of myActivities) {>>
-                        <div class="activity-container">
-                            <div class="icon-container">
-                                <div class="existing-icon"></div>
+                        <a href="/#/admin-activity/<<=activity.id>>">
+                            <div class="activity-container">
+                                <div class="icon-container">
+                                    <div class="activity-icon-<<=activity.iconId>>"></div>
+                                </div>
+                                <<=activity.name>>
                             </div>
-                            <<=activity.name>>
-                        </div>
+                        </a>
                         << }>>
                             <a href="/#/create-new-activity">
                                 <div class="activity-container">
@@ -46,7 +48,7 @@
                         <a href="/#/activity/<<=activity.id>>">
                             <div class="activity-container">
                                 <div class="icon-container">
-                                    <div class="existing-icon"></div>
+                                    <div class="activity-icon-<<=activity.iconId>>"></div>
                                 </div>
                                 <<=activity.name>>
                             </div>

@@ -173,7 +173,6 @@ button.info, .btn.info, input[type="button"].info, input[type="submit"].info {
     outline: none;
 }
 
-
 /* containers */
 
 .flex-container {
@@ -184,52 +183,49 @@ button.info, .btn.info, input[type="button"].info, input[type="submit"].info {
     flex-direction: column;
 }
 
-.flex-container.children-nowidth > * {
+.flex-container.children-nowidth>* {
     align-self: flex-start;
 }
 
 .card {
     display: flex;
     flex-direction: column;
-
     background-color: white;
     box-shadow: var(--box-shadow);
     padding: 24px;
     margin: 50px 0 1rem 0;
-    border-radius: 2px;    
+    border-radius: 2px;
 }
 
-.card > .card-title:first-child {
+.card>.card-title:first-child {
     color: white;
     width: auto;
     font-size: 24px;
     padding: 15px 20px;
     background-color: var(--primary);
     align-self: flex-start;
-
     box-shadow: var(--box-shadow);
-
     margin-top: -55px;
     margin-bottom: 10px;
 }
 
-.card > .card-title:first-child.center {
+.card>.card-title:first-child.center {
     align-self: center;
 }
 
-.card > .card-title:first-child.left {
+.card>.card-title:first-child.left {
     align-self: flex-start;
 }
 
-.card > .card-title:first-child.right {
+.card>.card-title:first-child.right {
     align-self: flex-end;
 }
 
-.card > .card-title:first-child.danger {
+.card>.card-title:first-child.danger {
     background-color: var(--bg-danger);
 }
 
-.card > .card-title:first-child.info {
+.card>.card-title:first-child.info {
     background-color: var(--secondary);
 }
 
@@ -238,7 +234,7 @@ button.info, .btn.info, input[type="button"].info, input[type="submit"].info {
     justify-content: center;
 }
 
-.card > .card-content {
+.card>.card-content {
     display: flex;
     flex-direction: row;
 }
@@ -256,21 +252,68 @@ button.info, .btn.info, input[type="button"].info, input[type="submit"].info {
         --container-max-width: 540px;
     }
 }
-  
+
 @media (min-width: 768px) {
     :root {
         --container-max-width: 720px;
     }
 }
-  
+
 @media (min-width: 992px) {
     :root {
         --container-max-width: 960px;
     }
 }
-  
+
 @media (min-width: 1200px) {
     :root {
         --container-max-width: 1140px;
     }
+}
+
+.activity-icon-1 {
+    background: url("assets/icons/eagle-icon.jpg") no-repeat;
+    background-size: 100%;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+}
+
+.activity-icon-2 {
+    background: url("assets/icons/panda-icon.jpg") no-repeat;
+    background-size: 100%;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+}
+
+.activity-icon-3 {
+    background: url("assets/icons/rocket-icon.jpg") no-repeat;
+    background-size: 100%;
+    width: 100%;
+    height: 100%;
+}
+
+.activity-icon-4 {
+    background: url("assets/icons/toxic-icon.jpg") no-repeat;
+    background-size: 100%;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+}
+
+.activity-icon-5 {
+    background: url("assets/icons/book-icon.jpg") no-repeat;
+    background-size: 100%;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+}
+
+.activity-icon-6 {
+    background: url("assets/icons/smile-icon.jpg") no-repeat;
+    background-size: 100%;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
 }
