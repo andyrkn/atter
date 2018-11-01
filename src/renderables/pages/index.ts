@@ -8,3 +8,4 @@ export * from './activity/activity.page';
 export * from './dashboard/dashboard.page';
 export * from './admin-activity/admin-activity.page';
 export * from './create-new-activity/create-new-activity.page';
+export * from './follow-activity/follow-activity.page';
