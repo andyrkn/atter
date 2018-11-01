@@ -2,7 +2,7 @@ import { Route } from "@web/router";
 
 import {
     HomePage, LoginPage, NotFoundPage, LayoutPage,
-    RegisterPage, ForgotPasswordPage, Dashboard, Activity, AdminActivityPage
+    RegisterPage, ForgotPasswordPage, Dashboard, Activity, AdminActivityPage, CreateNewActivityPage
 } from "./renderables/pages";
 
 export const appRoute: Route[] = [
@@ -41,6 +41,9 @@ export const appRoute: Route[] = [
     {
         page: AdminActivityPage,
         path: 'admin-activity'
-
+    },
+    {
+        page: CreateNewActivityPage,
+        path: 'create-new-activity'
     }
 ];

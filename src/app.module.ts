@@ -2,7 +2,7 @@ import { Module } from "@web/core";
 import { appRoute } from "./app.routing";
 import {
     HomePage, LoginPage, NotFoundPage, RegisterPage,
-    ForgotPasswordPage, Dashboard, Activity, AdminActivityPage
+    ForgotPasswordPage, Dashboard, Activity, AdminActivityPage, CreateNewActivityPage
 } from "./renderables/pages";
 import { HeaderComponent } from "./renderables/components";
 import { FillerDataService } from "./services/filler.data.service";
@@ -20,7 +20,8 @@ import { UserService } from "./services/user.service";
             Dashboard,
             Activity,
             ForgotPasswordPage,
-            AdminActivityPage
+            AdminActivityPage,
+            CreateNewActivityPage
         ]
     },
     injectable: [
