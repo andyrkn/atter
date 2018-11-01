@@ -1,4 +1,4 @@
-export class ClassInfo {
+    export class ClassInfo {
     public className: string;
     public description: string;
     public admin: string;
