@@ -3,10 +3,6 @@ import { Injectable } from '@web/core';
 @Injectable()
 export class CheckInServivce {
 
-    constructor() {
-
-    }
-
     public toggleStatus(): void {
         const newValue = this.checkinStatus === true ? 'FALSE' : 'TRUE';
         localStorage.setItem('checkInStatus', newValue);

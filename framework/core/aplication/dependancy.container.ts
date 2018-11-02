@@ -11,7 +11,8 @@ export class DependencyContainer {
     }
 
     public addInjectable(injectable: Function): void {
-        this.injectablesMetadata[injectable.name] = Reflect.getMetadata('design:paramtypes', injectable);
+        const metadata = Reflect.getMetadata('design:paramtypes', injectable);
+        this.injectablesMetadata[injectable.name] = metadata === undefined ? [] : metadata;
     }
 
     public getRenderableMetadata(renderable: Function): Function[] {
@@ -33,4 +34,5 @@ export class DependencyContainer {
     public addRouter(name: string, router: any): void {
         this.injectableClasses[name] = router;
     }
+
 }

@@ -3,10 +3,6 @@ import { Injectable } from "@web/core";
 @Injectable()
 export class FillerDataService {
 
-    constructor() {
-
-    }
-
     private _followedActivities: any = [
         {
             name: 'arctic activity',
