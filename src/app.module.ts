@@ -9,6 +9,7 @@ import {
 import { HeaderComponent, HeaderService } from "./renderables/components";
 import { FillerDataService } from "./services/filler.data.service";
 import { UserService } from "./services/user.service";
+import { AsignGradePage } from "./renderables/pages/asign-grade/asign-grade.page";
 
 @Module({
     renderableDeclaration: {
@@ -23,7 +24,8 @@ import { UserService } from "./services/user.service";
             ForgotPasswordPage,
             DashboardPage,
             CreateNewActivityPage,
-            FollowActivity
+            FollowActivity,
+            AsignGradePage
         ]
     },
     injectable: [

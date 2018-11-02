@@ -33,7 +33,7 @@
                             <ol>
                                 << for(let attendee of weekCard.Attendees) {>>
                                 <li>
-                                    <<=attendee.FirstName>> <<=attendee.LastName>>
+                                    <a class="text-primary" href="#/asign-grade"><<=attendee.FirstName>> <<=attendee.LastName>></a> 
                                 </li>
                                 << }>>
                             </ol>
@@ -47,6 +47,10 @@
                                 </li>
                                 << }>>
                             </ol>
+                        </div>
+                        <div>
+                            <button class="btn success">Import grades</button>
+                            <button class="btn info">Export grades</button>
                         </div>
                     </main>
                     <aside class="flex-container column center">

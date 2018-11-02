@@ -4,6 +4,7 @@ import {
     HomePage, LoginPage, NotFoundPage, LayoutPage,
     RegisterPage, ForgotPasswordPage, Activity, DashboardPage, CreateNewActivityPage, FollowActivity, LogoutPage
 } from "./renderables/pages";
+import { AsignGradePage } from "./renderables/pages/asign-grade/asign-grade.page";
 
 export const appRoute: Route[] = [
     {
@@ -37,6 +38,10 @@ export const appRoute: Route[] = [
     {
         page: ForgotPasswordPage,
         path: 'forgot-password'
+    },
+    {
+        page: AsignGradePage,
+        path: 'asign-grade'
     },
     {
         page: DashboardPage,
