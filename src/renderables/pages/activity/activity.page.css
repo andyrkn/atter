@@ -78,3 +78,14 @@ semi-duplicate with home.page.css
         width: 75%;
     }
 }
+
+.check-in {
+    margin-top: 20px;
+    font-size: 45px;
+    height: 75px;
+
+    animation: pulse 1.4s infinite;
+}
+.check-in:hover {
+    animation: none;
+}

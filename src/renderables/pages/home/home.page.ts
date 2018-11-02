@@ -1,4 +1,4 @@
-import { Renderable } from "@web/core";
+import { Renderable, TrackChanges } from "@web/core";
 import { FillerDataService } from "@app/services/filler.data.service";
 import { UserService } from "@app/services/user.service";
 
@@ -9,7 +9,9 @@ import { UserService } from "@app/services/user.service";
 })
 export class HomePage {
     public appTitle: string = 'Atter';
-    public loggedIn: boolean = false;
+
+    @TrackChanges()
+    public loggedIn: boolean;
 
     public followedActivities: any = [];
     public myActivities: any = [];
@@ -20,6 +22,6 @@ export class HomePage {
 
         this.followedActivities = this.fillerDataService.followedActivities;
         this.myActivities = this.fillerDataService.myActivities;
-        this.loggedIn = this.userService.loggedIn;
+        this.userService.onLoginChange().subscribe((loginStatus: boolean) => this.loggedIn = loginStatus);
     }
 }

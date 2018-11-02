@@ -1,28 +1,30 @@
-<<if(!loggedIn) {>>
-    <h1>
-        <<= appTitle>>
-    </h1>
+<< if(!loggedIn) {>>
 
-    <p class="app-description">
-        Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's
-        standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to
-        make a
-        type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting,
-        remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing
-        Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including
-        versions of
-        Lorem Ipsum.
-    </p>
-    <a href="/#/login/1">change</a>
+    <img class="logo" src="assets/logos/logo-sm.png" alt="Atter logo">
+    <main class="card">
+        <div class="card-title">Why atter?</div>
+        <div class="card-content">
+            <p class="app-description">
+                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's
+                standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to
+                make a
+                type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting,
+                remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing
+                Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including
+                versions of
+                Lorem Ipsum.
+            </p>
+        </div>
+    </main>
 
     <<} else {>>
 
         <section>
             <div class="card">
-                <div class="card-title text-primary">MY ACTIVITIES</div>
+                <div class="card-title text-primary">My Activities</div>
                 <div class="container">
                     << for(let activity of myActivities) {>>
-                        <a href="/#/admin-activity/<<=activity.id>>">
+                        <a class="activity-profile" href="/#/dashboard/<<=activity.id>>">
                             <div class="activity-container">
                                 <div class="icon-container">
                                     <div class="activity-icon-<<=activity.iconId>>"></div>
@@ -31,7 +33,7 @@
                             </div>
                         </a>
                         << }>>
-                            <a href="/#/create-new-activity">
+                            <a class="activity-profile" href="/#/create-new-activity">
                                 <div class="activity-container">
                                     <div class="icon-container">
                                         <div class="new-icon"></div>
@@ -42,19 +44,19 @@
                 </div>
             </div>
             <div class="card">
-                <div class="card-title text-primary">FOLLOWED ACTIVITIES</div>
+                <div class="card-title text-primary">Followed Activities</div>
                 <div class="container">
                     << for(let activity of followedActivities) {>>
-                        <a href="/#/activity/<<=activity.id>>">
+                        <a class="activity-profile" href="/#/activity/<<=activity.id>>">
                             <div class="activity-container">
                                 <div class="icon-container">
-                                    <div class="activity-icon-<<=activity.iconId>>"></div>
+                                    <div class="activity-icon activity-icon-<<=activity.iconId>>"></div>
                                 </div>
                                 <<=activity.name>>
                             </div>
                         </a>
                         << }>>
-                            <a href="/#/follow-activity">
+                            <a class="activity-profile" href="/#/follow-activity">
                                 <div class="activity-container">
                                     <div class="icon-container">
                                         <div class="new-icon"></div>

@@ -1,0 +1,77 @@
+.privacy-container {
+    align-self: center;
+}
+
+.add-attendee-button {
+    display: inline-flex;
+    justify-content: end;
+}
+
+.card-content {
+    justify-content: space-between;
+}
+
+.checkin-content { 
+    justify-content: space-evenly;
+    align-items: center;
+    min-width: 570px;
+}
+
+.check-in {
+    display: flex;
+    flex-direction: column;
+    align-self: center;
+}
+
+.buttons-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.buttons-container .btn {
+    margin: 7px;
+}
+.graph {
+    height: 230px; 
+    width: 560px; 
+}
+
+
+@media (min-width: 767px) and (max-width: 991px) { 
+    .privacy-container {
+        align-self: unset;
+    }
+}
+
+@media (max-width: 992px) {
+    .checkin-content {
+        justify-content: unset;
+        align-items: unset;
+        min-width: initial;
+    }
+
+    .card-content {
+        flex-direction: column;
+        width: 100%;
+    }
+    .names-container {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+    }
+
+    .graph {
+        align-self: center;
+        max-width: 100%;
+    }
+
+    .buttons-container {
+        border-top: 1px solid #ccc;
+        padding-top: 20px;
+        margin-top: 20px;
+    }
+
+    .check-in {
+        margin-top: 20px;
+    }
+}

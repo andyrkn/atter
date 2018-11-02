@@ -6,6 +6,4 @@ import { Renderable } from "@web/core";
     styleUrl: '/create-new-activity.page.css'
 })
 export class CreateNewActivityPage {
-    constructor() {
-    }
 }

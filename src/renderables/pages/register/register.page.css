@@ -1,6 +1,5 @@
 .atter-header-info {
-    display: flex;
-    justify-content: center;
+    text-align: center;
 }
 
 .register-container {
@@ -57,62 +56,47 @@
 .first-name-input {
     grid-area: fn;
     width: 100%;
-    padding: 12px 20px;
-    margin: 8px 0;
-    border: 1px solid #ccc;
-    box-sizing: border-box;
 }
 
 .last-name-input {
     grid-area: ln;
     width: 100%;
-    padding: 12px 20px;
-    margin: 8px 0;
-    border: 1px solid #ccc;
-    box-sizing: border-box;
 }
 
 .email-input {
     grid-area: em;
     width: 100%;
-    padding: 12px 20px;
-    margin: 8px 0;
-    border: 1px solid #ccc;
-    box-sizing: border-box;
 }
 
 .password-input {
     grid-area: pw;
     width: 100%;
-    padding: 12px 20px;
-    margin: 8px 0;
-    border: 1px solid #ccc;
-    box-sizing: border-box;
 }
 
 .confirm-password-input {
     grid-area: cpw;
     width: 100%;
-    padding: 12px 20px;
-    margin: 8px 0;
-    border: 1px solid #ccc;
-    box-sizing: border-box;
 }
 
-@media only screen and (max-width: 1000px) {
-    .extra-register-container {
+@media only screen and (max-width: 992px) {
+    .submit-register-container {
         display: flex;
         flex-direction:column ;
         align-self: center;
     }
-    .button-container{
+
+    .submit-register-container .btn, .submit-register-container a {
+        margin-top: 10px;
+    }
+
+    .button-container {
         align-self: center;
     }
 }
 
-@media only screen and (min-width: 1000px) {
-.extra-register-container {
-    display: flex;
-    justify-content: space-between;
-}
+@media only screen and (min-width: 992px) {
+    .submit-register-container {
+        display: flex;
+        justify-content: space-between;
+    }
 }

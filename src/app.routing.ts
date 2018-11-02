@@ -2,7 +2,7 @@ import { Route } from "@web/router";
 
 import {
     HomePage, LoginPage, NotFoundPage, LayoutPage,
-    RegisterPage, ForgotPasswordPage, Dashboard, Activity, AdminActivityPage, CreateNewActivityPage, FollowActivity
+    RegisterPage, ForgotPasswordPage, Activity, DashboardPage, CreateNewActivityPage, FollowActivity, LogoutPage
 } from "./renderables/pages";
 
 export const appRoute: Route[] = [
@@ -13,6 +13,10 @@ export const appRoute: Route[] = [
     {
         page: LoginPage,
         path: 'login'
+    },
+    {
+        page: LogoutPage,
+        path: 'logout'
     },
     {
         page: LayoutPage,
@@ -27,10 +31,6 @@ export const appRoute: Route[] = [
         path: 'register'
     },
     {
-        page: Dashboard,
-        path: 'dashboard'
-    },
-    {
         page: Activity,
         path: 'activity'
     },
@@ -39,8 +39,8 @@ export const appRoute: Route[] = [
         path: 'forgot-password'
     },
     {
-        page: AdminActivityPage,
-        path: 'admin-activity'
+        page: DashboardPage,
+        path: 'dashboard/:id'
     },
     {
         page: CreateNewActivityPage,

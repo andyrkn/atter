@@ -6,20 +6,13 @@
                 <span class="title desktop-title">Atter</span>
             </div>
         </a>
-        <span class="title mobile-tittle">Atter</span>
-        <div id="toggle">
-            <input type="checkbox" />
-            <span></span>
-            <span></span>
-            <span></span>
-        </div>
         <nav>
             <ul>
-                <li><a href="#/home">Home</a></li>
-                <li><a href="#/layout">Layout</a></li>
-                <li><a href="#/login">Login</a></li>
-                <li><a href="#/register">Register</a>
-                <li><a href="#/dashboard">Dashboard</a>
+                << for(const menuItem of menuItems) {>>
+                    <li>
+                        <a href="<<= menuItem.url >>"><<=menuItem.text>></a>
+                    </li>
+                << }>>
             </ul>
         </nav>
     </div>

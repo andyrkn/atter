@@ -2,9 +2,11 @@ import { Module } from "@web/core";
 import { appRoute } from "./app.routing";
 import {
     HomePage, LoginPage, NotFoundPage, RegisterPage,
-    ForgotPasswordPage, Dashboard, Activity, AdminActivityPage, CreateNewActivityPage, FollowActivity
+    ForgotPasswordPage, Activity, DashboardPage, CreateNewActivityPage,
+    FollowActivity, CheckInServivce
 } from "./renderables/pages";
-import { HeaderComponent } from "./renderables/components";
+
+import { HeaderComponent, HeaderService } from "./renderables/components";
 import { FillerDataService } from "./services/filler.data.service";
 import { UserService } from "./services/user.service";
 
@@ -17,17 +19,18 @@ import { UserService } from "./services/user.service";
             NotFoundPage,
             HeaderComponent,
             RegisterPage,
-            Dashboard,
             Activity,
             ForgotPasswordPage,
-            AdminActivityPage,
+            DashboardPage,
             CreateNewActivityPage,
             FollowActivity
         ]
     },
     injectable: [
         FillerDataService,
-        UserService
+        UserService,
+        HeaderService,
+        CheckInServivce
     ],
     route: appRoute
 })

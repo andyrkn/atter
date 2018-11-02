@@ -1,6 +1,7 @@
-import { Renderable } from "@web/core";
+import { Renderable, TrackChanges } from "@web/core";
 import { FillerDataService } from "@app/services/filler.data.service";
 import { UrlTree } from "@web/router";
+import { CheckInServivce } from "../dashboard/services/check-in.service";
 
 @Renderable({
     folderPathRelativeToRenderablesFolder: 'pages/activity',
@@ -8,8 +9,23 @@ import { UrlTree } from "@web/router";
     styleUrl: './activity.page.css'
 })
 export class Activity {
+
+    @TrackChanges()
+    public canCheckIn: boolean = false;
+
     public activity: any;
-    constructor(private fillerDataService: FillerDataService) {
+
+    constructor(private fillerDataService: FillerDataService, private checkinService: CheckInServivce) {
         this.activity = this.fillerDataService.getFollowedActivityId(new UrlTree().routeParameter);
+        this.canCheckIn = this.checkinService.checkinStatus;
+    }
+
+    public afterRender(): void {
+        // just a hack to be replaced
+        if (this.canCheckIn) {
+            document.getElementById('check-in-button').addEventListener('click', () => {
+                this.canCheckIn = false;
+            });
+        }
     }
 }

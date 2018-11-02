@@ -1,38 +1,26 @@
 <section>
     <div class="attend-now-container">
-        <div class="card attend-card">
-            <div class="card-title center danger">
-                Attend Now
-            </div>
-            <input class="user-input" type="text" placeholder="Activity Key" name="activityKey" required>
-            <button class="btn success"> Attend </button>
-        </div>
+        << if(canCheckIn) {>>
+            <button id="check-in-button" class="btn danger check-in"> Check in </button>
+        << } >>
         <div class="card">
             <div class="card-title">
                 Activity Info
             </div>
 
-            <div class="container">
-                <div class="activity-container">
-                    <div class="icon-container">
-                        <div class="activity-icon-<<=activity.iconId>>"></div>
-                    </div>
-                    <<=activity.name>>
-                </div>
+            <div class="card-content flex-container column center">
+
+                <h2 class="text-primary text-center text-uppercase"><<=activity.name>></h2> 
+
+                <h3 class="text-info">Organizer : <span class="text-primary"><<=activity.coordinator>></span></h3>
+                <h4 class="text-info">Your attendances : </h4> 
+                <ol>
+                    <li>Check in # 1 2018-09-20</li>
+                    <li>Check in # 2 2018-09-28</li>
+                    <li>Check in # 3 2018-10-02</li>
+                    <li>Check in # 4 2018-10-25</li>
+                </ol>
             </div>
 
-            <h4>Coordinator:</h4>
-            <<=activity.coordinator>>
-
-        </div>
-
-        <div class="card">
-            <div class="card-title right info">Attendance History</div>
-            <ol>
-                <li>Week 1</li>
-                <li>Week 2</li>
-                <li>Week 3</li>
-                <li>Week 4</li>
-            </ol>
         </div>
 </section>

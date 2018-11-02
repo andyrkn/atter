@@ -25,6 +25,11 @@ export abstract class RenderableManipulatorHandler implements Handler<Renderable
 
         const subscription: Subscription = contextChangeSubject.subscribe(() => {
             this.renderTemplate(objectToHandle, context);
+            // TODO: Refactor and introduce renderable life hooks and replace this code
+            // just a hack
+            if (context['onRefresh']) {
+                context['onRefresh']();
+            }
         });
 
         this.watch(objectToHandle, context, contextChangeSubject);
