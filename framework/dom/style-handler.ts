@@ -14,6 +14,7 @@ export class StyleHandler {
             const styleElement = document.createElement('style');
             styleElement.innerHTML = styleEncapsulated;
             this.headElement.appendChild(styleElement);
+            renderableManipulator.styleRendered = true;
         }
     }
 }
