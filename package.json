@@ -6,7 +6,9 @@
   "scripts": {
     "start": "node index.js",
     "build": "npm-run-all -p lint compile",
-    "compile": "npx webpack --config webpack.dev.config.js --watch",
+    "compile": "npx webpack --config webpack.config.js --env=dev --watch",
+    "build:prod": "npm-run-all -p lint compile-prod",
+    "compile:prod": "npx webpack --config webpack.config.js --env=prod",
     "lint": "tslint 'src/**/*.ts'",
     "lint-framework": "tslint 'framework/**/*.ts'",
     "serve": "npm-run-all -p build start"
