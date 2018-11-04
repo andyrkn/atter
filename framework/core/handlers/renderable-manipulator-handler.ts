@@ -1,19 +1,17 @@
 import { Handler, RenderableManipulator, InstanceManager } from "@web/core";
 import { Renderer, StyleHandler } from "@web/dom";
 import { Subscription, Subject } from "rxjs";
+import { LifeCycle } from "../lifecycle/lifecycle-instanceOf";
+import { DomProcessorHandler } from "@web/dom/dom-processor.handler";
 
 import * as WatchJS from 'melanke-watchjs';
-import { LifeCycle } from "../lifecycle/lifecycle-instanceOf";
 
 export abstract class RenderableManipulatorHandler implements Handler<RenderableManipulator> {
-    protected renderer: Renderer;
-    protected styleHandler: StyleHandler;
-    protected instanceManager: InstanceManager;
 
-    constructor(renderer: Renderer, styleHandler: StyleHandler, instanceManager: InstanceManager) {
-        this.renderer = renderer;
-        this.styleHandler = styleHandler;
-        this.instanceManager = instanceManager;
+    constructor(
+        private styleHandler: StyleHandler, 
+        private instanceManager: InstanceManager, 
+        private processorsHandler: DomProcessorHandler) {
     }
 
     public handle(objectToHandle: RenderableManipulator): void {
@@ -47,7 +45,7 @@ export abstract class RenderableManipulatorHandler implements Handler<Renderable
         const interpretation = renderableManipulator.getInterpretation();
         const toRender: string = interpretation(context);
         const selector = this.whereToRender(renderableManipulator);
-        this.renderer.renderTo(selector, toRender, renderableManipulator.renderingIndex);
+        this.processorsHandler.handle(selector, toRender, renderableManipulator.renderingIndex, context);
     }
 
     private handleStyle(pageManipulator: RenderableManipulator): void {

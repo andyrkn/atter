@@ -4,10 +4,14 @@ import { Renderer, StyleHandler } from "@web/dom";
 import { Subject } from "rxjs";
 
 import { RenderableManipulatorHandler } from "./renderable-manipulator-handler";
+import { DomProcessorHandler } from "@web/dom/dom-processor.handler";
 
 export class ComponentManipulatorHandler extends RenderableManipulatorHandler {
-    constructor(renderer: Renderer, styleHandler: StyleHandler, instanceManager: InstanceManager) {
-        super(renderer, styleHandler, instanceManager);
+    constructor(
+        styleHandler: StyleHandler, 
+        instanceManager: InstanceManager, 
+        processorsHandler: DomProcessorHandler) {
+        super(styleHandler, instanceManager, processorsHandler);
     }
 
     protected whenToUnwatch(): Subject<boolean> {

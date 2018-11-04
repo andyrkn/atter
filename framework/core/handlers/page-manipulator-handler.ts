@@ -5,14 +5,18 @@ import { RenderableManipulatorHandler } from "./renderable-manipulator-handler";
 
 import { Subject } from "rxjs";
 import { NavigationState } from "@web/router/utils/navigation-state.enum";
+import { DomProcessorHandler } from "@web/dom/dom-processor.handler";
 
 export class PageManipulatorHandler extends RenderableManipulatorHandler {
 
-    private router: Router;
     private whenToUnwatchSubject: Subject<boolean> = new Subject<boolean>();
 
-    constructor(router: Router, renderer: Renderer, styleHandler: StyleHandler, instanceManager: InstanceManager) {
-        super(renderer, styleHandler, instanceManager);
+    constructor(
+        private router: Router,
+        styleHandler: StyleHandler,
+        instanceManager: InstanceManager,
+        processorsHandler: DomProcessorHandler) {
+        super(styleHandler, instanceManager, processorsHandler);
         this.router = router;
 
         this.router.navigationState.subscribe((state: NavigationState) => {

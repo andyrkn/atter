@@ -1,4 +1,4 @@
-import { Renderer, StyleHandler } from "./dom";
+import { Renderer, StyleHandler, DomProcessorHandler } from "./dom";
 import { Application, InstanceManager } from "./core";
 import { AppContainer } from "./core/aplication/app-container";
 import { RoutingManager } from "./router/routing-manager";
@@ -23,9 +23,10 @@ export function startApplication<T>(application: Application<T>): void {
     dependencyContainer.addRouter(Router.name, router);
 
     const instanceManager = new InstanceManager(dependencyContainer);
-
-    const componentManipulatorHandler = new ComponentManipulatorHandler(renderer, styleHandler, instanceManager);
-    const pageManipulatorHandler = new PageManipulatorHandler(router, renderer, styleHandler, instanceManager);
+    
+    const processHandler = new DomProcessorHandler(renderer);
+    const componentManipulatorHandler = new ComponentManipulatorHandler(styleHandler, instanceManager, processHandler);
+    const pageManipulatorHandler = new PageManipulatorHandler(router, styleHandler, instanceManager, processHandler);
 
     const componentManager = new ComponentManager(orchestrator, componentManipulatorHandler);
     componentManager.manage();

@@ -11,6 +11,8 @@ export class HomePage {
 
     @TrackChanges()
     public loggedIn: boolean;
+    @TrackChanges()
+    public counter: number = 0;
 
     public followedActivities: any = [];
     public myActivities: any = [];
@@ -22,5 +24,9 @@ export class HomePage {
         this.followedActivities = this.fillerDataService.followedActivities;
         this.myActivities = this.fillerDataService.myActivities;
         this.userService.onLoginChange().subscribe((loginStatus: boolean) => this.loggedIn = loginStatus);
+    }
+
+    public increment(): void {
+        this.counter++;
     }
 }

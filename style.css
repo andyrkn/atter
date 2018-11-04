@@ -255,6 +255,11 @@ button.info, .btn.info, input[type="button"].info, input[type="submit"].info {
     flex-direction: row;
 }
 
+.card>.card-content.column {
+    flex-direction: column;
+}
+
+
 .container {
     width: 100%;
     margin-right: auto;

@@ -7,7 +7,7 @@ import { CheckInServivce } from "../dashboard/services/check-in.service";
     template: require('./activity.page.html'),
     style: require('./activity.page.css')
 })
-export class Activity implements AfterRender {
+export class Activity {
 
     @TrackChanges()
     public canCheckIn: boolean = false;
@@ -19,12 +19,7 @@ export class Activity implements AfterRender {
         this.canCheckIn = this.checkinService.checkinStatus;
     }
 
-    public afterRender(): void {
-        // just a hack to be replaced
-        if (this.canCheckIn) {
-            document.getElementById('check-in-button').addEventListener('click', () => {
-                this.canCheckIn = false;
-            });
-        }
+    public checkIn(): void {
+        this.canCheckIn = false;
     }
 }

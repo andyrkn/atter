@@ -56,7 +56,7 @@ export class RenderableManipulator {
         this._propertiesToTrack.push(value);
     }
 
-    public getInterpretation(): Function {
+    public  getInterpretation(): Function {
         return this.interpretation;
     }
 

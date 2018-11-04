@@ -7,24 +7,20 @@ import { Subject } from "rxjs";
 
 export class RoutingManager {
 
-    private orchestrator: RenderableOrchestrator;
-    private navigationState: Subject<NavigationState>;
-    private handler: PageManipulatorHandler;
+    constructor(
+        private pagesOrchestrator: RenderableOrchestrator,
+        private navigationState: Subject<NavigationState>,
+        private handler: PageManipulatorHandler) {
 
-    constructor(pagesOrchestrator: RenderableOrchestrator, navigationState: Subject<NavigationState>,
-                pageManuipulatorHandler: PageManipulatorHandler) {
-        this.orchestrator = pagesOrchestrator;
-        this.navigationState = navigationState;
-        this.handler = pageManuipulatorHandler;
     }
 
     public manage(): void {
-        addEventListener('hashchange', () => this.handleRouteChange(this.orchestrator, this.navigationState, this.handler));
-        addEventListener('load', () => this.handleRouteChange(this.orchestrator, this.navigationState, this.handler));
+        addEventListener('hashchange', () => this.handleRouteChange(this.pagesOrchestrator, this.navigationState, this.handler));
+        addEventListener('load', () => this.handleRouteChange(this.pagesOrchestrator, this.navigationState, this.handler));
     }
 
     private handleRouteChange(pagesOrchestrator: RenderableOrchestrator, navigationState: Subject<NavigationState>,
-                              pageManuipulatorHandler: PageManipulatorHandler): void {
+        pageManuipulatorHandler: PageManipulatorHandler): void {
         navigationState.next(NavigationState.Start);
 
         const urlTree: UrlTree = new UrlTree();
