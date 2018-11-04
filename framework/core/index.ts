@@ -5,3 +5,4 @@ export * from './aplication/instance.manager';
 export * from './aplication/utils/renderable-orchestrator';
 export * from './aplication/utils/renderable-manipulator';
 export * from './utils/handler';
+export * from './lifecycle';

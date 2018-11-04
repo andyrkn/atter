@@ -1,4 +1,4 @@
-import { Renderable } from "@web/core";
+import { Renderable, AfterRender } from "@web/core";
 import { UserService } from "@app/services/user.service";
 import { Router } from "@web/router";
 
@@ -6,7 +6,7 @@ import { Router } from "@web/router";
     template: require('./login.page.html'),
     style: require('./login.page.css')
 })
-export class LoginPage {
+export class LoginPage implements AfterRender {
     constructor(private userService: UserService, private router: Router) {
     }
 

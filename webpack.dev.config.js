@@ -1,5 +1,4 @@
 const path = require('path');
-const webpack = require('webpack');
 var TsConfigPathsPlugin = require('awesome-typescript-loader').TsConfigPathsPlugin;
 var LiveReloadPlugin = require('webpack-livereload-plugin');
 

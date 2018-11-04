@@ -3,6 +3,7 @@ import { Renderer, StyleHandler } from "@web/dom";
 import { Subscription, Subject } from "rxjs";
 
 import * as WatchJS from 'melanke-watchjs';
+import { LifeCycle } from "../lifecycle/lifecycle-instanceOf";
 
 export abstract class RenderableManipulatorHandler implements Handler<RenderableManipulator> {
     protected renderer: Renderer;
@@ -18,27 +19,28 @@ export abstract class RenderableManipulatorHandler implements Handler<Renderable
     public handle(objectToHandle: RenderableManipulator): void {
         const context: Function = this.instanceManager.getInstance(objectToHandle.renderableClass);
 
+        if(LifeCycle.implementsOnInit(context)) {
+            context.onInit();
+        }
+
         const contextChangeSubject: Subject<boolean> = new Subject();
 
         this.handleStyle(objectToHandle);
         this.renderTemplate(objectToHandle, context);
 
+        if (LifeCycle.implementsAfterRender(context)) {
+            context.afterRender();
+        }
+
         const subscription: Subscription = contextChangeSubject.subscribe(() => {
             this.renderTemplate(objectToHandle, context);
-            // TODO: Refactor and introduce renderable life hooks and replace this code
-            // just a hack
-            if (context['onRefresh']) {
-                context['onRefresh']();
+            if (LifeCycle.implementsOnRefresh(context)) {
+                context.onRefresh();
             }
         });
 
         this.watch(objectToHandle, context, contextChangeSubject);
         this.whenToUnwatch().subscribe(() => this.unwatch(objectToHandle, context, subscription));
-
-        // TODO: Refactor and introduce renderable life hooks and replace this code
-        if (context['afterRender']) {
-            context['afterRender']();
-        }
     }
 
     private renderTemplate(renderableManipulator: RenderableManipulator, context: any): void {
@@ -61,6 +63,10 @@ export abstract class RenderableManipulatorHandler implements Handler<Renderable
     private unwatch(objectToHandle: RenderableManipulator, context: Function, contextChangeSubscription: Subscription): void {
         WatchJS.unwatch(context, objectToHandle.propertiesToTrack);
         contextChangeSubscription.unsubscribe();
+
+        if(LifeCycle.implementsOnDestroy(context)) {
+            context.onDestroy();
+        }
     }
 
     protected abstract whenToUnwatch(): Subject<boolean>;

@@ -1,17 +1,14 @@
-import {
-    Renderable, TrackChanges
-} from "@web/core";
-import {
-    ActivityDetails
-} from "./activity-details";
+import { Renderable, TrackChanges, AfterRender, OnRefresh } from "@web/core";
 import * as Chart from 'chart.js';
+
+import { ActivityDetails  } from "./activity-details";
 import { CheckInServivce } from "./services/check-in.service";
 
 @Renderable({
     template: require('./dashboard.page.html'),
     style: require('./dashboard.page.css')
 })
-export class DashboardPage {
+export class DashboardPage implements AfterRender, OnRefresh {
     private enableValue = 'Enable check-in';
     private disableValue = 'Disable check-in';
 

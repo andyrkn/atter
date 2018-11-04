@@ -1,4 +1,4 @@
-import { Renderable, TrackChanges } from "@web/core";
+import { Renderable, TrackChanges, AfterRender } from "@web/core";
 import { FillerDataService } from "@app/services/filler.data.service";
 import { UrlTree } from "@web/router";
 import { CheckInServivce } from "../dashboard/services/check-in.service";
@@ -7,7 +7,7 @@ import { CheckInServivce } from "../dashboard/services/check-in.service";
     template: require('./activity.page.html'),
     style: require('./activity.page.css')
 })
-export class Activity {
+export class Activity implements AfterRender {
 
     @TrackChanges()
     public canCheckIn: boolean = false;

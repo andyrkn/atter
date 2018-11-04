@@ -5,7 +5,7 @@
   "private": true,
   "scripts": {
     "start": "node index.js",
-    "build": "npm-run-all -p compile lint",
+    "build": "npm-run-all -p lint compile",
     "compile": "npx webpack --config webpack.dev.config.js --watch",
     "lint": "tslint 'src/**/*.ts'",
     "lint-framework": "tslint 'framework/**/*.ts'",
