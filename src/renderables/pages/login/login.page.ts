@@ -3,9 +3,8 @@ import { UserService } from "@app/services/user.service";
 import { Router } from "@web/router";
 
 @Renderable({
-    folderPathRelativeToRenderablesFolder: 'pages/login',
-    templateUrl: '/login.page.html',
-    styleUrl: '/login.page.css'
+    template: require('./login.page.html'),
+    style: require('./login.page.css')
 })
 export class LoginPage {
     constructor(private userService: UserService, private router: Router) {

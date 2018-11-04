@@ -3,8 +3,7 @@ import { UserService } from "@app/services/user.service";
 import { Router } from "@web/router";
 
 @Renderable({
-    folderPathRelativeToRenderablesFolder: 'pages/log-out',
-    templateUrl: './log-out.page.hmtl'
+    template: require('./log-out.page.html')
 })
 export class LogoutPage {
     constructor(userService: UserService, router: Router) {

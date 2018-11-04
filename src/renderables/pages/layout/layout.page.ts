@@ -1,9 +1,8 @@
 import { Renderable } from "@web/core";
 
 @Renderable({
-    folderPathRelativeToRenderablesFolder: 'pages/layout',
-    templateUrl: './layout.page.html',
-    styleUrl: './layout.page.css'
+    template: require('./layout.page.html'),
+    style: require('./layout.page.css')
 })
 export class LayoutPage {
 

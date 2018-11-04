@@ -1,23 +1,18 @@
 import { RenderableMetadata } from "@web/core/metadata/renderable.metadata";
 import { UrlTree } from "@web/router/utils/url-tree";
 import { RoutePath } from "@web/router/utils/route-path";
-import { Loader } from "./loader";
 import { TemplateEngine } from "@web/core/template-engine/template-engine";
 
 export class RenderableManipulator {
     private _renderingIndex: number;
     private path: RoutePath;
-    private folder: string;
 
     private _renderableClass: Function;
     private metadata: RenderableMetadata;
 
     private _propertiesToTrack: string[] = [];
 
-    private interpretationLoaded: boolean = false;
     private interpretation: Function;
-    private styleLoaded: boolean = false;
-    private style: string;
     public styleRendered: boolean = false;
 
     public static Create(renderableClass: Function, metadata: RenderableMetadata, renderingIndex: number): RenderableManipulator {
@@ -25,6 +20,7 @@ export class RenderableManipulator {
         pageManipulator._renderableClass = renderableClass;
         pageManipulator.metadata = metadata;
         pageManipulator._renderingIndex = renderingIndex;
+        pageManipulator.interpretation = TemplateEngine.interpret(metadata.template);
         return pageManipulator;
     }
 
@@ -52,13 +48,8 @@ export class RenderableManipulator {
         return this.path.path === urlTree.rawUrl;
     }
 
-    public setPathTo(value: RoutePath, folder: string): void {
+    public setPathTo(value: RoutePath): void {
         this.path = value;
-        this.setFolderPath(folder);
-    }
-
-    public setFolderPath(folder: string): void {
-        this.folder = folder;
     }
 
     public addTrackProperty(value: string): void {
@@ -66,7 +57,6 @@ export class RenderableManipulator {
     }
 
     public getInterpretation(): Function {
-        this.loadIfNeeded();
         return this.interpretation;
     }
 
@@ -79,15 +69,7 @@ export class RenderableManipulator {
     }
 
     public getStyle(): string {
-        if (!this.styleLoaded) {
-            const styleUrl = this.getUrl(this.metadata.styleUrl);
-            const style: string = Loader.load(styleUrl);
-            this.style = style;
-
-            this.styleLoaded = true;
-        }
-
-        return this.style;
+        return this.metadata.style;
     }
 
     public get renderableClass(): Function {
@@ -100,28 +82,5 @@ export class RenderableManipulator {
 
     public get selector(): string {
         return this.metadata.selector;
-    }
-
-    private loadIfNeeded(): void {
-        if (!this.interpretationLoaded) {
-            const requestUrl = this.getUrl(this.metadata.templateUrl);
-            const template: string = Loader.load(requestUrl);
-            this.interpretation = TemplateEngine.interpret(template);
-
-            this.interpretationLoaded = true;
-        }
-    }
-
-    private getUrl(relativeUrl: string): string {
-        let url = relativeUrl;
-        if (url.indexOf('.') !== 0) {
-            url.slice(1);
-        }
-
-        if (url.indexOf('/') !== 0) {
-            url = `/${url}`;
-        }
-
-        return `${this.folder}/${this.metadata.folderPathRelativeToRenderablesFolder}${url}`;
     }
 }

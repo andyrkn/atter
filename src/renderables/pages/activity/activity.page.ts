@@ -4,9 +4,8 @@ import { UrlTree } from "@web/router";
 import { CheckInServivce } from "../dashboard/services/check-in.service";
 
 @Renderable({
-    folderPathRelativeToRenderablesFolder: 'pages/activity',
-    templateUrl: './activity.page.html',
-    styleUrl: './activity.page.css'
+    template: require('./activity.page.html'),
+    style: require('./activity.page.css')
 })
 export class Activity {
 

@@ -1,11 +1,8 @@
 import { Renderable } from "@web/core";
 
 @Renderable({
-    folderPathRelativeToRenderablesFolder: 'pages/follow-activity',
-    templateUrl: './follow-activity.page.html',
-    styleUrl: './follow-activity.page.css'
+    template: require('./follow-activity.page.html'),
+    style: require('./follow-activity.page.css')
 })
 export class FollowActivity {
-
-    constructor() { }
 }

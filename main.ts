@@ -3,6 +3,5 @@ import { AppModule } from "./src/app.module";
 import 'reflect-metadata';
 
 startApplication({
-    entryModule: AppModule,
-    port: 3000
+    entryModule: AppModule
 });

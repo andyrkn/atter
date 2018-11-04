@@ -8,9 +8,8 @@ import * as Chart from 'chart.js';
 import { CheckInServivce } from "./services/check-in.service";
 
 @Renderable({
-    folderPathRelativeToRenderablesFolder: 'pages/dashboard',
-    templateUrl: '/dashboard.page.html',
-    styleUrl: '/dashboard.page.css'
+    template: require('./dashboard.page.html'),
+    style: require('./dashboard.page.css')
 })
 export class DashboardPage {
     private enableValue = 'Enable check-in';

@@ -3,9 +3,8 @@ import { FillerDataService } from "@app/services/filler.data.service";
 import { UserService } from "@app/services/user.service";
 
 @Renderable({
-    folderPathRelativeToRenderablesFolder: 'pages/home',
-    templateUrl: './home.page.html',
-    styleUrl: './home.page.css'
+    template: require('./home.page.html'),
+    style: require('./home.page.css')
 })
 export class HomePage {
     public appTitle: string = 'Atter';

@@ -38,14 +38,10 @@ export class AppContainer {
 
     public static mergeMetadata(): void {
         for (const mod of this.modules) {
-            if (mod.route && mod.renderableDeclaration) {
+            if (mod.route && mod.declarations) {
                 for (const route of mod.route) {
-                    this.orchestrator.setPathToPage(route.page.name, route.path, mod.renderableDeclaration.folderPath);
+                    this.orchestrator.setPathToPage(route.page.name, route.path);
                 }
-            }
-
-            for (const component of this.orchestrator.getComponents()) {
-                component.setFolderPath(mod.renderableDeclaration.folderPath);
             }
         }
 

@@ -1,6 +1,5 @@
 export interface RenderableMetadata {
-    folderPathRelativeToRenderablesFolder: string;
-    templateUrl: string;
-    styleUrl?: string;
+    template: string;
+    style?: string;
     selector?: string;
 }

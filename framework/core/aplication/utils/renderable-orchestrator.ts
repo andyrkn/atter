@@ -12,11 +12,11 @@ export class RenderableOrchestrator {
         this.renderables.push(RenderableManipulator.Create(targetClass, pageMetadata, this.renderingIndex++));
     }
 
-    public setPathToPage(pageClassName: string, path: string, pageFolder: string): void {
+    public setPathToPage(pageClassName: string, path: string): void {
         const pageToSetPath = this.renderables.find((x: RenderableManipulator) => x.hasClassName(pageClassName));
         if (pageToSetPath) {
             const routePath = new RoutePath(path);
-            pageToSetPath.setPathTo(routePath, pageFolder);
+            pageToSetPath.setPathTo(routePath);
         } else {
             Utils.printError("Something went wrong...");
         }
