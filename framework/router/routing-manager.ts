@@ -19,22 +19,37 @@ export class RoutingManager {
         addEventListener('load', () => this.handleRouteChange(this.pagesOrchestrator, this.navigationState, this.handler));
     }
 
-    private handleRouteChange(pagesOrchestrator: RenderableOrchestrator, navigationState: Subject<NavigationState>,
+    private handleRouteChange(
+        pageOrchestrator: RenderableOrchestrator, navigationState: Subject<NavigationState>,
         pageManuipulatorHandler: PageManipulatorHandler): void {
+
         navigationState.next(NavigationState.Start);
 
         const urlTree: UrlTree = new UrlTree();
-        const page: RenderableManipulator = pagesOrchestrator.getPageFor(urlTree);
+        const page: RenderableManipulator = pageOrchestrator.getPageFor(urlTree);
 
         if (page) {
-            pageManuipulatorHandler.handle(page);
-        } else {
-            const defaultPage: RenderableManipulator = pagesOrchestrator.getDefaultPage();
-            if (defaultPage) {
-                pageManuipulatorHandler.handle(defaultPage);
+            const parameterCondition = urlTree.hasParameter === page.hasParameter();
+            if (parameterCondition) {
+                this.handlePage(pageManuipulatorHandler, page);
+            } else {
+                this.handleDefaultPage(pageOrchestrator, pageManuipulatorHandler);
             }
+        } else {
+            this.handleDefaultPage(pageOrchestrator, pageManuipulatorHandler);
         }
 
         navigationState.next(NavigationState.End);
+    }
+
+    private handlePage(pageManuipulatorHandler: PageManipulatorHandler, page: RenderableManipulator): void {
+        pageManuipulatorHandler.handle(page);
+    }
+
+    private handleDefaultPage(pagesOrchestrator: RenderableOrchestrator, pageManuipulatorHandler: PageManipulatorHandler): void {
+        const defaultPage: RenderableManipulator = pagesOrchestrator.getDefaultPage();
+        if (defaultPage) {
+            pageManuipulatorHandler.handle(defaultPage);
+        }
     }
 }

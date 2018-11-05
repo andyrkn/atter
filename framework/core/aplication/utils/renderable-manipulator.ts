@@ -56,7 +56,7 @@ export class RenderableManipulator {
         this._propertiesToTrack.push(value);
     }
 
-    public  getInterpretation(): Function {
+    public getInterpretation(): Function {
         return this.interpretation;
     }
 
@@ -82,5 +82,9 @@ export class RenderableManipulator {
 
     public get selector(): string {
         return this.metadata.selector;
+    }
+
+    public hasParameter(): Boolean {
+        return this.path.supportsParameter;
     }
 }
