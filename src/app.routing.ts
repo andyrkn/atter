@@ -33,7 +33,7 @@ export const appRoute: Route[] = [
     },
     {
         page: Activity,
-        path: 'activity'
+        path: 'activity/:id'
     },
     {
         page: ForgotPasswordPage,
