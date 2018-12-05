@@ -23,7 +23,7 @@ export function startApplication<T>(application: Application<T>): void {
     dependencyContainer.addRouter(Router.name, router);
 
     const instanceManager = new InstanceManager(dependencyContainer);
-    
+
     const processHandler = new DomProcessorHandler(renderer);
     const componentManipulatorHandler = new ComponentManipulatorHandler(styleHandler, instanceManager, processHandler);
     const pageManipulatorHandler = new PageManipulatorHandler(router, styleHandler, instanceManager, processHandler);
