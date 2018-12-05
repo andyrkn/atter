@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+  <title>Atter</title>
+  <link rel="stylesheet" href="scholarly.min.css">
+  <script src="js/scholarly.min.js"></script>
+</head>
+
+<body prefix="schema: http://schema.org">
+  <header>
+    <h1>Atter</h1>
+  </header>
+  <div role="contentinfo">
+    <dl>
+      <dt>Authors</dt>
+      <dd>
+        Mihăilă Andrei, Ursu Cristian Andrei, Verciuc Sergiu
+      </dd>
+    </dl>
+  </div>
+  <section typeof="sa:Introduction" id="introduction" role="doc-introduction">
+    <h2>Introduction</h2>
+    <p>
+      The Atter application is a solution intended to ease the organizing academic activities and it's attendees,
+      providing a easy to use system for tracking attendances for both consumers, oraganizer and attendee.
+    </p>
+    <p>
+      The application is built in a way where all the data is provided in real-time making the attendance tracking more
+      interactive. Also, we are able to provide statistics for attendance and possible frauds.
+      The impelemtation for tracking an attendance uses the geolacation of the user device (with his approval), by
+      doing so we are able to detect possible frauds. We feel that this approach is the best for an organizer that
+      wants to have an accurate attendance statistics.
+    </p>
+    </p>
+  </section>
+  <section typeof="sa:Architecture" id="architecture" role="doc-architecture">
+    <h2>Architecture</h2>
+    <p>
+
+    </p>
+    <section id="SinglePageApplication">
+      <h3>Single-page application</h3>
+      <p>
+        Atter is made unsing its own Single-Page Appliation(SPA) built specifically to support its needs.
+        We choose SPA over MPA(Multiple-Page Application) because SPA is fast, more interactive, can provie to the
+        user a more pleasant experience, it's easier to develop a serverless application using SPA.
+      </p>
+      <p>
+        We are following a traditional way of implementing a SPA but we did some enhancements introducing built-in
+        Dependency Injection system, component life-cycle hooks, style encapsulation for each component, a DOM renderer
+        that makes sure that only the differences between what is already rendered and what should be rendered will
+        affect the DOM improving performance and a template engine that help us to interpolate HTML with JS making the
+        imporving development time and code readability and reliability.
+      </p>
+      <p>
+        Our SPA framework has the following components:
+        <ul>
+          <li>Application container</li>
+          <li>Router manager</li>
+          <li>Component mananger</li>
+          <li>Renderer</li>
+          <li>Renderable element equivalent to components from known SPA frameworks</li>
+          <li>Dependency Injection container</li>
+          <li>DOM processors, used to manipulate events like click, submit on an element from a renderable etc</li>
+          <li>Encapsulator, used to encapsulate style for renderables</li>
+          <li>Life-cycles hooks: AfterRender, OnInit, OnRefresh and OnDestroy</li>
+          <li>Template engine</li>
+          <li></li>
+        </ul>
+      </p>
+    </section>
+    <section id="Application">
+      <h3>Serverless application</h3>
+      <p>
+        Despre firebase si de ce il folosim, ce aduce nou, cum comunicam cu firebase, serverless app is the keyword...
+      </p>
+    </section>
+  </section>
+  <section typeof="sa:Technologies" id="technologies" role="doc-technologies">
+    <h3>Technologies</h3>
+    <p>
+      Atter uses a set of technologies and programming paradigms like TypeScript, RxJs, Firebase, HTML5, CSS and
+      NodeJS. We explain the benefits of Firebase previously but in the following chapters we will explain the benefits
+      for the other ones.
+    </p>
+    <section id="Typescript">
+      <h3>Why TypeScript instead of JavaScript?</h3>
+      <p>
+
+      </p>
+    </section>
+    <section id="RxJs">
+      <h3>Reactive programming with RxJs</h3>
+      <p>
+
+      </p>
+    </section>
+    <section id="NodeJS">
+      <h3>Node JS</h3>
+      <p>
+
+      </p>
+    </section>
+    <section id="HTMLANDCSS">
+      <h3>HTML5 and CSS</h3>
+      <p>
+
+      </p>
+    </section>
+  </section>
+  <section typeof="sa:Improvements" id="improvements" role="doc-improvements">
+    <h3>Future improvements</h3>
+    <p>
+      To be continued...
+    </p>
+  </section>
+  <section typeof="sa:Conclusion" id="conclusion" role="doc-conclusion">
+    <h3>Conclusion</h3>
+    <p>
+      To be continued...
+    </p>
+  </section>
+</body>
+
+</html>
