@@ -8,6 +8,10 @@ import { AsignGradePage } from "./renderables/pages/asign-grade/asign-grade.page
 
 export const appRoute: Route[] = [
     {
+        page: NotFoundPage,
+        path: '**'
+    },
+    {
         page: HomePage,
         path: 'home'
     },
@@ -22,10 +26,6 @@ export const appRoute: Route[] = [
     {
         page: LayoutPage,
         path: 'layout'
-    },
-    {
-        page: NotFoundPage,
-        path: '**'
     },
     {
         page: RegisterPage,
