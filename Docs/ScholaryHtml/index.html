@@ -75,7 +75,7 @@
         </ul>
       </p>
     </section>
-    <section id="Application">
+    <section id="ServerlessApplication">
       <h3>Serverless application</h3>
       <p>
         Despre firebase si de ce il folosim, ce aduce nou, cum comunicam cu firebase, serverless app is the keyword...
@@ -92,19 +92,29 @@
     <section id="Typescript">
       <h3>Why TypeScript instead of JavaScript?</h3>
       <p>
-
+        We chose TypeScript over JavaScript for multiple reasons but the most important one is that TypeScript provides
+        an optional type system for JavaScript.
+        Types, in our opinion, increases the code readability and lower the human error for the simple reason that the
+        compiler catches error instead of the user at runtime. Further more, types are the best form of documentation
+        that a developer have to its disposal. 
+      </p>
+      <p>
+        Another reason is that TypeScript is a superset of JavaScript and beacuse of that JavaScript works the same in TypeScript.
+      </p>
+      <p>
+        Our application relies heavily on the decorators that TypeScript brings, in order to collect metadata and set-up behaviors, 
+        we think taht is the best approach to this problem that we would encounter if we were using JavaScript.
       </p>
     </section>
     <section id="RxJs">
-      <h3>Reactive programming with RxJs</h3>
+      <h3>Functional reactive programming with RxJs</h3>
       <p>
-
+        RxJs solve the problem of asynchronous operations, but Promises solve the same and are built-in JavaScript, then why using RxJs?
       </p>
-    </section>
-    <section id="NodeJS">
-      <h3>Node JS</h3>
       <p>
-
+        We are storing our data into a Real-time database from Firebase. Firbase uses a event source approach in order to retrieve data, 
+        so when something is changing into a collection we have to react to that modification accordingly and using Promises did not 
+        solve the problem of dealing with more than one event, would complicate things and the code was hard to understand and maintain.
       </p>
     </section>
     <section id="HTMLANDCSS">
