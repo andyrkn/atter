@@ -24,15 +24,17 @@
   <section typeof="sa:Introduction" id="introduction" role="doc-introduction">
     <h2>Introduction</h2>
     <p>
-      The Atter application is a solution intended to ease the organizing academic activities and it's attendees,
-      providing a easy to use system for tracking attendances for both consumers, oraganizer and attendee.
+      The Atter application is a solution intended to ease the organization of academic activities for both the organizers
+      and the attendees, providing an easy to use system, for tracking not only the attendances, but also the attendees progress 
+      troughout the activity and the oraganizers.
     </p>
     <p>
-      The application is built in a way where all the data is provided in real-time making the attendance tracking more
-      interactive. Also, we are able to provide statistics for attendance and possible frauds.
-      The impelemtation for tracking an attendance uses the geolacation of the user device (with his approval), by
-      doing so we are able to detect possible frauds. We feel that this approach is the best for an organizer that
-      wants to have an accurate attendance statistics.
+      The application is built in a way where all the data is provided in real-time, making the attendance tracking more
+      interactive. We also provide statistics for grades, attendance and possible attendance frauds.
+      The impelemtation of our tracking system involves using the geolocation of an users device (with his approval). By
+      doing so, we are able to detect possible frauds and guarantee easy and fast check-ins. We feel that this approach 
+      is the best, not only for an organizer that wants to have accurate statistics about his activity, but also for the attendee
+      that wants to check in trough only one key press.
     </p>
     </p>
   </section>
@@ -44,28 +46,29 @@
     <section id="SinglePageApplication">
       <h3>Single-page application</h3>
       <p>
-        Atter is made unsing its own Single-Page Appliation(SPA) built specifically to support its needs.
-        We choose SPA over MPA(Multiple-Page Application) because SPA is fast, more interactive, can provie to the
-        user a more pleasant experience, it's easier to develop a serverless application using SPA.
+        Atter is made using its own Single-Page Appliation(SPA), built specifically to support its needs.
+        We choose SPA over MPA(Multiple-Page Application) because SPA is fast, more interactive and can provide 
+        a more pleasant experience towards its user. It is also easier to develop a serverless application using SPA.
       </p>
       <p>
-        We are following a traditional way of implementing a SPA but we did some enhancements introducing built-in
-        Dependency Injection system, component life-cycle hooks, style encapsulation for each component, a DOM renderer
-        that makes sure that only the differences between what is already rendered and what should be rendered will
-        affect the DOM improving performance and a template engine that help us to interpolate HTML with JS making the
-        imporving development time and code readability and reliability.
+        We are following a traditional way of implementing a SPA, but we did some enhancements introducing built-in
+        Dependency Injection system, Component life-cycle Hooks, Style Encapsulation for each component, a DOM renderer
+        that makes sure only the differences between what is already rendered and what should be rendered will be
+        processed, improving the DOM rendering performance and a template engine that lets us interpolate HTML with JS, 
+        greatly reducing the development time and increasing the code readability and reliability.
       </p>
       <p>
         Our SPA framework has the following components:
         <ul>
           <li>Application container</li>
-          <li>Router manager</li>
+          <li>Route manager</li>
+          <li>Router</li>
           <li>Component mananger</li>
           <li>Renderer</li>
           <li>Renderable element equivalent to components from known SPA frameworks</li>
           <li>Dependency Injection container</li>
-          <li>DOM processors, used to manipulate events like click, submit on an element from a renderable etc</li>
-          <li>Encapsulator, used to encapsulate style for renderables</li>
+          <li>DOM processors, used to manipulate events like click, submit on an element from a renderable, etc</li>
+          <li>Encapsulator, used to encapsulate styles for renderables</li>
           <li>Life-cycles hooks: AfterRender, OnInit, OnRefresh and OnDestroy</li>
           <li>Template engine</li>
           <li></li>
