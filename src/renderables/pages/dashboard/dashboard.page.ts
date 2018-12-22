@@ -1,8 +1,9 @@
 import { Renderable, TrackChanges, AfterRender, OnRefresh } from "@web/core";
 import * as Chart from 'chart.js';
 
-import { ActivityDetails  } from "./activity-details";
+import { ActivityDetails } from "./activity-details";
 import { CheckInServivce } from "./services/check-in.service";
+import { GeolocationService } from "@app/services/geolocation.service";
 
 @Renderable({
     template: require('./dashboard.page.html'),
@@ -18,26 +19,23 @@ export class DashboardPage implements AfterRender, OnRefresh {
     @TrackChanges()
     public checkinButtonValue: string = this.enableValue;
 
-    constructor(private checkInService: CheckInServivce) {
+    constructor(
+        private checkInService: CheckInServivce) {
         this.checkinButtonValue = this.checkInService.checkinStatus ? this.disableValue : this.enableValue;
     }
 
     public onRefresh(): void {
-        this.handleCheckInButton();
         this.drawGraphs();
     }
 
     public afterRender(): void {
-        this.handleCheckInButton();
         this.drawGraphs();
     }
 
-    private handleCheckInButton(): void {
-        // just a hack onClick feature is on its way
-        document.getElementById('check-in-btn').addEventListener('click', () => {
-            this.checkInService.toggleStatus();
-            this.checkinButtonValue = this.checkInService.checkinStatus === true ? this.disableValue : this.enableValue;
-        });
+    public handleCheckInButton(): void {
+        this.checkInService.toggleStatus();
+        this.checkinButtonValue =
+            this.checkInService.checkinStatus ? this.disableValue : this.enableValue;
     }
 
     private drawGraphs(): void {
