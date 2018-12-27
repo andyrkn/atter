@@ -1,17 +1,3 @@
-/*
-    colors: {
-        primary : #2EB7CC;
-        secondary #67CB7D;
-        danger: #FF4076;
-
-        btn-background: {
-            primary: #26a69a; hover: #2bbbad;
-
-            danger: #E57373;
-        }
-    }
-*/
-
 :root {
     --primary: #2EB7CC;
     --secondary: #67CB7D;

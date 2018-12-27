@@ -1,7 +1,6 @@
 import 'reflect-metadata';
 
 export class DependencyContainer {
-
     private renderablesMetadata: Function[] = [];
     private injectablesMetadata: Function[] = [];
     private injectableClasses: [] = [];

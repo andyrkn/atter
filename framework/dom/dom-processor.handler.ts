@@ -1,4 +1,4 @@
-import { DomProcessor } from "./pre-processor";
+import { DomProcessor } from "./dom-processor";
 import { Encapsulator } from "./encapsulator";
 import { Renderer } from "./renderer";
 import { ClickProcessor } from "./processors/click.processor";
@@ -26,7 +26,8 @@ export class DomProcessorHandler {
 
 
     private createElement(selector: string, template: string, renderingIndex: number): Element {
-        const encapsulatedTemplate = Encapsulator.encapsulateTempalte(template, renderingIndex);
+        const result = template.replace(/>[\s]+\</g, "><");
+        const encapsulatedTemplate = Encapsulator.encapsulateTempalte(result, renderingIndex);
         const element = document.createElement(selector);
         element.innerHTML = encapsulatedTemplate;
         return element;

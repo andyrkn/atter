@@ -1,5 +1,5 @@
 export class Encapsulator {
-    private static encapsulatorAttributeName: string = '__renderable-';
+    private static encapsulatorAttributeName: string = 'data-__renderable-';
 
     public static encapsulateTempalte(template: string, renderingIndex: number): string {
         return template.replace(/<[a-z0-9]+/g, `$& ${this.encapsualtorAttribute(renderingIndex)}`);
