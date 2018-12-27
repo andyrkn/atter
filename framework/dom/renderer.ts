@@ -36,7 +36,7 @@ export class Renderer {
             if (difference.action === 'modifyAttribute') {
                 elementModifed.setAttribute(difference.name, difference.newValue)
             }
-            if(difference.action === 'modifyTextElement'){
+            if (difference.action === 'modifyTextElement') {
                 elementModifed.nodeValue = difference.newValue;
             }
         }
