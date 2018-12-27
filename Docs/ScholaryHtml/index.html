@@ -24,16 +24,21 @@
   <section typeof="sa:Introduction" id="introduction" role="doc-introduction">
     <h2>Introduction</h2>
     <p>
-      The Atter application is a solution intended to ease the organization of academic activities for both the organizers
-      and the attendees, providing an easy to use system, for tracking not only the attendances, but also the attendees progress 
+      The Atter application is a solution intended to ease the organization of academic activities for both the
+      organizers
+      and the attendees, providing an easy to use system, for tracking not only the attendances, but also the attendees
+      progress
       troughout the activity and the oraganizers.
     </p>
     <p>
-      The application is built in a way where all the data is provided in real-time, making the attendance tracking more
+      The application is built in a way where all the data is provided in real-time, making the attendance tracking
+      more
       interactive. We also provide statistics for grades, attendance and possible attendance frauds.
-      The impelemtation of our tracking system involves using the geolocation of an users device (with his approval). By
-      doing so, we are able to detect possible frauds and guarantee easy and fast check-ins. We feel that this approach 
-      is the best, not only for an organizer that wants to have accurate statistics about his activity, but also for the attendee
+      The impelemtation of our tracking system involves using the geolocation of an users device (with his approval).
+      By
+      doing so, we are able to detect possible frauds and guarantee easy and fast check-ins. We feel that this approach
+      is the best, not only for an organizer that wants to have accurate statistics about his activity, but also for
+      the attendee
       that wants to check in trough only one key press.
     </p>
     </p>
@@ -47,14 +52,14 @@
       <h3>Single-page application</h3>
       <p>
         Atter is made using its own Single-Page Appliation(SPA), built specifically to support its needs.
-        We choose SPA over MPA(Multiple-Page Application) because SPA is fast, more interactive and can provide 
+        We choose SPA over MPA(Multiple-Page Application) because SPA is fast, more interactive and can provide
         a more pleasant experience towards its user. It is also easier to develop a serverless application using SPA.
       </p>
       <p>
         We are following a traditional way of implementing a SPA, but we did some enhancements introducing built-in
         Dependency Injection system, Component life-cycle Hooks, Style Encapsulation for each component, a DOM renderer
         that makes sure only the differences between what is already rendered and what should be rendered will be
-        processed, improving the DOM rendering performance and a template engine that lets us interpolate HTML with JS, 
+        processed, improving the DOM rendering performance and a template engine that lets us interpolate HTML with JS,
         greatly reducing the development time and increasing the code readability and reliability.
       </p>
       <p>
@@ -78,7 +83,18 @@
     <section id="ServerlessApplication">
       <h3>Serverless application</h3>
       <p>
-        Despre firebase si de ce il folosim, ce aduce nou, cum comunicam cu firebase, serverless app is the keyword...
+        We chose to build a serverless application with the help of firebase. It has multiple advantages and we are
+        going to discuss a few of them.
+        Building a serverless application with the help of Firebase means a couple of things: we do not have to worry
+        about
+        different operating systems, the "backend" becomes safer and secure and it reduces the total cost of
+        ownership.
+        Of course there could be some disadvantages to this approach as we have no idea about what is going on in the
+        server at most times.
+        <p>Firebase also provides us with a real-time database, which is strongly recommended for our attendance
+          aplication. When the users go offline the Realtime Database SDK uses the local storage in order to serve and store changes, 
+          this way when the device comes online, the local data is automatically synchronized.
+        </p>
       </p>
     </section>
   </section>
@@ -86,44 +102,78 @@
     <h3>Technologies</h3>
     <p>
       Atter uses a set of technologies and programming paradigms like TypeScript, RxJs, Firebase, HTML5, CSS and
-      NodeJS. We explain the benefits of Firebase previously but in the following chapters we will explain the benefits
-      for the other ones.
+      NodeJS. We have explained the benefits of Firebase previously so in the following chapters we will explain the benefits
+      of other technologies.
     </p>
     <section id="Typescript">
       <h3>Why TypeScript instead of JavaScript?</h3>
       <p>
         We chose TypeScript over JavaScript for multiple reasons but the most important one is that TypeScript provides
         an optional type system for JavaScript.
-        Types, in our opinion, increases the code readability and lower the human error for the simple reason that the
-        compiler catches error instead of the user at runtime. Further more, types are the best form of documentation
-        that a developer have to its disposal. 
+        Types, in our opinion, increase code readability and lower human error for the simple reason that the
+        compiler catches errors instead of the user at runtime. Further more, types are the best form of documentation
+        that a developer has at its disposal.
       </p>
       <p>
-        Another reason is that TypeScript is a superset of JavaScript and beacuse of that JavaScript works the same in TypeScript.
+        Another reason is that TypeScript is a superset of JavaScript and beacuse of that, JavaScript works the same in
+        TypeScript.
       </p>
       <p>
-        Our application relies heavily on the decorators that TypeScript brings, in order to collect metadata and set-up behaviors, 
-        we think taht is the best approach to this problem that we would encounter if we were using JavaScript.
+        Our application relies heavily on the decorators that TypeScript brings, in order to collect metadata and
+        set-up behaviors.
+        We think that is the best approach to this problem that we would have encountered if we would be using JavaScript.
       </p>
     </section>
     <section id="RxJs">
       <h3>Functional reactive programming with RxJs</h3>
       <p>
-        RxJs solve the problem of asynchronous operations, but Promises solve the same and are built-in JavaScript, then why using RxJs?
+        RxJs solves the problem of asynchronous operations, but Promises also solve the problem and are built-in JavaScript.
+        Then why are we using RxJs?
       </p>
       <p>
-        We are storing our data into a Real-time database from Firebase. Firbase uses a event source approach in order to retrieve data, 
-        so when something is changing into a collection we have to react to that modification accordingly and using Promises did not 
-        solve the problem of dealing with more than one event, would complicate things and the code was hard to understand and maintain.
+        We are storing our data into a Real-time database from Firebase. Firebase uses an event source approach in order
+        to retrieve data,
+        so when something is changing into a collection we have to react to that modification accordingly and using
+        Promises would not
+        solve the problem of dealing with more than one event.They would complicate things and the code would be hard
+        to understand and mantain.
       </p>
     </section>
     <section id="HTMLANDCSS">
-      <h3>HTML5 and CSS</h3>
+      <h3>HTML5 and CSS3</h3>
       <p>
-
+        Using the features of HTML5 and CSS3 lets us complete multiple tasks with relative ease. Our application is fully responsive
+        trough media queries, grid and flex, while HTML5 offers us the best tools for a rich multimedia experience and well organised code.
       </p>
     </section>
   </section>
+  <section typeof="sa:Features" id="Features" role="Features">
+    <h3>Features</h3>
+    <section id="SolvinFalseAttendance">
+      <h3>Solving the problem of false attendance</h3>
+      <p>
+        In order for our application to be complete, we need to make sure it is pretty hard to fake an attendance. For this purpose we are going to use to our aid, most
+        likely, the geolocation. This way we are going to set a perimeter around the organizer of an event and allow check in a chosen radius of metters.
+        An alternative to this, is the use of an QR Code generated by the organizer each time he wants to perform a check-in. 
+      </p>
+    </section>
+    <section id="LocalStorage">
+      <h3>The use of local storage</h3>
+      <p>
+        In our design, the local storage is mainly used by Firebase.
+      </p>
+    </section>
+  </section>
+  
+  <section typeof="sa:ExternalApis" id="ExternalApis" role="ExternalApis">
+    <h3>ExternalAPIs</h3>
+      <p>
+        Our application is limited when it comes to the use of external API's. The only thing we do need them for is importing data for the atendees.
+        For this purpose we are going to use Google Drive and/or DropBox with a few formats available such as: JSON, XLS and maybe XML.
+      </p>
+  </section>
+  
+  
   <section typeof="sa:Improvements" id="improvements" role="doc-improvements">
     <h3>Future improvements</h3>
     <p>
