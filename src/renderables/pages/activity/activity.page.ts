@@ -9,6 +9,8 @@ import { CheckInServivce } from "../dashboard/services/check-in.service";
 })
 export class Activity {
 
+    private activityID = Number(new UrlTree().routeParameter);
+
     @TrackChanges()
     public canCheckIn: boolean = false;
 

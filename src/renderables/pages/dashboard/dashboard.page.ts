@@ -4,6 +4,7 @@ import * as Chart from 'chart.js';
 import { ActivityDetails } from "./activity-details";
 import { CheckInServivce } from "./services/check-in.service";
 import { GeolocationService } from "@app/services/geolocation.service";
+import { UrlTree } from "@web/router";
 
 @Renderable({
     template: require('./dashboard.page.html'),
@@ -12,6 +13,7 @@ import { GeolocationService } from "@app/services/geolocation.service";
 export class DashboardPage implements AfterRender, OnRefresh {
     private enableValue = 'Enable check-in';
     private disableValue = 'Disable check-in';
+    private activityID = Number(new UrlTree().routeParameter);
 
     public id: number = 1;
     public activity: ActivityDetails = new ActivityDetails();
