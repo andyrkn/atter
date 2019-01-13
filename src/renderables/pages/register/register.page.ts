@@ -1,5 +1,5 @@
 import { Renderable } from "@web/core";
-import { AuthFirebaseSerivce} from "@app/services/auth-firebase.service";
+import { AuthFirebaseSerivce} from "@app/services/firebase/firebase-auth.service";
 
 @Renderable({
     template: require('./register.page.html'),

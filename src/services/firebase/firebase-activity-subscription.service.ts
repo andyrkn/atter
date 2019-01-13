@@ -1,11 +1,12 @@
 import { Observable, from } from "rxjs";
 import { Injectable } from "@web/core";
-import { FirebaseService } from "./firebase.service";
 import { NewActivityModel } from "@app/models/activity.model";
-import { UserService } from "./user.service";
+import { UserService } from "../user.service";
+import { FirebaseService } from "./firebase.service";
 
 @Injectable()
-export class DatabaseFirebaseService {
+export class FireBaseActivitySubscriptionService {
+
     constructor(
         private firebaseService: FirebaseService,
         private userService: UserService) {
@@ -28,7 +29,7 @@ export class DatabaseFirebaseService {
     public createActivity(activity: NewActivityModel) {
 
         const dashboardref = this.database.ref('dashboards/' + this.userId + '/')
-            .push({ name: activity.name }, (e) => { if (!e) { console.log(e); } });
+            .push({ name: activity.name, iconID: activity.iconID }, (e) => { if (!e) { alert("succes"); } });
 
         this.database.ref('activities/' + dashboardref.key)
             .set(activity, (e) => { if (!e) { console.log(e); } });

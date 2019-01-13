@@ -1,7 +1,7 @@
 import { Renderable } from "@web/core";
 import { UserService } from "@app/services/user.service";
 import { Router } from "@web/router";
-import { AuthFirebaseSerivce } from "@app/services/auth-firebase.service";
+import { AuthFirebaseSerivce } from "@app/services/firebase/firebase-auth.service";
 
 @Renderable({
     template: require('./login.page.html'),

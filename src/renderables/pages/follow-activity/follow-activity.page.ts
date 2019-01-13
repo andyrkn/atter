@@ -1,5 +1,5 @@
 import { Renderable } from "@web/core";
-import { DatabaseFirebaseService } from "@app/services/database-firebase.service";
+import { FireBaseActivitySubscriptionService } from "@app/services/firebase/firebase-activity-subscription.service";
 
 @Renderable({
     template: require('./follow-activity.page.html'),
@@ -10,7 +10,7 @@ export class FollowActivity {
     public activityKey: string = "";
 
     constructor(
-        private firebaseDataService: DatabaseFirebaseService
+        private firebaseDataService: FireBaseActivitySubscriptionService
     ) { }
 
     public followActivity(): void {

@@ -1,5 +1,5 @@
 import { Renderable } from "@web/core";
-import { DatabaseFirebaseService } from "@app/services/database-firebase.service";
+import { FireBaseActivitySubscriptionService } from "@app/services/firebase/firebase-activity-subscription.service";
 import { NewActivityModel } from "@app/models/activity.model";
 
 @Renderable({
@@ -9,7 +9,7 @@ import { NewActivityModel } from "@app/models/activity.model";
 export class CreateNewActivityPage {
 
     constructor(
-        private firebaseDataService: DatabaseFirebaseService
+        private firebaseDataService: FireBaseActivitySubscriptionService
     ) { }
 
     public gradingTypes = ['Tags', 'Points', 'Free Text'];

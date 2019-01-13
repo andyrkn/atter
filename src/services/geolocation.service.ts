@@ -9,7 +9,7 @@ export class GeolocationService {
 
     constructor() { }
 
-    private getCurrentLocation(): Observable<Coordinates> {
+    public getCurrentLocation(): Observable<Coordinates> {
         return from(new Promise((resolve) => {
             navigator.geolocation.getCurrentPosition((position) => {
                 resolve(new Coordinates(position.coords.longitude, position.coords.latitude));

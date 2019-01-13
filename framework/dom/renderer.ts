@@ -18,7 +18,7 @@ export class Renderer {
 
     private computeDiferences(targetElement: Element, elementToRender: Element, differences: any[]): Element {
         for (const difference of differences) {
-            let elementModifed: Element = this.getElementModified(targetElement, difference.route);
+            const elementModifed: Element = this.getElementModified(targetElement, difference.route);
             if (difference.action === 'replaceElement') {
                 const elem = elementToRender.cloneNode(true) as Element;
                 const newValue: Element = this.getElementModified(elem, difference.route);
@@ -34,7 +34,7 @@ export class Renderer {
                 targetElement.removeChild(elementModifed);
             }
             if (difference.action === 'modifyAttribute') {
-                elementModifed.setAttribute(difference.name, difference.newValue)
+                elementModifed.setAttribute(difference.name, difference.newValue);
             }
             if (difference.action === 'modifyTextElement') {
                 elementModifed.nodeValue = difference.newValue;

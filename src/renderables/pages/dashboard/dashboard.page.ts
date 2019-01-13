@@ -3,8 +3,8 @@ import * as Chart from 'chart.js';
 
 import { ActivityDetails } from "./activity-details";
 import { CheckInServivce } from "./services/check-in.service";
-import { GeolocationService } from "@app/services/geolocation.service";
 import { UrlTree } from "@web/router";
+import { FireBaseCheckInService } from "@app/services/firebase/firebase-checkin.service";
 
 @Renderable({
     template: require('./dashboard.page.html'),
@@ -15,6 +15,7 @@ export class DashboardPage implements AfterRender, OnRefresh {
     private disableValue = 'Disable check-in';
     private activityID = Number(new UrlTree().routeParameter);
 
+    public maxDistance: number = 0;
     public id: number = 1;
     public activity: ActivityDetails = new ActivityDetails();
 
@@ -22,7 +23,8 @@ export class DashboardPage implements AfterRender, OnRefresh {
     public checkinButtonValue: string = this.enableValue;
 
     constructor(
-        private checkInService: CheckInServivce) {
+        private checkInService: CheckInServivce,
+        private firebaseCheckInService: FireBaseCheckInService) {
         this.checkinButtonValue = this.checkInService.checkinStatus ? this.disableValue : this.enableValue;
     }
 
@@ -33,11 +35,16 @@ export class DashboardPage implements AfterRender, OnRefresh {
     public afterRender(): void {
         this.drawGraphs();
     }
-
+    /*
     public handleCheckInButton(): void {
         this.checkInService.toggleStatus();
         this.checkinButtonValue =
             this.checkInService.checkinStatus ? this.disableValue : this.enableValue;
+    }*/
+
+    public handleCheckInButton(): void {
+        console.log(this.maxDistance);
+        this.firebaseCheckInService.enableActivityCheckIn(10);
     }
 
     private drawGraphs(): void {
@@ -119,4 +126,5 @@ export class DashboardPage implements AfterRender, OnRefresh {
             });
         }
     }
+
 }

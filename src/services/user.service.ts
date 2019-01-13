@@ -1,6 +1,6 @@
 import { Injectable } from "@web/core";
 import { BehaviorSubject, Observable, from } from "rxjs";
-import { AuthFirebaseSerivce } from "./auth-firebase.service";
+import { AuthFirebaseSerivce } from "./firebase/firebase-auth.service";
 
 @Injectable()
 export class UserService {
@@ -66,6 +66,8 @@ export class UserService {
     }
 
     public get user() {
-        return this.userSubject.value.user;
+        // until this waits for firebase response
+        return { uid: "qs7PuH0fROeTVqDeoCHLX1OvZfm1" };
+        // return this.userSubject.value.user;
     }
 }

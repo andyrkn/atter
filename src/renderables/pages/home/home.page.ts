@@ -1,6 +1,7 @@
 import { Renderable, TrackChanges } from "@web/core";
 import { FillerDataService } from "@app/services/filler.data.service";
 import { UserService } from "@app/services/user.service";
+import { FireBaseActivityService } from "@app/services/firebase/firebase-activities.service";
 
 @Renderable({
     template: require('./home.page.html'),
@@ -13,19 +14,30 @@ export class HomePage {
     @TrackChanges()
     public counter: number = 0;
 
-    public followedActivities: any = [];
-    public myActivities: any = [];
+    public followedActivities: any = {};
+    public myActivities: any = {};
 
     constructor(
+        private userService: UserService,
         private fillerDataService: FillerDataService,
-        private userService: UserService
+        private firebaseActivities: FireBaseActivityService
     ) {
-        this.followedActivities = this.fillerDataService.followedActivities;
-        this.myActivities = this.fillerDataService.myActivities;
         this.userService.onLoginChange().subscribe((loginStatus: boolean) => this.loggedIn = loginStatus);
+        this.getActivities();
     }
 
     public increment(): void {
         this.counter++;
+    }
+
+    private getActivities(): void {
+        this.firebaseActivities.getUserActivities().subscribe((activities) => {
+            this.myActivities = activities;
+            console.log(activities);
+        });
+        this.firebaseActivities.getFollowedActivities().subscribe((activities) => {
+            this.followedActivities = activities;
+            console.log(activities);
+        });
     }
 }
