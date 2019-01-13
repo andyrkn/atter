@@ -1,12 +1,13 @@
 const path = require('path');
-var TsConfigPathsPlugin = require('awesome-typescript-loader').TsConfigPathsPlugin;
-var LiveReloadPlugin = require('webpack-livereload-plugin');
+const TsConfigPathsPlugin = require('awesome-typescript-loader').TsConfigPathsPlugin;
+const LiveReloadPlugin = require('webpack-livereload-plugin');
+const nodeExternals = require('webpack-node-externals');
 
 const webpackConfig = {
 	entry: {
 		bundle: './main.ts'
 	},
-	target: 'node',
+	target: 'web',
 	node: {
 		__dirname: false,
 		__filename: false,

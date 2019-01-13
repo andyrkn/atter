@@ -33,6 +33,7 @@ export class RenderableManipulator {
     }
 
     public isForTree(urlTree: UrlTree): boolean {
+        // TODO: Lower cyclomatic complexity
         if (!this.path) {
             return false;
         }
@@ -45,7 +46,7 @@ export class RenderableManipulator {
             return false;
         }
 
-        return this.path.path === urlTree.rawUrl;
+        return this.path.path === urlTree.rawUrl && !urlTree.hasParameter;
     }
 
     public setPathTo(value: RoutePath): void {
@@ -82,9 +83,5 @@ export class RenderableManipulator {
 
     public get selector(): string {
         return this.metadata.selector;
-    }
-
-    public hasParameter(): Boolean {
-        return this.path.supportsParameter;
     }
 }

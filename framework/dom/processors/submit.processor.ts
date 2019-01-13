@@ -1,12 +1,12 @@
 import { AttributeParser } from "../utils/attribute.parser";
 import { Utils } from "@web/utils";
-import { DomProcessor } from "../pre-processor";
+import { DomProcessor } from "../dom-processor";
 
 export class SubmitProcessor implements DomProcessor {
     public processElement(elementToProcess: Element, context: any): Element {
-        const submitables = elementToProcess.querySelectorAll('[submit]');
+        const submitables = elementToProcess.querySelectorAll('[data-submit]');
         for (const element of submitables) {
-            const attributeValue = element.getAttribute('submit');
+            const attributeValue = element.getAttribute('data-submit');
             const action = AttributeParser.getAction(attributeValue);
 
             element.addEventListener('submit', () => {

@@ -18,12 +18,15 @@
   "dependencies": {
     "chart.js": "^2.7.3",
     "connect": "^3.6.6",
+    "firebase": "^5.7.1",
+    "diff-dom": "^2.4.0",
     "melanke-watchjs": "^1.5.0",
     "reflect-metadata": "^0.1.12",
     "rxjs": "^6.3.3",
     "serve-static": "^1.13.2"
   },
   "devDependencies": {
+    "@types/html-minifier": "^3.5.2",
     "@types/mocha": "2.2.41",
     "@types/node": "7.0.22",
     "awesome-typescript-loader": "^5.2.1",
@@ -38,6 +41,7 @@
     "webpack": "^4.12.0",
     "webpack-cli": "^3.1.2",
     "webpack-glob": "^2.0.2",
-    "webpack-livereload-plugin": "^2.1.1"
+    "webpack-livereload-plugin": "^2.1.1",
+    "webpack-node-externals": "^1.7.2"
   }
 }

@@ -8,7 +8,6 @@ import { UserService } from "@app/services/user.service";
 })
 export class HomePage {
     public appTitle: string = 'Atter';
-
     @TrackChanges()
     public loggedIn: boolean;
     @TrackChanges()
@@ -19,8 +18,8 @@ export class HomePage {
 
     constructor(
         private fillerDataService: FillerDataService,
-        private userService: UserService) {
-
+        private userService: UserService
+    ) {
         this.followedActivities = this.fillerDataService.followedActivities;
         this.myActivities = this.fillerDataService.myActivities;
         this.userService.onLoginChange().subscribe((loginStatus: boolean) => this.loggedIn = loginStatus);

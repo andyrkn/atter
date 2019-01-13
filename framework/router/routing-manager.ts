@@ -15,12 +15,13 @@ export class RoutingManager {
     }
 
     public manage(): void {
-        addEventListener('hashchange', () => this.handleRouteChange(this.pagesOrchestrator, this.navigationState, this.handler));
-        addEventListener('load', () => this.handleRouteChange(this.pagesOrchestrator, this.navigationState, this.handler));
+        addEventListener('hashchange', () => this.handleRouteChanged(this.pagesOrchestrator, this.navigationState, this.handler));
+        addEventListener('load', () => this.handleRouteChanged(this.pagesOrchestrator, this.navigationState, this.handler));
     }
 
-    private handleRouteChange(
-        pageOrchestrator: RenderableOrchestrator, navigationState: Subject<NavigationState>,
+    private handleRouteChanged(
+        pageOrchestrator: RenderableOrchestrator,
+        navigationState: Subject<NavigationState>,
         pageManuipulatorHandler: PageManipulatorHandler): void {
 
         navigationState.next(NavigationState.Start);
@@ -29,27 +30,14 @@ export class RoutingManager {
         const page: RenderableManipulator = pageOrchestrator.getPageFor(urlTree);
 
         if (page) {
-            const parameterCondition = urlTree.hasParameter === page.hasParameter();
-            if (parameterCondition) {
-                this.handlePage(pageManuipulatorHandler, page);
-            } else {
-                this.handleDefaultPage(pageOrchestrator, pageManuipulatorHandler);
-            }
+            pageManuipulatorHandler.handle(page);
         } else {
-            this.handleDefaultPage(pageOrchestrator, pageManuipulatorHandler);
+            const defaultPage: RenderableManipulator = pageOrchestrator.getDefaultPage();
+            if (defaultPage) {
+                pageManuipulatorHandler.handle(defaultPage);
+            }
         }
 
         navigationState.next(NavigationState.End);
-    }
-
-    private handlePage(pageManuipulatorHandler: PageManipulatorHandler, page: RenderableManipulator): void {
-        pageManuipulatorHandler.handle(page);
-    }
-
-    private handleDefaultPage(pagesOrchestrator: RenderableOrchestrator, pageManuipulatorHandler: PageManipulatorHandler): void {
-        const defaultPage: RenderableManipulator = pagesOrchestrator.getDefaultPage();
-        if (defaultPage) {
-            pageManuipulatorHandler.handle(defaultPage);
-        }
     }
 }

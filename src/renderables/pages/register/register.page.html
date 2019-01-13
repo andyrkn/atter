@@ -20,17 +20,17 @@
                 <input class="last-name-input" type="text" placeholder="Last Name" name="last-name" required>
 
                 <label for="email"><b> </b> </label>
-                <input class="email-input" type="text" placeholder="Email" name="email" required>
+                <input class="email-input" id="email-input" type="text" placeholder="Email" name="email" required>
 
                 <label for="password"><b> </b> </label>
-                <input class="password-input" type="text" placeholder="Password" name="password" required>
+                <input class="password-input" id="password-input" type="text" placeholder="Password" name="password" required>
 
                 <label for="confirm-password"><b> </b> </label>
                 <input class="confirm-password-input" type="text" placeholder="Confirm password" name="confirm-password"
                     required>
             </div>
             <div class="submit-register-container">
-                <button class="btn success"> Register </button>
+                <button class="btn success" click="register()"> Register </button>
                 <a href="/#/login"> Already registered? Login here. </a>
             </div>
         </div>
