@@ -1,6 +1,11 @@
-.new-activity-card{
-    margin-top:15%;
+.activity-container {
+    --activity-width: 150px;
+    --activity-height: 150px;
+    --activity-margin: 20px;
+    --activity-inner-padding: 20px;
+    --icon-container-bottom-margin: 30px;
 }
+
 .user-input {
     width: 50%;
     padding: 12px 20px;
@@ -10,19 +15,100 @@
     text-align: center;
 }
 
-.grading-tags{
+.grading-tags {
     display: flex;
     flex-direction: column;
 }
-.grading-header{
+
+.grading-header {
     align-self: center;
 }
-.button-container{
-    display:flex;
+
+.button-container {
+    display: flex;
     width: 30%;
     justify-content: space-between;
     align-self: center;
 }
-.create-button{
+
+.create-button {
     align-self: flex-end;
+}
+
+.available-icons-container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.activity-container {
+    width: var(--activity-width);
+    height: var(--activity-height);
+    margin: var(--activity-margin);
+    padding: var(--activity-inner-padding);
+    cursor: pointer;
+    text-align: center;
+    text-overflow: ellipsis;
+    transition: box-shadow .45s;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.activity-container:hover {
+    box-shadow: var(--box-shadow);
+}
+
+.icon-container {
+    padding: 10px;
+    width: 100%;
+    height: 70%;
+    margin-bottom: var(--icon-container-bottom-margin);
+}
+
+.activity-icon-1 {
+    background: url("assets/icons/eagle-icon.jpg") no-repeat;
+    background-size: 100%;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+}
+
+.activity-icon-2 {
+    background: url("assets/icons/panda-icon.jpg") no-repeat;
+    background-size: 100%;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+}
+
+.activity-icon-3 {
+    background: url("assets/icons/rocket-icon.jpg") no-repeat;
+    background-size: 100%;
+    width: 100%;
+    height: 100%;
+}
+
+.activity-icon-4 {
+    background: url("assets/icons/toxic-icon.jpg") no-repeat;
+    background-size: 100%;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+}
+
+.activity-icon-5 {
+    background: url("assets/icons/book-icon.jpg") no-repeat;
+    background-size: 100%;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+}
+
+.activity-icon-6 {
+    background: url("assets/icons/smile-icon.jpg") no-repeat;
+    background-size: 100%;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
 }

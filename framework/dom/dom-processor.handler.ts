@@ -3,10 +3,12 @@ import { Encapsulator } from "./encapsulator";
 import { Renderer } from "./renderer";
 import { ClickProcessor } from "./processors/click.processor";
 import { SubmitProcessor } from "./processors/submit.processor";
+import { BindProcessor } from "./processors/bind.processor";
 
 const processors: Function[] = [
     ClickProcessor,
-    SubmitProcessor
+    SubmitProcessor,
+    BindProcessor
 ];
 
 export class DomProcessorHandler {
@@ -23,7 +25,6 @@ export class DomProcessorHandler {
         this.process(element, context);
         this.renderer.render(selector, element);
     }
-
 
     private createElement(selector: string, template: string, renderingIndex: number): Element {
         const result = template.replace(/>[\s]+\</g, "><");

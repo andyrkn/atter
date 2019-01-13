@@ -14,7 +14,7 @@ export class ClickProcessor implements DomProcessor {
                 if (context[action.method]) {
                     context[action.method](...action.args);
                 } else {
-                    Utils.printError(`Method: "${action.method}" doesn't exists on ${context.__proto__.constructor.name}!`);
+                    Utils.printError(`Method: "${action.method}" doesn't exist on ${context.__proto__.constructor.name}!`);
                 }
             });
         }

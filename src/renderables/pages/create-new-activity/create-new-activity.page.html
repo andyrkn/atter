@@ -6,19 +6,30 @@
             </div>
             <div class="card-content flex-container column center">
                 <label for="activity-name"><b> </b> </label>
-                <input class="user-input" type="text" placeholder="Activity name" name="activity-name" required>
+                <input class="user-input" type="text" placeholder="Activity name" data-bind="activityName" required>
+
                 <div class="grading-tags">
                     <h3 class="grading-header"> Grading Tags</h3>
-    
                     <div class="button-container">
-                        <button class="btn success"> Tags </button>
-                        <button class="btn success"> Points </button>
-                        <button class="btn success"> Free text </button>
+                        << for(let type of gradingTypes) {>>
+                            <button class="btn success" data-click="selectGradingType(<<=type>>)">
+                                <<=type>>
+                            </button>
+                            << }>>
                     </div>
-    
+
+                    <h3 class="grading-header">Activity Icon</h3>
+                    <div class="available-icons-container">
+                        << for(let i=1;i<=6;i++ ) {>>
+                            <div class="activity-container">
+                                <div class="activity-icon-<<=i>>" data-click="selectIcon(<<=i>>)"></div>
+                            </div>
+                            << }>>
+                    </div>
                 </div>
+
                 <div class="create-button">
-                    <button class="btn success"> Create </button>
+                    <button class="btn success" data-click="createActivity()"> Create </button>
                 </div>
             </div>
         </div>

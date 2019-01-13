@@ -3,6 +3,7 @@ import { Utils } from "@web/utils";
 import { DomProcessor } from "../dom-processor";
 
 export class SubmitProcessor implements DomProcessor {
+
     public processElement(elementToProcess: Element, context: any): Element {
         const submitables = elementToProcess.querySelectorAll('[data-submit]');
         for (const element of submitables) {
@@ -14,7 +15,7 @@ export class SubmitProcessor implements DomProcessor {
                     context[action.method](...action.args);
                     window.history.pushState(null, null, window.location.pathname);
                 } else {
-                    Utils.printError(`Method: "${action.method}" doesn't exists on ${context.__proto__.constructor.name}!`)
+                    Utils.printError(`Method: "${action.method}" doesn't exist on ${context.__proto__.constructor.name}!`);
                 }
             });
         }

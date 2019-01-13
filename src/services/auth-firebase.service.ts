@@ -8,19 +8,23 @@ import { FirebaseService } from "./firebase.service";
 export class AuthFirebaseSerivce {
 
     constructor(private firebaseService: FirebaseService) {
-        this.firebaseService.firebaseApp.auth().onAuthStateChanged((user) => this.onAuthStateChange(user));
+        this.firebaseAuth.onAuthStateChanged((user) => this.onAuthStateChange(user));
+    }
+
+    private get firebaseAuth() {
+        return this.firebaseService.firebaseApp.auth();
     }
 
     public register(email: string, password: string): Observable<auth.UserCredential> {
-        return from(this.firebaseService.firebaseApp.auth().createUserWithEmailAndPassword(email, password));
+        return from(this.firebaseAuth.createUserWithEmailAndPassword(email, password));
     }
 
     public login(email: string, password: string): Observable<auth.UserCredential> {
-        return from(this.firebaseService.firebaseApp.auth().signInWithEmailAndPassword(email, password));
+        return from(this.firebaseAuth.signInWithEmailAndPassword(email, password));
     }
 
     public logout(): Observable<void> {
-        return from(this.firebaseService.firebaseApp.auth().signOut());
+        return from(this.firebaseAuth.signOut());
     }
 
     private onAuthStateChange(user: any): void {
