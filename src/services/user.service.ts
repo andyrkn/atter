@@ -5,33 +5,13 @@ import { AuthFirebaseSerivce } from "./firebase/firebase-auth.service";
 @Injectable()
 export class UserService {
 
+    public ownedactivities = [];
+    public followedactivities = [];
+
     private changeSubject: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(this.loggedIn);
     private userSubject: BehaviorSubject<any> = new BehaviorSubject<any>(null);
 
     constructor(private authFirebaseSerivce: AuthFirebaseSerivce) {
-        const email = "cristyurs@yhaoo.com";
-        const password = "Test1234";
-
-        this.authFirebaseSerivce.login(email, password).subscribe(
-            (user) => {
-                this.loggedIn = true;
-                this.userSubject.next(user);
-            },
-            (err) => {
-                this.loggedIn = false;
-            });
-    }
-
-    private set loggedIn(value: boolean) {
-        localStorage.setItem("loggin", value ? "TRUE" : "FALSE");
-        this.changeSubject.next(value);
-    }
-
-    private get loggedIn(): boolean {
-        return localStorage.getItem("loggin") === "TRUE" ? true : false;
-    }
-
-    public login(): void {
         /*
         const email = "cristyurs@yhaoo.com";
         const password = "Test1234";
@@ -44,8 +24,53 @@ export class UserService {
             (err) => {
                 this.loggedIn = false;
             });
-            */
-        this.loggedIn = true;
+        */
+    }
+
+    private set loggedIn(value: boolean) {
+        localStorage.setItem("loggin", value ? "TRUE" : "FALSE");
+        this.changeSubject.next(value);
+    }
+
+    private get loggedIn(): boolean {
+        return localStorage.getItem("loggin") === "TRUE" ? true : false;
+    }
+
+    private setUser(): void {
+        localStorage.setItem("userUid", this.userSubject.value.user.uid);
+        localStorage.setItem("userEmail", this.userSubject.value.user.email);
+    }
+
+    private delUser(): void {
+        localStorage.removeItem("userUid");
+        localStorage.removeItem("userEmail");
+    }
+
+    private getUserUid(): string {
+        return localStorage.getItem("userUid");
+    }
+    private getUserEmail(): string {
+        return localStorage.getItem("userEmail");
+    }
+
+    public login(email: string, password: string): Observable<boolean> {
+        /*
+        const email = "cristyurs@yhaoo.com";
+        const password = "Test1234";
+        */
+        return from(new Promise((resolve) =>
+            this.authFirebaseSerivce.login(email, password).subscribe(
+                (user) => {
+                    this.loggedIn = true;
+                    this.userSubject.next(user);
+                    this.setUser();
+                    resolve(true);
+                },
+                (err) => {
+                    this.loggedIn = false;
+                    this.delUser();
+                    resolve(false);
+                })));
     }
 
     public logout(): void {
@@ -66,10 +91,14 @@ export class UserService {
     }
 
     public get user() {
-        return this.userSubject.value.user;
+        return { uid: this.getUserUid(), email: this.getUserEmail() };
     }
 
     public get userObservable() {
-        return this.userSubject.asObservable();
+        if (this.loggedIn) {
+            return this.userSubject.asObservable();
+        } else {
+            return null;
+        }
     }
 }

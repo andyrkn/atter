@@ -25,22 +25,30 @@ export class HomePage {
     ) {
         this.userService.onLoginChange().subscribe((loginStatus: boolean) => this.loggedIn = loginStatus);
 
-        this.userService.userObservable.subscribe((data) => {
-            if (data) {
-                this.getActivities();
-            }
-        });
+        if (this.userService.user) {
+            this.getActivities();
+        }
     }
 
     private getActivities(): void {
 
         this.firebaseActivities.getFollowedActivities().subscribe((following) => {
             this.followedActivities = following;
-
-            // track changes bug, if both elements update fast one wont show up
-            this.firebaseActivities.getUserActivities().subscribe((dashboards) => {
-                this.myActivities = dashboards;
-            });
+            this.logActivities(following, "followedactivities");
         });
+
+        this.firebaseActivities.getUserActivities().subscribe((dashboards) => {
+            this.myActivities = dashboards;
+            this.logActivities(this.myActivities, "ownedactivities");
+        });
+    }
+
+    private logActivities(activities, type: string): void {
+        this.userService[type] = [];
+        for (const key in activities) {
+            if (key) {
+                this.userService[type].push(key);
+            }
+        }
     }
 }

@@ -2,6 +2,7 @@ import { Renderable, TrackChanges, AfterRender } from "@web/core";
 import { FillerDataService } from "@app/services/filler.data.service";
 import { UrlTree } from "@web/router";
 import { CheckInServivce } from "../dashboard/services/check-in.service";
+import { FireBaseActivityService } from "@app/services/firebase/firebase-activities.service";
 
 @Renderable({
     template: require('./activity.page.html'),
@@ -9,19 +10,23 @@ import { CheckInServivce } from "../dashboard/services/check-in.service";
 })
 export class Activity {
 
-    private activityID = Number(new UrlTree().routeParameter);
+    private activityID = new UrlTree().routeParameter;
 
     @TrackChanges()
-    public canCheckIn: boolean = false;
+    public canCheckIn: boolean = true;
 
-    public activity: any;
+    @TrackChanges()
+    public activity: any = {};
 
-    constructor(private fillerDataService: FillerDataService, private checkinService: CheckInServivce) {
-        this.activity = this.fillerDataService.getFollowedActivityId(new UrlTree().routeParameter);
-        this.canCheckIn = this.checkinService.checkinStatus;
+    constructor(
+        private firebaseActivityService: FireBaseActivityService) {
+        this.firebaseActivityService.getActivityDetails(this.activityID).subscribe((data) => {
+            this.activity = data;
+            console.log(this.activity);
+        });
     }
 
     public checkIn(): void {
-        this.canCheckIn = false;
+        // this.canCheckIn = false;
     }
 }

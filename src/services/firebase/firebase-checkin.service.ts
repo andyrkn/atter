@@ -22,18 +22,61 @@ export class FireBaseCheckInService {
         return this.firebaseService.firebaseApp.database();
     }
 
-    private setActivityLocation(resolve): void {
-        resolve(true);
+    private updateActivityData(activityData, activityID): Observable<{}> {
+        return from(new Promise((resolve) =>
+            this.database.ref('activities/' + activityID).update(activityData).then(
+                (res) => { if (!res) { resolve(activityData); } },
+                (err) => { resolve(err); })));
     }
 
-    public enableActivityCheckIn(distance: number, activtyID: string): Observable<boolean> {
-        let activityCoords: Coordinates;
+    private prepareCheckInCoordinates(activityData, activityID: string, resolve): void {
+        this.geolocationService.getCurrentLocation()
+            .subscribe((coords: Coordinates) => {
+                activityData['coords'] = coords;
+                this.updateActivityData(activityData, activityID).subscribe((data) => { resolve(data); });
+            });
+    }
 
+    private prepareCheckInActivityData(distance: number, activityID: string, resolve): void {
+
+        const date = new Date();
+        const datestring: string =
+            date.getFullYear().toString() +
+            date.getMonth().toString() +
+            date.getUTCDate().toString() +
+            date.getHours().toString() +
+            date.getMinutes().toString();
+
+        this.database.ref('activities/' + activityID).once('value')
+            .then((snapshot) => {
+                const activityData = snapshot.val();
+
+                activityData['distance'] = distance;
+                activityData['lastCheckInDate'] = datestring;
+                activityData['ableToCheckIn'] = true;
+                this.prepareCheckInCoordinates(activityData, activityID, resolve);
+            });
+    }
+
+    private prepareActivityDisableCheckIn(activityID: string, resolve): void {
+        this.database.ref('activities/' + activityID).once('value')
+            .then((snapshot) => {
+                const activityData = snapshot.val();
+                activityData['ableToCheckIn'] = false;
+                this.updateActivityData(activityData, activityID).subscribe((data) => {
+                    resolve(data);
+                });
+            });
+    }
+
+    public enableActivityCheckIn(distance: number, activityID: string): Observable<{}> {
         return from(new Promise((resolve) =>
-            this.geolocationService.getCurrentLocation()
-                .subscribe((coords: Coordinates) => {
-                    activityCoords = coords;
-                    console.log(activityCoords);
-                })));
+            this.prepareCheckInActivityData(distance, activityID, resolve)));
+    }
+
+    public disableActivityCheckIn(activityID: string): Observable<{}> {
+        return from(new Promise((resolve) =>
+            this.prepareActivityDisableCheckIn(activityID, resolve)
+        ));
     }
 }

@@ -28,21 +28,30 @@ export class FireBaseActivityService {
     public getFollowedActivities(): Observable<any> {
         return from(new Promise((resolve) =>
             this.database.ref('following/' + this.userId).once('value')
-                .then((snapshot) => { resolve(this.getActivityDetails(snapshot.val())); })));
-        // .then((snapshot) => { resolve(snapshot.val()); })));
+                .then((snapshot) => { resolve(this.getAllActivitiesDetails(snapshot.val())); })));
     }
 
-    private getActivityDetails(activities) {
+    private async getAllActivitiesDetails(activities) {
         const res = {};
 
         // tslint:disable-next-line:forin
         for (const i in activities) {
-            this.database.ref('activities/' + activities[i]).once('value')
+            await this.database.ref('activities/' + activities[i]).once('value')
                 .then((snapshot) => {
                     const data = snapshot.val();
                     res[activities[i]] = { name: data.name, iconID: data.iconID };
                 });
         }
         return res;
+    }
+
+    public getActivityDetails(code: string): Observable<any> {
+        return from(new Promise((resolve) =>
+            this.database.ref('activities/' + code).once('value')
+                .then((snapshot) => {
+                    const data = snapshot.val();
+                    data['id'] = snapshot.key;
+                    resolve(data);
+                })));
     }
 }

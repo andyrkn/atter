@@ -31,6 +31,7 @@ export class FireBaseActivitySubscriptionService {
         const dashboardref = this.database.ref('dashboards/' + this.userId + '/')
             .push({ name: activity.name, iconID: activity.iconID }, (e) => { if (!e) { alert("succes"); } });
 
+        activity['owner'] = this.userService.user.email;
         this.database.ref('activities/' + dashboardref.key)
             .set(activity, (e) => { if (!e) { console.log(e); } });
     }

@@ -5,6 +5,8 @@ import { ActivityDetails } from "./activity-details";
 import { CheckInServivce } from "./services/check-in.service";
 import { UrlTree } from "@web/router";
 import { FireBaseCheckInService } from "@app/services/firebase/firebase-checkin.service";
+import { UserService } from "@app/services/user.service";
+import { FireBaseActivityService } from "@app/services/firebase/firebase-activities.service";
 
 @Renderable({
     template: require('./dashboard.page.html'),
@@ -14,18 +16,33 @@ export class DashboardPage implements AfterRender, OnRefresh {
     private enableValue = 'Enable check-in';
     private disableValue = 'Disable check-in';
     private activityID = new UrlTree().routeParameter;
+    private activityDetails: any = {};
 
     public maxDistance: number = 0;
     public id: number = 1;
     public activity: ActivityDetails = new ActivityDetails();
 
     @TrackChanges()
-    public checkinButtonValue: string = this.enableValue;
+    public checkinButtonValue: string = "...";
 
     constructor(
-        private checkInService: CheckInServivce,
-        private firebaseCheckInService: FireBaseCheckInService) {
-        this.checkinButtonValue = this.checkInService.checkinStatus ? this.disableValue : this.enableValue;
+        private firebaseCheckInService: FireBaseCheckInService,
+        private firebaseActivityService: FireBaseActivityService,
+        private userService: UserService) {
+
+        // TODO: check if current user is actually allowed to browse this dashboard
+        // console.log(this.userService.ownedactivities);
+
+        this.firebaseActivityService.getActivityDetails(this.activityID).subscribe((data) => {
+            this.activityDetails = data;
+            console.log(this.activityDetails);
+            this.toggleCheckInButton(this.activityDetails.ableToCheckIn);
+        });
+    }
+
+    private toggleCheckInButton(value: boolean): void {
+        value === true ?
+            this.checkinButtonValue = this.disableValue : this.checkinButtonValue = this.enableValue;
     }
 
     public onRefresh(): void {
@@ -35,15 +52,22 @@ export class DashboardPage implements AfterRender, OnRefresh {
     public afterRender(): void {
         this.drawGraphs();
     }
-    /*
-    public handleCheckInButton(): void {
-        this.checkInService.toggleStatus();
-        this.checkinButtonValue =
-            this.checkInService.checkinStatus ? this.disableValue : this.enableValue;
-    }*/
 
     public handleCheckInButton(): void {
-        this.firebaseCheckInService.enableActivityCheckIn(this.maxDistance, this.activityID);
+        this.checkinButtonValue = "...";
+        if (this.activityDetails.ableToCheckIn === false) {
+            this.firebaseCheckInService.enableActivityCheckIn(this.maxDistance, this.activityID).subscribe((data: any) => {
+                console.log(data);
+                this.activityDetails = data;
+                this.toggleCheckInButton(data.ableToCheckIn);
+            });
+        } else {
+            this.firebaseCheckInService.disableActivityCheckIn(this.activityID).subscribe((data: any) => {
+                console.log(data);
+                this.activityDetails = data;
+                this.toggleCheckInButton(data.ableToCheckIn);
+            });
+        }
     }
 
     private drawGraphs(): void {

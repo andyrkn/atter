@@ -6,6 +6,9 @@
         <div class="card-content">
             <input type="text" placeholder="Follow Code" data-bind="activityKey" required>
             <button class="btn success" data-click="followActivity()"> Follow </button>
+            << if(invalidKey){>>
+                <p style="color:red;"><b>Invalid Key</b></p>
+                <<}>>
         </div>
     </div>
 </main>

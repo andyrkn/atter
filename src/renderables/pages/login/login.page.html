@@ -6,17 +6,20 @@
             </div>
 
             <label for="email"><b> </b> </label>
-            <input type="text" placeholder="Email" name="email" required>
+            <input type="text" placeholder="Email" data-bind="email" required>
             <label for="password"><b> </b> </label>
-            <input type="text" placeholder="Password" name="password" required>
+            <input type="text" placeholder="Password" data-bind="password" required>
+            << if(invalidData){>>
+                <p style="color:red;"><b>Invalid Data</b></p>
+                <<}>>
 
-            <div class="submit-login-container">
-                <button class="btn success" data-click="login()"> Login </button>
-                <div class="extra-options">
-                    <a href="/#/forgot-password"> Forgot your password? </a>
-                    <a href="/#/register"> Register here </a>
-                </div>
-            </div>
+                    <div class="submit-login-container">
+                        <button class="btn success" data-click="login()"> Login </button>
+                        <div class="extra-options">
+                            <a href="/#/forgot-password"> Forgot your password? </a>
+                            <a href="/#/register"> Register here </a>
+                        </div>
+                    </div>
         </div>
     </div>
 </section>
