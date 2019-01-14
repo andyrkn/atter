@@ -1,13 +1,3 @@
-<div class="card small">
-    <div class="card-title"> Counter (click example) </div>
-    <div class="card-content column">
-        <div>
-            <<= counter>>
-        </div>
-        <button class="btn success" data-click="increment()">Increment</button>
-    </div>
-</div>
-
 << if(!loggedIn) {>>
 
     <img class="logo" src="assets/logos/logo-sm.png" alt="Atter logo">
@@ -60,13 +50,13 @@
             <div class="card">
                 <div class="card-title text-primary">Followed Activities</div>
                 <div class="container">
-                    << for(const i in followedActivities) {>>
-                        <a class="activity-profile" href="/#/activity/<<=i>>">
+                    << for(const j in followedActivities) {>>
+                        <a class="activity-profile" href="/#/activity/<<=j>>">
                             <div class="activity-container">
                                 <div class="icon-container">
-                                    <div class="activity-icon activity-icon-<<=followedActivities[i].iconID>>"></div>
+                                    <div class="activity-icon activity-icon-<<=followedActivities[j].iconID>>"></div>
                                 </div>
-                                <<=followedActivities[i].name>>
+                                <<=followedActivities[j].name>>
                             </div>
                         </a>
                         << }>>

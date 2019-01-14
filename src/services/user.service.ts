@@ -22,6 +22,15 @@ export class UserService {
             });
     }
 
+    private set loggedIn(value: boolean) {
+        localStorage.setItem("loggin", value ? "TRUE" : "FALSE");
+        this.changeSubject.next(value);
+    }
+
+    private get loggedIn(): boolean {
+        return localStorage.getItem("loggin") === "TRUE" ? true : false;
+    }
+
     public login(): void {
         /*
         const email = "cristyurs@yhaoo.com";
@@ -52,22 +61,15 @@ export class UserService {
             });
     }
 
-    private set loggedIn(value: boolean) {
-        localStorage.setItem("loggin", value ? "TRUE" : "FALSE");
-        this.changeSubject.next(value);
-    }
-
-    private get loggedIn(): boolean {
-        return localStorage.getItem("loggin") === "TRUE" ? true : false;
-    }
-
     public onLoginChange(): Observable<boolean> {
         return this.changeSubject.asObservable();
     }
 
     public get user() {
-        // until this waits for firebase response
-        return { uid: "qs7PuH0fROeTVqDeoCHLX1OvZfm1" };
-        // return this.userSubject.value.user;
+        return this.userSubject.value.user;
+    }
+
+    public get userObservable() {
+        return this.userSubject.asObservable();
     }
 }

@@ -26,7 +26,7 @@ export class FireBaseCheckInService {
         resolve(true);
     }
 
-    public enableActivityCheckIn(distance: number): Observable<boolean> {
+    public enableActivityCheckIn(distance: number, activtyID: string): Observable<boolean> {
         let activityCoords: Coordinates;
 
         return from(new Promise((resolve) =>

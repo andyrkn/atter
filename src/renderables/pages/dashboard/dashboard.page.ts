@@ -13,7 +13,7 @@ import { FireBaseCheckInService } from "@app/services/firebase/firebase-checkin.
 export class DashboardPage implements AfterRender, OnRefresh {
     private enableValue = 'Enable check-in';
     private disableValue = 'Disable check-in';
-    private activityID = Number(new UrlTree().routeParameter);
+    private activityID = new UrlTree().routeParameter;
 
     public maxDistance: number = 0;
     public id: number = 1;
@@ -43,8 +43,7 @@ export class DashboardPage implements AfterRender, OnRefresh {
     }*/
 
     public handleCheckInButton(): void {
-        console.log(this.maxDistance);
-        this.firebaseCheckInService.enableActivityCheckIn(10);
+        this.firebaseCheckInService.enableActivityCheckIn(this.maxDistance, this.activityID);
     }
 
     private drawGraphs(): void {

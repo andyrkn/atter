@@ -28,6 +28,21 @@ export class FireBaseActivityService {
     public getFollowedActivities(): Observable<any> {
         return from(new Promise((resolve) =>
             this.database.ref('following/' + this.userId).once('value')
-                .then((snapshot) => { resolve(snapshot.val()); })));
+                .then((snapshot) => { resolve(this.getActivityDetails(snapshot.val())); })));
+        // .then((snapshot) => { resolve(snapshot.val()); })));
+    }
+
+    private getActivityDetails(activities) {
+        const res = {};
+
+        // tslint:disable-next-line:forin
+        for (const i in activities) {
+            this.database.ref('activities/' + activities[i]).once('value')
+                .then((snapshot) => {
+                    const data = snapshot.val();
+                    res[activities[i]] = { name: data.name, iconID: data.iconID };
+                });
+        }
+        return res;
     }
 }
