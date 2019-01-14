@@ -9,15 +9,15 @@ import * as WatchJS from 'melanke-watchjs';
 export abstract class RenderableManipulatorHandler implements Handler<RenderableManipulator> {
 
     constructor(
-        private styleHandler: StyleHandler, 
-        private instanceManager: InstanceManager, 
+        private styleHandler: StyleHandler,
+        private instanceManager: InstanceManager,
         private processorsHandler: DomProcessorHandler) {
     }
 
     public handle(objectToHandle: RenderableManipulator): void {
         const context: Function = this.instanceManager.getInstance(objectToHandle.renderableClass);
 
-        if(LifeCycle.implementsOnInit(context)) {
+        if (LifeCycle.implementsOnInit(context)) {
             context.onInit();
         }
 
@@ -62,7 +62,7 @@ export abstract class RenderableManipulatorHandler implements Handler<Renderable
         WatchJS.unwatch(context, objectToHandle.propertiesToTrack);
         contextChangeSubscription.unsubscribe();
 
-        if(LifeCycle.implementsOnDestroy(context)) {
+        if (LifeCycle.implementsOnDestroy(context)) {
             context.onDestroy();
         }
     }

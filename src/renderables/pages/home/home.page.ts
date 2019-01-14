@@ -9,12 +9,16 @@ import { FireBaseActivityService } from "@app/services/firebase/firebase-activit
 })
 export class HomePage {
     public appTitle: string = 'Atter';
+
     @TrackChanges()
     public loggedIn: boolean;
     @TrackChanges()
     public counter: number = 0;
 
+    @TrackChanges()
     public followedActivities: any = {};
+
+    @TrackChanges()
     public myActivities: any = {};
 
     constructor(

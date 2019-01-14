@@ -1,7 +1,9 @@
 <div class="card small">
     <div class="card-title"> Counter (click example) </div>
     <div class="card-content column">
-        <div><<= counter >></div>
+        <div>
+            <<= counter>>
+        </div>
         <button class="btn success" data-click="increment()">Increment</button>
     </div>
 </div>
@@ -13,11 +15,15 @@
         <div class="card-title">Why atter?</div>
         <div class="card-content">
             <p class="app-description">
-                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's
-                standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to
+                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
+                industry's
+                standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled
+                it to
                 make a
-                type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting,
-                remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing
+                type specimen book. It has survived not only five centuries, but also the leap into electronic
+                typesetting,
+                remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets
+                containing
                 Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including
                 versions of
                 Lorem Ipsum.
@@ -32,7 +38,7 @@
                 <div class="card-title text-primary">My Activities</div>
                 <div class="container">
                     << for(const i in myActivities) {>>
-                        <a class="activity-profile" href="/#/dashboard/<<=myActivities[i].id>>">
+                        <a class="activity-profile" href="/#/dashboard/<<=i>>">
                             <div class="activity-container">
                                 <div class="icon-container">
                                     <div class="activity-icon-<<=myActivities[i].iconID>>"></div>
@@ -55,7 +61,7 @@
                 <div class="card-title text-primary">Followed Activities</div>
                 <div class="container">
                     << for(const i in followedActivities) {>>
-                        <a class="activity-profile" href="/#/activity/<<=followedActivities[i].id>>">
+                        <a class="activity-profile" href="/#/activity/<<=i>>">
                             <div class="activity-container">
                                 <div class="icon-container">
                                     <div class="activity-icon activity-icon-<<=followedActivities[i].iconID>>"></div>

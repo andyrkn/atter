@@ -8,8 +8,8 @@ import { DomProcessorHandler } from "@web/dom/dom-processor.handler";
 
 export class ComponentManipulatorHandler extends RenderableManipulatorHandler {
     constructor(
-        styleHandler: StyleHandler, 
-        instanceManager: InstanceManager, 
+        styleHandler: StyleHandler,
+        instanceManager: InstanceManager,
         processorsHandler: DomProcessorHandler) {
         super(styleHandler, instanceManager, processorsHandler);
     }
