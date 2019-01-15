@@ -1,4 +1,4 @@
-import { Observable, from } from "rxjs";
+import { Observable, from, BehaviorSubject } from "rxjs";
 import { Injectable } from "@web/core";
 import { UserService } from "../user.service";
 import { FirebaseService } from "./firebase.service";
@@ -19,18 +19,6 @@ export class FireBaseActivityService {
         return this.firebaseService.firebaseApp.database();
     }
 
-    public getUserActivities(): Observable<any> {
-        return from(new Promise((resolve) =>
-            this.database.ref('dashboards/' + this.userId).once('value')
-                .then((snapshot) => { resolve(snapshot.val()); })));
-    }
-
-    public getFollowedActivities(): Observable<any> {
-        return from(new Promise((resolve) =>
-            this.database.ref('following/' + this.userId).once('value')
-                .then((snapshot) => { resolve(this.getAllActivitiesDetails(snapshot.val())); })));
-    }
-
     private async getAllActivitiesDetails(activities) {
         const res = {};
 
@@ -45,7 +33,19 @@ export class FireBaseActivityService {
         return res;
     }
 
-    public getActivityDetails(code: string): Observable<any> {
+    public getUserActivities(): Observable<any> {
+        return from(new Promise((resolve) =>
+            this.database.ref('dashboards/' + this.userId).once('value')
+                .then((snapshot) => { resolve(snapshot.val()); })));
+    }
+
+    public getFollowedActivities(): Observable<any> {
+        return from(new Promise((resolve) =>
+            this.database.ref('following/' + this.userId).once('value')
+                .then((snapshot) => { resolve(this.getAllActivitiesDetails(snapshot.val())); })));
+    }
+
+    public getStaticActivityDetails(code: string): Observable<any> {
         return from(new Promise((resolve) =>
             this.database.ref('activities/' + code).once('value')
                 .then((snapshot) => {
@@ -53,5 +53,13 @@ export class FireBaseActivityService {
                     data['id'] = snapshot.key;
                     resolve(data);
                 })));
+    }
+
+    public getObservableActivityDetails(code: string, activity: BehaviorSubject<any>): void {
+
+        this.database.ref('activities/' + code).on('value', (snapshot) => {
+            // console.log(snapshot.val());
+            activity.next(snapshot.val());
+        });
     }
 }

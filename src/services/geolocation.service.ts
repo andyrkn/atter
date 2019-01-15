@@ -5,8 +5,6 @@ import { Observable, from } from "rxjs";
 @Injectable()
 export class GeolocationService {
 
-    private readonly maximumCheckInDistance: number = 10;
-
     constructor() { }
 
     public getCurrentLocation(): Observable<Coordinates> {
@@ -17,14 +15,9 @@ export class GeolocationService {
         }));
     }
 
-    public checkIfLegalCheckIn(): Observable<boolean> {
-
-        // get activity coords from firebase
-        const flon = 27.574614399999998;
-        const flat = 47.1738559;
-        const activityCoords = new Coordinates(flon, flat);
+    public calculateDistance(activityCoords: Coordinates): Observable<number> {
 
         return from(new Promise((resolve) => this.getCurrentLocation()
-            .subscribe((coords) => resolve(coords.calculateDistance(activityCoords) < this.maximumCheckInDistance ? true : false))));
+            .subscribe((coords) => resolve(coords.calculateDistance(activityCoords)))));
     }
 }

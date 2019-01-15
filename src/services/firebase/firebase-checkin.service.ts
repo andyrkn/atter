@@ -4,6 +4,8 @@ import { FirebaseService } from "./firebase.service";
 import { GeolocationService } from "../geolocation.service";
 import { Coordinates } from "../coordinates";
 import { from, Observable } from "rxjs";
+import { LegalCheckInModel } from "@app/models/checkInModels/legalCheckIn.model";
+import { IllegalCheckInModel } from "@app/models/checkInModels/illegalCheckIn.model";
 
 @Injectable()
 export class FireBaseCheckInService {
@@ -16,6 +18,10 @@ export class FireBaseCheckInService {
 
     private get userId() {
         return this.userService.user.uid;
+    }
+
+    private get userEmail() {
+        return this.userService.user.email;
     }
 
     private get database() {
@@ -38,13 +44,12 @@ export class FireBaseCheckInService {
     }
 
     private prepareCheckInActivityData(distance: number, activityID: string, resolve): void {
-
         const date = new Date();
         const datestring: string =
-            date.getFullYear().toString() +
-            date.getMonth().toString() +
-            date.getUTCDate().toString() +
-            date.getHours().toString() +
+            date.getUTCDate().toString() + '_' +
+            (date.getMonth() + 1).toString() + '_' +
+            date.getFullYear().toString() + '_' +
+            date.getHours().toString() + ':' +
             date.getMinutes().toString();
 
         this.database.ref('activities/' + activityID).once('value')
@@ -78,5 +83,20 @@ export class FireBaseCheckInService {
         return from(new Promise((resolve) =>
             this.prepareActivityDisableCheckIn(activityID, resolve)
         ));
+    }
+
+    public userCheckIn(activityID: string, datestring: string, distance: number, legal: boolean): Observable<any> {
+        const checkInData = legal ?
+            new LegalCheckInModel(this.userEmail, distance) : new IllegalCheckInModel(this.userEmail, distance);
+        const route = legal ? 'checkins/' : 'frauds/';
+
+        return from(new Promise((resolve) => {
+            this.saveCheckIn(activityID, datestring, checkInData, route, resolve);
+        }));
+    }
+
+    private saveCheckIn(activityID, datestring: string, checkInData: any, route: string, resolve) {
+        this.database.ref(route + activityID + '/' + datestring + '/' + this.userId).set(checkInData)
+            .then((res) => { if (res) { resolve(res); } });
     }
 }

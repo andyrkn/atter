@@ -5,9 +5,6 @@ import { AuthFirebaseSerivce } from "./firebase/firebase-auth.service";
 @Injectable()
 export class UserService {
 
-    public ownedactivities = [];
-    public followedactivities = [];
-
     private changeSubject: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(this.loggedIn);
     private userSubject: BehaviorSubject<any> = new BehaviorSubject<any>(null);
 

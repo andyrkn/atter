@@ -2,7 +2,6 @@ import { Renderable, TrackChanges, AfterRender, OnRefresh } from "@web/core";
 import * as Chart from 'chart.js';
 
 import { ActivityDetails } from "./activity-details";
-import { CheckInServivce } from "./services/check-in.service";
 import { UrlTree } from "@web/router";
 import { FireBaseCheckInService } from "@app/services/firebase/firebase-checkin.service";
 import { UserService } from "@app/services/user.service";
@@ -33,7 +32,7 @@ export class DashboardPage implements AfterRender, OnRefresh {
         // TODO: check if current user is actually allowed to browse this dashboard
         // console.log(this.userService.ownedactivities);
 
-        this.firebaseActivityService.getActivityDetails(this.activityID).subscribe((data) => {
+        this.firebaseActivityService.getStaticActivityDetails(this.activityID).subscribe((data) => {
             this.activityDetails = data;
             console.log(this.activityDetails);
             this.toggleCheckInButton(this.activityDetails.ableToCheckIn);
