@@ -16,5 +16,14 @@ export class ExternalDataService {
             );
         });
     }
-
+    public obtainFiles(importer: BaseImporter, numberOfFilesToImport: number) {
+        importer.obtainFiles(numberOfFilesToImport).subscribe((data) => {
+            console.log(data);
+        });
+    }
+    public obtainDataFromFile(importer: BaseImporter, fileName: string) {
+        importer.obtainDataFromFile("request.txt").subscribe((d) => {
+            console.log(d);
+        });
+    }
 }

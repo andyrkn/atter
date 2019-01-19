@@ -35,6 +35,7 @@ export abstract class BaseImporter {
             .set('Authorization', this.getEncodedCredentials())
             .send(body));
     }
+
     public authorizeApp() {
         window.location.href = this.getAuthorizeLink();
     }
@@ -43,6 +44,8 @@ export abstract class BaseImporter {
     protected abstract getAuthorizeLink(): string;
     protected abstract obtainBody(code): {};
     protected abstract getCredentials();
+    public abstract obtainFiles(numberOfFiles: number): Observable<any>;
+    public abstract obtainDataFromFile(fileName : string): Observable<any>;
     private getEncodedCredentials(): string {
         return "Basic " + new Buffer(this.appKey + ":" + this.appsecret).toString("base64");
     }
