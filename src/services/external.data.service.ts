@@ -21,4 +21,9 @@ export class ExternalDataService {
             console.log(data);
         });
     }
+    public obtainDataFromFile(importer: BaseImporter, fileName: string) {
+        importer.obtainDataFromFile("request.txt").subscribe((d) => {
+            console.log(d);
+        });
+    }
 }

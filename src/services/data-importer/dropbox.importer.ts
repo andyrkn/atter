@@ -40,7 +40,6 @@ export class DropboxImporter extends BaseImporter {
     }
     private requestFiles(numberOfFiles: number, callback: any) {
         this.userService.getCurrentUserAuthToken("dropboxOAuthToken").subscribe((data) => {
-            console.log(data);
             request.post("https://api.dropboxapi.com/2/files/list_folder")
                 .set('Authorization', "Bearer " + data)
                 .set('Accept', 'application/json')
@@ -52,6 +51,21 @@ export class DropboxImporter extends BaseImporter {
                     include_has_explicit_shared_members: false,
                     include_mounted_folders: true
                 }).then((d) => { console.log(d); callback(d); });
+        });
+    }
+
+    public obtainDataFromFile(fileName : string): Observable<any> {
+        return from(new Promise((resolve) => { this.obtainFileData(fileName, resolve); }));
+    }
+
+    private obtainFileData(filePath: string, callback) {
+        this.userService.getCurrentUserAuthToken("dropboxOAuthToken").subscribe((data) => {
+            console.log(data);
+            request.post("https://content.dropboxapi.com/2/files/download")
+                .set('Authorization', "Bearer " + data)
+                .set('Accept', 'application/json')
+                .set('Dropbox-API-Arg', '{"path": "/atter-resources/request.txt"}')
+                .send().then((d) => { console.log(d); callback(d); });
         });
     }
 }
