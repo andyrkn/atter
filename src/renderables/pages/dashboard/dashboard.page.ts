@@ -17,6 +17,11 @@ export class DashboardPage implements AfterRender, OnRefresh {
     private activityID = new UrlTree().routeParameter;
     private activityDetails: any = {};
 
+    @TrackChanges()
+    private checkInData: any = {};
+    @TrackChanges()
+    private fraudData: any = {};
+
     public maxDistance: number = 0;
     public id: number = 1;
     public activity: ActivityDetails = new ActivityDetails();
@@ -26,8 +31,7 @@ export class DashboardPage implements AfterRender, OnRefresh {
 
     constructor(
         private firebaseCheckInService: FireBaseCheckInService,
-        private firebaseActivityService: FireBaseActivityService,
-        private userService: UserService) {
+        private firebaseActivityService: FireBaseActivityService) {
 
         // TODO: check if current user is actually allowed to browse this dashboard
         // console.log(this.userService.ownedactivities);
@@ -36,6 +40,16 @@ export class DashboardPage implements AfterRender, OnRefresh {
             this.activityDetails = data;
             console.log(this.activityDetails);
             this.toggleCheckInButton(this.activityDetails.ableToCheckIn);
+        });
+
+        this.firebaseCheckInService.getAllCheckins(this.activityID, 'checkins').subscribe((data) => {
+            this.checkInData = data;
+            console.log(JSON.stringify(this.checkInData));
+        });
+
+        this.firebaseCheckInService.getAllCheckins(this.activityID, 'frauds').subscribe((data) => {
+            this.fraudData = data;
+            console.log(this.fraudData);
         });
     }
 

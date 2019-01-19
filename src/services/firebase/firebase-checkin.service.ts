@@ -74,6 +74,21 @@ export class FireBaseCheckInService {
             });
     }
 
+    private saveCheckIn(activityID, datestring: string, checkInData: any, route: string, resolve) {
+        this.database.ref(route + activityID + '/' + datestring + '/' + this.userId).set(checkInData)
+            .then((res) => { if (res) { resolve(res); } });
+    }
+
+    private getAllCheckInType(route, resolve): void {
+        this.database.ref(route).on('value', (snapshot) => { resolve(snapshot.val()); });
+    }
+
+    public getAllCheckins(activityID: string, checkInType: string): Observable<{}> {
+        let route: string = checkInType === 'frauds' ? 'frauds/' : 'checkins/';
+        route += activityID;
+        return from(new Promise((resolve) => this.getAllCheckInType(route, resolve)));
+    }
+
     public enableActivityCheckIn(distance: number, activityID: string): Observable<{}> {
         return from(new Promise((resolve) =>
             this.prepareCheckInActivityData(distance, activityID, resolve)));
@@ -93,10 +108,5 @@ export class FireBaseCheckInService {
         return from(new Promise((resolve) => {
             this.saveCheckIn(activityID, datestring, checkInData, route, resolve);
         }));
-    }
-
-    private saveCheckIn(activityID, datestring: string, checkInData: any, route: string, resolve) {
-        this.database.ref(route + activityID + '/' + datestring + '/' + this.userId).set(checkInData)
-            .then((res) => { if (res) { resolve(res); } });
     }
 }
