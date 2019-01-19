@@ -1,6 +1,8 @@
 import { Injectable } from "@web/core";
 import { BehaviorSubject, Observable, from } from "rxjs";
 import { AuthFirebaseSerivce } from "./firebase/firebase-auth.service";
+import { FirebaseService } from "./firebase/firebase.service";
+import { UserModel } from '../models/user.model';
 
 @Injectable()
 export class UserService {
@@ -8,7 +10,7 @@ export class UserService {
     private changeSubject: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(this.loggedIn);
     private userSubject: BehaviorSubject<any> = new BehaviorSubject<any>(null);
 
-    constructor(private authFirebaseSerivce: AuthFirebaseSerivce) {
+    constructor(private authFirebaseSerivce: AuthFirebaseSerivce, private firebaseService: FirebaseService) {
     }
 
     private set loggedIn(value: boolean) {
@@ -81,4 +83,33 @@ export class UserService {
             return null;
         }
     }
+    public createUser(userModel: UserModel) {
+        userModel.uid = this.user.uid;
+        const userRef = this.database.ref('users/' + userModel.uid)
+            .set({ firstName: userModel.firstName, lastName: userModel.lastName, email: userModel.email },
+                (e) => { if (!e) { } });
+
+    }
+    public getCurrentUser(): Observable<{}> {
+        return from(new Promise((resolve) =>
+            this.database.ref('users/' + this.user.uid).once('value')
+                .then((snapshot) => resolve(snapshot.val()))));
+    }
+    public updateValues(fields: string[], fieldsValue: string[]): Observable<any> {
+        return from(new Promise((resolve) => {
+            this.getCurrentUser().subscribe((data) => {
+                let i = 0;
+                for (const field of fields) {
+                    data[field] = fieldsValue[i];
+                    i++;
+                }
+                this.database.ref('users/' + this.user.uid).update(data).then((d) => { resolve(d); });
+            });
+        }));
+    }
+
+    private get database() {
+        return this.firebaseService.firebaseApp.database();
+    }
+
 }

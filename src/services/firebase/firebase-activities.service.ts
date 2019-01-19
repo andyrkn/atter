@@ -1,4 +1,4 @@
-import { Observable, from, BehaviorSubject } from "rxjs";
+import { Observable, from, BehaviorSubject, Subject } from "rxjs";
 import { Injectable } from "@web/core";
 import { UserService } from "../user.service";
 import { FirebaseService } from "./firebase.service";
@@ -33,16 +33,14 @@ export class FireBaseActivityService {
         return res;
     }
 
-    public getUserActivities(): Observable<any> {
-        return from(new Promise((resolve) =>
-            this.database.ref('dashboards/' + this.userId).once('value')
-                .then((snapshot) => { resolve(snapshot.val()); })));
+    public getUserActivities(subject): void {
+        this.database.ref('dashboards/' + this.userId).on('value', (snapshot) => { subject.next(snapshot.val()); });
     }
 
-    public getFollowedActivities(): Observable<any> {
-        return from(new Promise((resolve) =>
-            this.database.ref('following/' + this.userId).once('value')
-                .then((snapshot) => { resolve(this.getAllActivitiesDetails(snapshot.val())); })));
+    public getFollowedActivities(subject): void {
+        this.database.ref('following/' + this.userId).on('value', (snapshot) => {
+            subject.next(this.getAllActivitiesDetails(snapshot.val()));
+        });
     }
 
     public getStaticActivityDetails(code: string): Observable<any> {

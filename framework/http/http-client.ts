@@ -2,31 +2,31 @@ import { HttpResponse } from "./http-response";
 
 export class HttpClient {
 
-    public get(req, callback, error) {
-        this.request(req, 'get', null, null, callback, error);
+    public get(req, callback, error, token) {
+        this.request(req, 'get', null, null, callback, error, token);
     }
 
-    public post(req, body, callback, error) {
-        this.request(req, 'post', body, null, callback, error);
+    public post(req, body, callback, error, token) {
+        this.request(req, 'post', body, null, callback, error, token);
     }
 
-    public put(req, body, callback, error) {
-        this.request(req, 'put', body, null, callback, error);
+    public put(req, body, callback, error, token) {
+        this.request(req, 'put', body, null, callback, error, token);
     }
 
-    public patch(req, body, callback, error) {
-        this.request(req, 'patch', body, null, callback, error);
+    public patch(req, body, callback, error, token) {
+        this.request(req, 'patch', body, null, callback, error, token);
     }
 
-    public delete(req, body, callback, error) {
-        this.request(req, 'delete', body, null, callback, error);
+    public delete(req, body, callback, error, token) {
+        this.request(req, 'delete', body, null, callback, error, token);
     }
 
-    public options(req, body, callback, error) {
-        this.request(req, 'options', body, null, callback, error);
+    public options(req, body, callback, error, token) {
+        this.request(req, 'options', body, null, callback, error, token);
     }
 
-    public request(req, requestVerb, body, headers, callback, error) {
+    public request(req, requestVerb, body, headers, callback, error, token) {
         const xmlHttp = new XMLHttpRequest();
 
         xmlHttp.onreadystatechange = () => {
@@ -54,10 +54,12 @@ export class HttpClient {
 
         // TODO: introduce interceptor
         // TODO: use fetch api maybe
-        const token = localStorage.getItem('userToken');
         if (token) {
-            xmlHttp.setRequestHeader('authorization', token);
+            xmlHttp.setRequestHeader('Authorization', this.getEncodedAuth(token));
         }
         xmlHttp.send(body);
+    }
+    private getEncodedAuth(token): string {
+        return ("Basic " + new Buffer(token.username + ":" + token.password).toString("base64"));
     }
 }

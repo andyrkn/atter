@@ -1,10 +1,16 @@
+import * as request from "superagent";
+import { from, Observable } from "rxjs";
 export abstract class BaseImporter {
+    protected name: string = "";
     protected appkey: string = "";
     protected appsecret: string = "";
     protected redirecturi: string = "http://localhost:3000/";
     protected authorizeuri: string = "";
-    protected currentCode: string = "";
+    protected authentificateuri: string = "";
+    protected requestContentType: string = "";
+    protected requestAuth: string = "";
 
+    public getName(): string { return this.name; }
     public get appKey() {
         return this.appkey;
     }
@@ -21,26 +27,24 @@ export abstract class BaseImporter {
         return this.authorizeuri;
     }
 
-    public abstract authorizeApp();
+    public obtainOauthToken(code: string): Observable<any> {
+        const body: {} = this.obtainBody(code);
+        return from(request.post(this.authentificateuri)
+            .set('Accept', 'application/json')
+            .set('Content-type', this.requestContentType)
+            .set('Authorization', this.getEncodedCredentials())
+            .send(body));
+    }
+    public authorizeApp() {
+        window.location.href = this.getAuthorizeLink();
+    }
 
-    public setCurrentCodeInLocalStorage(code: string) {
-        localStorage.setItem(this.itemKey(), code);
+    protected abstract itemKey(): string;
+    protected abstract getAuthorizeLink(): string;
+    protected abstract obtainBody(code): {};
+    protected abstract getCredentials();
+    private getEncodedCredentials(): string {
+        return "Basic " + new Buffer(this.appKey + ":" + this.appsecret).toString("base64");
     }
-    public setCurrentCode(code: string) {
-        this.currentCode = code;
-    }
-    public resetLocalStorageCode() {
-        localStorage.removeItem(this.itemKey());
-    }
-    public resetCurrentCode() {
-        this.currentCode = "";
-    }
-    public getCurrentCodeFromLocalStorage() {
-        return localStorage.getItem(this.itemKey());
-    }
-    public getCurrentCode() {
-        return this.currentCode;
-    }
-    public abstract itemKey(): string;
+
 }
-

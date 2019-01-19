@@ -24,7 +24,8 @@
     "melanke-watchjs": "^1.5.0",
     "reflect-metadata": "^0.1.12",
     "rxjs": "^6.3.3",
-    "serve-static": "^1.13.2"
+    "serve-static": "^1.13.2",
+    "superagent": "^4.1.0"
   },
   "devDependencies": {
     "@types/html-minifier": "^3.5.2",
