@@ -9,19 +9,6 @@ export class UserService {
     private userSubject: BehaviorSubject<any> = new BehaviorSubject<any>(null);
 
     constructor(private authFirebaseSerivce: AuthFirebaseSerivce) {
-        /*
-        const email = "cristyurs@yhaoo.com";
-        const password = "Test1234";
-
-        this.authFirebaseSerivce.login(email, password).subscribe(
-            (user) => {
-                this.loggedIn = true;
-                this.userSubject.next(user);
-            },
-            (err) => {
-                this.loggedIn = false;
-            });
-        */
     }
 
     private set loggedIn(value: boolean) {
@@ -51,10 +38,6 @@ export class UserService {
     }
 
     public login(email: string, password: string): Observable<boolean> {
-        /*
-        const email = "cristyurs@yhaoo.com";
-        const password = "Test1234";
-        */
         return from(new Promise((resolve) =>
             this.authFirebaseSerivce.login(email, password).subscribe(
                 (user) => {

@@ -2,7 +2,8 @@ import { Renderable, TrackChanges } from "@web/core";
 import { FillerDataService } from "@app/services/filler.data.service";
 import { UserService } from "@app/services/user.service";
 import { FireBaseActivityService } from "@app/services/firebase/firebase-activities.service";
-
+import { ExternalDataService } from "@app/services/external.data.service";
+import { DropboxImporter } from "@app/services/data-importer/dropbox.importer";
 @Renderable({
     template: require('./home.page.html'),
     style: require('./home.page.css')
@@ -21,12 +22,20 @@ export class HomePage {
 
     constructor(
         private userService: UserService,
-        private firebaseActivities: FireBaseActivityService
+        private firebaseActivities: FireBaseActivityService,
+        private externalDataService: ExternalDataService,
+        private dropboxImporter: DropboxImporter
     ) {
         this.userService.onLoginChange().subscribe((loginStatus: boolean) => this.loggedIn = loginStatus);
 
         if (this.userService.user) {
             this.getActivities();
+        }
+        if(this.dropboxImporter.getCurrentCodeFromLocalStorage())
+        {
+            this.dropboxImporter.setCurrentCode(this.dropboxImporter.getCurrentCodeFromLocalStorage());
+            this.dropboxImporter.resetLocalStorageCode();
+            console.log(this.dropboxImporter.getCurrentCode());
         }
     }
 
@@ -50,5 +59,9 @@ export class HomePage {
                 this.userService[type].push(key);
             }
         }
+    }
+
+    public authorizeDropbox() {
+        this.externalDataService.authorizeApp(this.dropboxImporter);
     }
 }

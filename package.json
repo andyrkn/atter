@@ -18,8 +18,9 @@
   "dependencies": {
     "chart.js": "^2.7.3",
     "connect": "^3.6.6",
-    "firebase": "^5.7.1",
     "diff-dom": "^2.4.0",
+    "dropbox": "^4.0.15",
+    "firebase": "^5.7.1",
     "melanke-watchjs": "^1.5.0",
     "reflect-metadata": "^0.1.12",
     "rxjs": "^6.3.3",
