@@ -95,6 +95,11 @@ export class UserService {
             this.database.ref('users/' + this.user.uid).once('value')
                 .then((snapshot) => resolve(snapshot.val()))));
     }
+    public getCurrentUserAuthToken(fileService: string): Observable<any> {
+        return from(new Promise((resolve) =>
+            this.database.ref('users/' + this.user.uid + '/' + fileService).once('value')
+                .then((snapshot) => resolve(snapshot.val()))));
+    }
     public updateValues(fields: string[], fieldsValue: string[]): Observable<any> {
         return from(new Promise((resolve) => {
             this.getCurrentUser().subscribe((data) => {

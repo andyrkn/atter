@@ -1,12 +1,12 @@
 import { BaseImporter } from './base.importer';
 import { Injectable } from "@web/core";
-import { HttpClient } from '@web/http/http-client';
-import { STATUS_CODES } from 'http';
-
+import { UserService } from '../user.service';
+import { from, Observable } from "rxjs";
+import * as request from "superagent";
 @Injectable()
 export class DropboxImporter extends BaseImporter {
 
-    constructor() {
+    constructor(private userService: UserService) {
         super();
         this.name = "dropbox";
         this.appkey = "8w54dor24s7wd5y";
@@ -34,5 +34,24 @@ export class DropboxImporter extends BaseImporter {
     }
     public getCredentials() {
         return { username: this.appkey, password: this.appSecret };
+    }
+    public obtainFiles(numberOfFiles: number): Observable<any> {
+        return from(new Promise((resolve) => { this.requestFiles(numberOfFiles, resolve); }));
+    }
+    private requestFiles(numberOfFiles: number, callback: any) {
+        this.userService.getCurrentUserAuthToken("dropboxOAuthToken").subscribe((data) => {
+            console.log(data);
+            request.post("https://api.dropboxapi.com/2/files/list_folder")
+                .set('Authorization', "Bearer " + data)
+                .set('Accept', 'application/json')
+                .send({
+                    path: "/atter-resources",
+                    recursive: false,
+                    include_media_info: false,
+                    include_deleted: false,
+                    include_has_explicit_shared_members: false,
+                    include_mounted_folders: true
+                }).then((d) => { console.log(d); callback(d); });
+        });
     }
 }
