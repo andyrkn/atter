@@ -6,12 +6,12 @@
         <div class="card-content checkin-content">
             <div class="check-in">
                 <button class="btn success" id="check-in-btn" data-click="handleCheckInButton()">
-                    <<= checkinButtonValue >>
+                    <<= checkinButtonValue>>
                 </button>
                 <label for="distance"><b> </b> </label>
                 <input type="number" placeholder="Distance in meters" data-bind="maxDistance" required min="1">
             </div>
-    
+
             <div class="buttons-container">
                 <button class="btn success"> Make data private</button>
                 <button class="btn info"> Make data protected</button>
@@ -21,43 +21,40 @@
     </div>
 
     <div class="flex-container column center">
-        << for(let [index, weekCard] of activity.checkIns.reverse().entries()) {>>
+        <<for (date in checkInData) {>>
             <div class="card">
                 <div class="card-title text-primary">
-                   Check in  # <<=activity.checkIns.length - index >> : <<=weekCard.Date>>
+                    <<=date>>
                 </div>
                 <section class="card-content">
+
                     <main class="names-container">
-                        <div>
-                            <h4 class="text-info">Attendees : </h4>
-                            <ol>
-                                << for(let attendee of weekCard.Attendees) {>>
-                                <li>
-                                    <a class="text-primary" href="#/asign-grade"><<=attendee.FirstName>> <<=attendee.LastName>></a> 
-                                </li>
-                                << }>>
-                            </ol>
-                        </div>
-                        <div>
-                            <h4 class="text-info">Frauds attempts : </h4>
-                            <ol>
-                                << for(let attendee of weekCard.frauds) {>>
-                                <li>
-                                    <<=attendee.FirstName>> <<=attendee.LastName>>
-                                </li>
-                                << }>>
-                            </ol>
-                        </div>
-                        <div>
-                            <button class="btn success">Import grades</button>
-                            <button class="btn info">Export grades</button>
-                        </div>
+                        <<for (checkinType in checkInData[date]) {>>
+                            <div>
+                                <h4 class="text-info">
+                                    <<=checkinType>> :
+                                </h4>
+                                <ol>
+                                    <<for (user in checkInData[date][checkinType]) {>>
+                                        <li>
+                                            <a class="text-primary" href="#/asign-grade">
+                                                <<=checkInData[date][checkinType][user].user.split('@')[0]>>
+                                            </a>
+                                        </li>
+                                        <<}>>
+                                </ol>
+                            </div>
+                            <<}>>
+                                <div>
+                                    <button class="btn success">Import grades</button>
+                                    <button class="btn info">Export grades</button>
+                                </div>
                     </main>
                     <aside class="flex-container column center">
-                        <canvas height="230px" width="560px" class="graph" id="graph-<<=index>>"></canvas>
+                        <canvas height="230px" width="560px" class="graph" id="graph-0"></canvas>
                     </aside>
                 </section>
             </div>
-            << }>>
+            <<}>>
     </div>
 </section>

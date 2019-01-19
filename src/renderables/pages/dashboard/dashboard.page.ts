@@ -6,21 +6,21 @@ import { UrlTree } from "@web/router";
 import { FireBaseCheckInService } from "@app/services/firebase/firebase-checkin.service";
 import { UserService } from "@app/services/user.service";
 import { FireBaseActivityService } from "@app/services/firebase/firebase-activities.service";
+import { BehaviorSubject } from "rxjs";
 
 @Renderable({
     template: require('./dashboard.page.html'),
     style: require('./dashboard.page.css')
 })
 export class DashboardPage implements AfterRender, OnRefresh {
+    private _checkInsSubject = new BehaviorSubject<any>(null);
     private enableValue = 'Enable check-in';
     private disableValue = 'Disable check-in';
     private activityID = new UrlTree().routeParameter;
     private activityDetails: any = {};
 
     @TrackChanges()
-    private checkInData: any = {};
-    @TrackChanges()
-    private fraudData: any = {};
+    private checkInData: any = null;
 
     public maxDistance: number = 0;
     public id: number = 1;
@@ -38,18 +38,12 @@ export class DashboardPage implements AfterRender, OnRefresh {
 
         this.firebaseActivityService.getStaticActivityDetails(this.activityID).subscribe((data) => {
             this.activityDetails = data;
-            console.log(this.activityDetails);
             this.toggleCheckInButton(this.activityDetails.ableToCheckIn);
         });
 
-        this.firebaseCheckInService.getAllCheckins(this.activityID, 'checkins').subscribe((data) => {
+        this.firebaseCheckInService.getAllCheckins(this.activityID, this._checkInsSubject);
+        this._checkInsSubject.subscribe((data) => {
             this.checkInData = data;
-            console.log(JSON.stringify(this.checkInData));
-        });
-
-        this.firebaseCheckInService.getAllCheckins(this.activityID, 'frauds').subscribe((data) => {
-            this.fraudData = data;
-            console.log(this.fraudData);
         });
     }
 
@@ -59,11 +53,11 @@ export class DashboardPage implements AfterRender, OnRefresh {
     }
 
     public onRefresh(): void {
-        this.drawGraphs();
+        //    this.drawGraphs();
     }
 
     public afterRender(): void {
-        this.drawGraphs();
+        //   this.drawGraphs();
     }
 
     public handleCheckInButton(): void {
@@ -82,7 +76,7 @@ export class DashboardPage implements AfterRender, OnRefresh {
             });
         }
     }
-
+    /*
     private drawGraphs(): void {
         for (const [index, week] of this.activity.checkIns.entries()) {
 
@@ -161,6 +155,6 @@ export class DashboardPage implements AfterRender, OnRefresh {
                 }
             });
         }
-    }
+    }*/
 
 }

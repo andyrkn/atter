@@ -75,18 +75,18 @@ export class FireBaseCheckInService {
     }
 
     private saveCheckIn(activityID, datestring: string, checkInData: any, route: string, resolve) {
-        this.database.ref(route + activityID + '/' + datestring + '/' + this.userId).set(checkInData)
+        console.log(checkInData, route);
+        this.database.ref(route).set(checkInData)
             .then((res) => { if (res) { resolve(res); } });
     }
 
-    private getAllCheckInType(route, resolve): void {
-        this.database.ref(route).on('value', (snapshot) => { resolve(snapshot.val()); });
+    private getAllCheckIns(route, subject): void {
+        this.database.ref(route).on('value', (snapshot) => { subject.next(snapshot.val()); });
     }
 
-    public getAllCheckins(activityID: string, checkInType: string): Observable<{}> {
-        let route: string = checkInType === 'frauds' ? 'frauds/' : 'checkins/';
-        route += activityID;
-        return from(new Promise((resolve) => this.getAllCheckInType(route, resolve)));
+    public getAllCheckins(activityID: string, subject): void {
+        const route: string = 'checkins/' + activityID;
+        this.getAllCheckIns(route, subject);
     }
 
     public enableActivityCheckIn(distance: number, activityID: string): Observable<{}> {
@@ -103,7 +103,8 @@ export class FireBaseCheckInService {
     public userCheckIn(activityID: string, datestring: string, distance: number, legal: boolean): Observable<any> {
         const checkInData = legal ?
             new LegalCheckInModel(this.userEmail, distance) : new IllegalCheckInModel(this.userEmail, distance);
-        const route = legal ? 'checkins/' : 'frauds/';
+        let route = legal ? 'legalcheckins/' : 'frauds';
+        route = 'checkins' + '/' + activityID + '/' + datestring + '/' + route + '/' + this.userId;
 
         return from(new Promise((resolve) => {
             this.saveCheckIn(activityID, datestring, checkInData, route, resolve);
