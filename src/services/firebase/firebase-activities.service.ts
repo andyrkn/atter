@@ -19,7 +19,7 @@ export class FireBaseActivityService {
         return this.firebaseService.firebaseApp.database();
     }
 
-    private async getAllActivitiesDetails(activities) {
+    private async getAllActivitiesDetails(activities, subject): Promise<void> {
         const res = {};
 
         // tslint:disable-next-line:forin
@@ -30,7 +30,7 @@ export class FireBaseActivityService {
                     res[activities[i]] = { name: data.name, iconID: data.iconID };
                 });
         }
-        return res;
+        subject.next(res);
     }
 
     public getUserActivities(subject): void {
@@ -39,7 +39,7 @@ export class FireBaseActivityService {
 
     public getFollowedActivities(subject): void {
         this.database.ref('following/' + this.userId).on('value', (snapshot) => {
-            subject.next(this.getAllActivitiesDetails(snapshot.val()));
+            subject.next(this.getAllActivitiesDetails(snapshot.val(), subject));
         });
     }
 
