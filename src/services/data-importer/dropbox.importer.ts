@@ -35,37 +35,25 @@ export class DropboxImporter extends BaseImporter {
     public getCredentials() {
         return { username: this.appkey, password: this.appSecret };
     }
-    public obtainFiles(numberOfFiles: number): Observable<any> {
-        return from(new Promise((resolve) => { this.requestFiles(numberOfFiles, resolve); }));
+    public obtainFiles(data: any): Observable<any> {
+        return from(request.post("https://api.dropboxapi.com/2/files/list_folder")
+            .set('Authorization', "Bearer " + data)
+            .set('Accept', 'application/json')
+            .send({
+                path: "/atter-resources",
+                recursive: false,
+                include_media_info: false,
+                include_deleted: false,
+                include_has_explicit_shared_members: false,
+                include_mounted_folders: true
+            }));
     }
-    private requestFiles(numberOfFiles: number, callback: any) {
-        this.userService.getCurrentUserAuthToken("dropboxOAuthToken").subscribe((data) => {
-            request.post("https://api.dropboxapi.com/2/files/list_folder")
-                .set('Authorization', "Bearer " + data)
-                .set('Accept', 'application/json')
-                .send({
-                    path: "/atter-resources",
-                    recursive: false,
-                    include_media_info: false,
-                    include_deleted: false,
-                    include_has_explicit_shared_members: false,
-                    include_mounted_folders: true
-                }).then((d) => { console.log(d); callback(d); });
-        });
-    }
-
-    public obtainDataFromFile(fileName : string): Observable<any> {
-        return from(new Promise((resolve) => { this.obtainFileData(fileName, resolve); }));
+    public obtainDataFromFile(filePath: string, data: string) {
+        return from(request.post("https://content.dropboxapi.com/2/files/download")
+            .set('Authorization', "Bearer " + data)
+            .set('Accept', 'application/json')
+            .set('Dropbox-API-Arg', '{"path": "/atter-resources/' + filePath + '"}')
+            .send());
     }
 
-    private obtainFileData(filePath: string, callback) {
-        this.userService.getCurrentUserAuthToken("dropboxOAuthToken").subscribe((data) => {
-            console.log(data);
-            request.post("https://content.dropboxapi.com/2/files/download")
-                .set('Authorization', "Bearer " + data)
-                .set('Accept', 'application/json')
-                .set('Dropbox-API-Arg', '{"path": "/atter-resources/request.txt"}')
-                .send().then((d) => { console.log(d); callback(d); });
-        });
-    }
 }
