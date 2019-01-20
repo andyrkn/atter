@@ -54,7 +54,7 @@ export class DropboxImporter extends BaseImporter {
         });
     }
 
-    public obtainDataFromFile(fileName : string): Observable<any> {
+    public obtainDataFromFile(fileName: string): Observable<any> {
         return from(new Promise((resolve) => { this.obtainFileData(fileName, resolve); }));
     }
 

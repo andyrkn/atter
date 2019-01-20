@@ -41,7 +41,7 @@ export const appRoute: Route[] = [
     },
     {
         page: AsignGradePage,
-        path: 'asign-grade'
+        path: 'asign-grade/:id'
     },
     {
         page: DashboardPage,

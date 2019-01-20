@@ -37,7 +37,7 @@
                                 <ol>
                                     <<for (user in checkInData[date][checkinType]) {>>
                                         <li>
-                                            <a class="text-primary" href="#/asign-grade">
+                                            <a class="text-primary" href="/#/asign-grade/<<=activityID>>&<<=date>>&<<=checkinType>>&<<=user>>">
                                                 <<=checkInData[date][checkinType][user].user.split('@')[0]>>
                                             </a>
                                         </li>

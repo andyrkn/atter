@@ -100,7 +100,7 @@ export class FireBaseCheckInService {
         ));
     }
 
-    public userCheckIn(activityID: string, datestring: string, distance: number, legal: boolean): Observable<any> {
+    public setUserCheckIn(activityID: string, datestring: string, distance: number, legal: boolean): Observable<any> {
         const checkInData = legal ?
             new LegalCheckInModel(this.userEmail, distance) : new IllegalCheckInModel(this.userEmail, distance);
         let route = legal ? 'legalcheckins/' : 'frauds';
@@ -108,6 +108,23 @@ export class FireBaseCheckInService {
 
         return from(new Promise((resolve) => {
             this.saveCheckIn(activityID, datestring, checkInData, route, resolve);
+        }));
+    }
+
+    public getUserCheckIn(route: string): Observable<LegalCheckInModel> {
+        return from(new Promise((resolve) => {
+            this.database.ref('checkins/' + route).once('value').then((snapshot) => {
+                resolve(snapshot.val());
+            });
+        }));
+    }
+
+    public updateUserCheckIn(route: string, data: LegalCheckInModel): Observable<boolean> {
+        console.log(JSON.stringify(data));
+        return from(new Promise((resolve) => {
+            this.database.ref('checkins/' + route).update(data).then((res) => {
+                resolve(true);
+            }, (err) => { resolve(false); });
         }));
     }
 }

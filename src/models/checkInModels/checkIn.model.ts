@@ -4,6 +4,6 @@ export abstract class CheckInModel {
         this.distance = distance;
     }
 
-    public user: string;
-    public distance: number;
+    public user: string = null;
+    public distance: number = null;
 }

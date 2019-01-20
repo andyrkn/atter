@@ -16,14 +16,13 @@ export class DashboardPage implements AfterRender, OnRefresh {
     private _checkInsSubject = new BehaviorSubject<any>(null);
     private enableValue = 'Enable check-in';
     private disableValue = 'Disable check-in';
-    private activityID = new UrlTree().routeParameter;
+    public activityID = new UrlTree().routeParameter;
     private activityDetails: any = {};
 
     @TrackChanges()
     private checkInData: any = null;
 
     public maxDistance: number = 0;
-    public id: number = 1;
     public activity: ActivityDetails = new ActivityDetails();
 
     @TrackChanges()

@@ -62,7 +62,7 @@ export class Activity {
                 let legal = false;
                 if (actualDistance <= this.activity.distance) { legal = true; }
 
-                this.firebaseCheckInService.userCheckIn(this.activityID, this.activity.lastCheckInDate, actualDistance, legal)
+                this.firebaseCheckInService.setUserCheckIn(this.activityID, this.activity.lastCheckInDate, actualDistance, legal)
                     .subscribe((res) => { console.log(res); });
             });
     }
