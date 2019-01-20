@@ -3,7 +3,7 @@ import { appRoute } from "./app.routing";
 import {
     HomePage, LoginPage, NotFoundPage, RegisterPage,
     ForgotPasswordPage, Activity, DashboardPage, CreateNewActivityPage,
-    FollowActivity, CheckInServivce, LayoutPage, LogoutPage
+    FollowActivity, CheckInServivce, ImportDataForActivity, ProfilePage, LayoutPage, LogoutPage
 } from "./renderables/pages";
 
 import { HeaderComponent, HeaderService } from "./renderables/components";
@@ -32,7 +32,9 @@ import { GeolocationService } from "./services/geolocation.service";
         LoginPage,
         NotFoundPage,
         HeaderComponent,
-        RegisterPage
+        RegisterPage,
+        ImportDataForActivity,
+        ProfilePage
     ],
     injectable: [
         HeaderService,

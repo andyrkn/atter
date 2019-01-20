@@ -10,3 +10,5 @@ export * from './create-new-activity/create-new-activity.page';
 export * from './follow-activity/follow-activity.page';
 export * from './log-out/log-out.page';
 export * from './dashboard/services/check-in.service';
+export * from './import-data-for-activity/import-data-for-activity.page';
+export * from './profile/profile.page';

@@ -1,6 +1,7 @@
 import { BaseImporter } from './data-importer/base.importer';
 import { Injectable } from '@web/core';
 import { UserService } from './user.service';
+import { Observable, from } from 'rxjs';
 
 @Injectable()
 export class ExternalDataService {
@@ -16,14 +17,28 @@ export class ExternalDataService {
             );
         });
     }
-    public obtainFiles(importer: BaseImporter, numberOfFilesToImport: number) {
-        importer.obtainFiles(numberOfFilesToImport).subscribe((data) => {
-            console.log(data);
-        });
+    public obtainFiles(importer: BaseImporter): Observable<any> {
+        return from(
+            new Promise((resolve) => {
+                this.userService.getCurrentUserAuthToken(importer.getTokenLocation()).subscribe((token) => {
+                    importer.obtainFiles(token).subscribe((fileData) => { resolve(fileData); });
+                });
+            }));
     }
-    public obtainDataFromFile(importer: BaseImporter, fileName: string) {
-        importer.obtainDataFromFile("request.txt").subscribe((d) => {
-            console.log(d);
-        });
+    public obtainDataFromFile(importer: BaseImporter, fileName: string): Observable<any> {
+        return from(
+            new Promise((resolve) => {
+                this.userService.getCurrentUserAuthToken(importer.getTokenLocation()).subscribe((token) => {
+                    importer.obtainDataFromFile(fileName, token).subscribe((fileData) => { resolve(fileData); });
+                });
+            }));
+    }
+    public revokeAcces(importer: BaseImporter): Observable<any> {
+        return from(
+            new Promise((resolve) => {
+                this.userService.getCurrentUserAuthToken(importer.getTokenLocation()).subscribe((token) => {
+                    importer.revokeToken(token).subscribe((fileData) => { resolve(fileData); });
+                });
+            }));
     }
 }

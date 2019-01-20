@@ -26,9 +26,7 @@ export class HomePage {
 
     constructor(
         private userService: UserService,
-        private firebaseActivities: FireBaseActivityService,
-        private externalDataService: ExternalDataService,
-        private dropboxImporter: DropboxImporter
+        private firebaseActivities: FireBaseActivityService
     ) {
         this.userService.onLoginChange().subscribe((loginStatus: boolean) => this.loggedIn = loginStatus);
 
@@ -42,9 +40,5 @@ export class HomePage {
         this.firebaseActivities.getUserActivities(this._dashboardsSubject);
         this._dashboardsSubject.subscribe((data) => { this.myActivities = data; });
         this._followingSubject.subscribe((data) => { this.followedActivities = data; });
-    }
-
-    public authorizeDropbox() {
-        this.externalDataService.authorizeApp(this.dropboxImporter);
     }
 }

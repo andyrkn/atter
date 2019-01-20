@@ -1,0 +1,36 @@
+<div class="card">
+    <div class="card-title text-primary">Profile data</div>
+
+    <div class="profile-data-container">
+
+        <label for="first-name"><b> First name </b> </label>
+        <input class="first-name-input" type="text" placeholder="<<=firstName>>" name="first-name" data-bind="firstName"
+            required>
+
+        <label for="last-name"><b> Last name </b> </label>
+        <input class="last-name-input" type="text" placeholder="<<=lastName>>" name="last-name" data-bind="lastName"
+            required>
+
+        <label for="email"><b> Email</b> </label>
+        <input class="email-input" type="text" placeholder="<<=email>>" name="email" data-bind="email" readonly>
+    </div>
+
+    <button class="btn danger update" data-click = "updateProfileData()"> Update profile data </button>
+
+</div>
+
+<div class="card">
+    <div class="card-title text-primary">Use external data source</div>
+    <div class="container">
+        <button class="btn success" data-click="authorizeDropbox()">
+                << if(0===0) {>>
+                    Connect to dropbox
+                    << } else {>>
+                        Revoke dropbox access
+                        << }>>
+            </button>
+
+
+    </div>
+
+</div>
