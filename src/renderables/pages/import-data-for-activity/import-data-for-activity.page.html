@@ -1,13 +1,30 @@
 <div class="card">
     <div class="card-title text-primary">Dropbox Files</div>
-    <div class="container">
 
-        <button class="btn success" data-click="getFilesFromDropBox()"> Get drop box files</button>
-        <div>
-            <<for (file in dropBoxFiles) {>>
-                lemur
-                <<=file.name>>
-                    <<}>>
-        </div>
+
+
+    <div class="dropbox-container">
+
+        <button class="btn success" data-click="getFilesFromDropBox()">
+            << if(dropBoxFiles.length===0) {>>
+                Get drop box files
+                << } else {>>
+                    Refresh drop box files
+                    << }>>
+        </button>
+
+
+
+        <div class="container">
+                << for(const i in dropBoxFiles) {>>
+                        <div class="file-container">
+                            <div class="icon-container">
+                                <div class="file-icon"></div>
+                            </div>
+                            <<=dropBoxFiles[i].name>>
+                        </div>
+                    << }>>
+            </div>
+
     </div>
 </div>

@@ -1,0 +1,51 @@
+.file-container {
+    --file-width: 150px;
+    --file-height: 200px;
+    --file-margin: 20px;
+    --file-inner-padding: 20px;
+    --icon-container-bottom-margin: 30px;
+}
+
+.container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.file-container {
+    width: var(--file-width);
+    height: var(--file-height);
+    margin: var(--file-margin);
+    padding: var(--file-inner-padding);
+    cursor: pointer;
+    text-align: center;
+    text-overflow: ellipsis;
+    transition: box-shadow .45s;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.file-container:hover {
+    box-shadow: var(--box-shadow);
+}
+
+.icon-container {
+    padding: 10px;
+    width: 100%;
+    height: 70%;
+    margin-bottom: var(--icon-container-bottom-margin);
+}
+
+.logo {
+    margin: 0 auto;
+    display: block;
+}
+
+.file-icon {
+    background: url("assets/icons/document-file-icon.png") no-repeat;
+    background-size: 100%;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+}
