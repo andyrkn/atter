@@ -9,10 +9,14 @@ export abstract class BaseImporter {
     protected authentificateuri: string = "";
     protected requestContentType: string = "";
     protected requestAuth: string = "";
-
+    protected tokenLocation: string = "";
     public getName(): string { return this.name; }
     public get appKey() {
         return this.appkey;
+    }
+
+    public getTokenLocation(): string {
+        return this.tokenLocation;
     }
 
     public get appSecret() {
@@ -44,8 +48,9 @@ export abstract class BaseImporter {
     protected abstract getAuthorizeLink(): string;
     protected abstract obtainBody(code): {};
     protected abstract getCredentials();
+    public abstract revokeToken(data: string): Observable<any>;
     public abstract obtainFiles(data: string): Observable<any>;
-    public abstract obtainDataFromFile(fileName : string, data: string): Observable<any>;
+    public abstract obtainDataFromFile(fileName: string, data: string): Observable<any>;
     private getEncodedCredentials(): string {
         return "Basic " + new Buffer(this.appKey + ":" + this.appsecret).toString("base64");
     }

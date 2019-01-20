@@ -15,6 +15,7 @@ export class DropboxImporter extends BaseImporter {
         this.authorizeuri = "https://www.dropbox.com/oauth2/authorize";
         this.authentificateuri = "https://api.dropboxapi.com/oauth2/token";
         this.requestContentType = "application/x-www-form-urlencoded";
+        this.tokenLocation = "dropboxOAuthToken";
     }
 
     public getAuthorizeLink(): string {
@@ -55,5 +56,8 @@ export class DropboxImporter extends BaseImporter {
             .set('Dropbox-API-Arg', '{"path": "/atter-resources/' + filePath + '"}')
             .send());
     }
-
+    public revokeToken(data: string) : Observable<any> {
+        return from(request.post("https://api.dropboxapi.com/2/auth/token/revoke")
+            .set('Authorization', "Bearer " + data));
+    }
 }

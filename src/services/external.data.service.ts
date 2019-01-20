@@ -20,16 +20,24 @@ export class ExternalDataService {
     public obtainFiles(importer: BaseImporter): Observable<any> {
         return from(
             new Promise((resolve) => {
-                this.userService.getCurrentUserAuthToken("dropboxOAuthToken").subscribe((data) => {
-                    importer.obtainFiles(data).subscribe((fileData) => { resolve(fileData); });
+                this.userService.getCurrentUserAuthToken(importer.getTokenLocation()).subscribe((token) => {
+                    importer.obtainFiles(token).subscribe((fileData) => { resolve(fileData); });
                 });
             }));
     }
     public obtainDataFromFile(importer: BaseImporter, fileName: string): Observable<any> {
         return from(
             new Promise((resolve) => {
-                this.userService.getCurrentUserAuthToken("dropboxOAuthToken").subscribe((data) => {
-                    importer.obtainDataFromFile(fileName, data).subscribe((fileData) => {resolve(fileData); });
+                this.userService.getCurrentUserAuthToken(importer.getTokenLocation()).subscribe((token) => {
+                    importer.obtainDataFromFile(fileName, token).subscribe((fileData) => { resolve(fileData); });
+                });
+            }));
+    }
+    public revokeAcces(importer: BaseImporter): Observable<any> {
+        return from(
+            new Promise((resolve) => {
+                this.userService.getCurrentUserAuthToken(importer.getTokenLocation()).subscribe((token) => {
+                    importer.revokeToken(token).subscribe((fileData) => { resolve(fileData); });
                 });
             }));
     }
