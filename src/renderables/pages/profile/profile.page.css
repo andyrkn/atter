@@ -1,0 +1,21 @@
+.profile-data-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.first-name-input {
+    width: 50%;
+}
+
+.last-name-input {
+    width: 50%;
+}
+
+.email-input {
+    width: 50%;
+}
+.update{
+    width: 25%;
+    margin-top: 2.5%;
+}

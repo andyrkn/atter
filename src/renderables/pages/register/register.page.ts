@@ -23,10 +23,8 @@ export class RegisterPage {
 
     public register() {
         const userModel = new UserModel(this.firstName, this.lastName, this.email);
-        console.log(userModel);
         this.authFirebaseSerivce.register(userModel.email, this.password).subscribe((result) => {
             if (result) {
-                console.log(result);
                 this.userService.login(userModel.email, this.password).subscribe((res) => {
                     if (res) {
                         this.userService.createUser(userModel);
