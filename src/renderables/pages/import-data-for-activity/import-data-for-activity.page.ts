@@ -10,7 +10,7 @@ export class ImportDataForActivity {
     private activityID = new UrlTree().routeParameter;
     private acceptedExtensions = [".json", ".csv", ".xls"];
     @TrackChanges()
-    public dropBoxFiles: [] = [];
+    public dropBoxFiles: any = [];
 
     constructor(private externalDataService: ExternalDataService, private dropboxImporter: DropboxImporter) { }
 
@@ -18,9 +18,14 @@ export class ImportDataForActivity {
         this.externalDataService.obtainFiles(this.dropboxImporter).subscribe((data) => {
             const entries = JSON.parse(data.text).entries;
             for (const key in entries) {
-            // REMOVE UNWANTED EXTENSIONS
+                // REMOVE UNWANTED EXTENSIONS
             }
             this.dropBoxFiles = entries;
         });
     }
+    public getAndImportDataForAFile(index: number) {
+        this.externalDataService.obtainDataFromFile(this.dropboxImporter, this.dropBoxFiles[index].name)
+            .subscribe((data) => { console.log(data); });
+    }
+
 }
