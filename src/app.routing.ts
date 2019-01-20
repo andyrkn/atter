@@ -2,7 +2,7 @@ import { Route } from "@web/router";
 
 import {
     HomePage, LoginPage, NotFoundPage, LayoutPage,
-    RegisterPage, ForgotPasswordPage, Activity, DashboardPage, CreateNewActivityPage, FollowActivity, LogoutPage
+    RegisterPage, ForgotPasswordPage, Activity, DashboardPage, CreateNewActivityPage, FollowActivity, LogoutPage, ImportDataForActivity
 } from "./renderables/pages";
 import { AsignGradePage } from "./renderables/pages/asign-grade/asign-grade.page";
 
@@ -54,5 +54,9 @@ export const appRoute: Route[] = [
     {
         page: FollowActivity,
         path: 'follow-activity'
+    },
+    {
+        page: ImportDataForActivity,
+        path: 'import/:id'
     }
 ];

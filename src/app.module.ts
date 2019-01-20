@@ -3,7 +3,7 @@ import { appRoute } from "./app.routing";
 import {
     HomePage, LoginPage, NotFoundPage, RegisterPage,
     ForgotPasswordPage, Activity, DashboardPage, CreateNewActivityPage,
-    FollowActivity, CheckInServivce
+    FollowActivity, CheckInServivce, ImportDataForActivity
 } from "./renderables/pages";
 
 import { HeaderComponent, HeaderService } from "./renderables/components";
@@ -23,7 +23,8 @@ import { AsignGradePage } from "./renderables/pages/asign-grade/asign-grade.page
         DashboardPage,
         CreateNewActivityPage,
         FollowActivity,
-        AsignGradePage
+        AsignGradePage,
+        ImportDataForActivity
     ],
     injectable: [
         FillerDataService,
