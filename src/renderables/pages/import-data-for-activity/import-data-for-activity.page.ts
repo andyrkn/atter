@@ -4,7 +4,8 @@ import { DropboxImporter } from "@app/services/data-importer/dropbox.importer";
 import { UrlTree, Router } from "@web/router";
 import * as csvjson from "../../../../node_modules/csvjson";
 import { FireBaseCheckInService } from "@app/services/firebase/firebase-checkin.service";
-import { throws } from "assert";
+import { FireBaseActivityService } from "@app/services/firebase/firebase-activities.service";
+import { BehaviorSubject } from "rxjs";
 @Renderable({
     template: require('./import-data-for-activity.page.html'),
     style: require('./import-data-for-activity.page.css')
@@ -14,16 +15,33 @@ export class ImportDataForActivity {
     };
     private activityID = new UrlTree().routeParameter;
     private acceptedExtensions = [".json", ".csv"];
+
+    private _ownedActivities : BehaviorSubject<any> = new BehaviorSubject<any>(null);
+    @TrackChanges()
+    public allowedTo : boolean = false;
     @TrackChanges()
     public dropBoxFiles: any = [];
     constructor(private fireBaseCheckInService: FireBaseCheckInService,
                 private externalDataService: ExternalDataService,
                 private dropboxImporter: DropboxImporter,
-                private router : Router
+                private router : Router,
+                private fireBaseActivityService : FireBaseActivityService
     ) {
         this.mapper["json"] = this.importJson.bind(this);
         this.mapper["csv"] = this.importCsv.bind(this);
 
+        this.fireBaseActivityService.getUserActivities(this._ownedActivities);
+        this._ownedActivities.subscribe((data) => {
+            for (const activity in data) {
+               if (data.hasOwnProperty(activity)) {
+                if (activity === this.activityID) {
+                    this.allowedTo = true;
+                    break;
+                }
+               }
+            }
+            console.log(this.allowedTo);
+        });
     }
 
     public getFilesFromDropBox() {

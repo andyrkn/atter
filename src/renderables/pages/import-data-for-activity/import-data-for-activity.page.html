@@ -1,8 +1,9 @@
 <div class="card">
     <div class="card-title text-primary">Dropbox Files</div>
 
-
-
+    << if(!allowedTo) {>>
+        You are not the owner of this application
+    <<} else {>>
     <div class="dropbox-container">
         <button class="btn success" data-click="getFilesFromDropBox()">
             << if(dropBoxFiles.length===0) {>>
@@ -25,3 +26,4 @@
 
     </div>
 </div>
+<<}>>
