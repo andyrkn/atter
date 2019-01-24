@@ -1,11 +1,11 @@
 import { Renderable, TrackChanges, AfterRender, OnRefresh } from "@web/core";
 import * as Chart from 'chart.js';
 
-import { ActivityDetails } from "./activity-details";
 import { UrlTree, Route, Router } from "@web/router";
 import { FireBaseCheckInService } from "@app/services/firebase/firebase-checkin.service";
 import { FireBaseActivityService } from "@app/services/firebase/firebase-activities.service";
 import { BehaviorSubject } from "rxjs";
+import {graphJsOptions} from "./graphjs-options/graphjs.options";
 
 @Renderable({
     template: require('./dashboard.page.html'),
@@ -55,28 +55,29 @@ export class DashboardPage implements AfterRender, OnRefresh {
     public changeVisibilityPrivate(): void {
         this.changeVisibility('private');
     }
-    
+
     public changeVisibilityProtected(): void {
         this.changeVisibility('protected');
     }
-    
+
     public changeVisibilityPublic(): void {
         this.changeVisibility('public');
     }
-    
+
     public changeVisibility(value: string): void {
         this.activityDetails.gradesVisibility = value;
+        // tslint:disable-next-line
         let newActivity = Object.assign({}, this.activityDetails);
         delete newActivity.id;
-        this.firebaseActivityService.setActivityGradeVisibiliy(this.activityID, newActivity)
-    } 
+        this.firebaseActivityService.setActivityGradeVisibiliy(this.activityID, newActivity);
+    }
 
     public onRefresh(): void {
-        //    this.drawGraphs();
+        this.drawGraphs();
     }
 
     public afterRender(): void {
-        //   this.drawGraphs();
+        this.drawGraphs();
     }
 
     public handleCheckInButton(): void {
@@ -95,86 +96,50 @@ export class DashboardPage implements AfterRender, OnRefresh {
             });
         }
     }
-    /*
     private drawGraphs(): void {
-        for (const [index, week] of this.activity.checkIns.entries()) {
-
-            const keyData = [];
-            const values: any = {};
-            const extractedValues = [];
-            for (const atendee of week.Attendees) {
-                if (keyData.indexOf(atendee.tag) === -1) {
-                    keyData.push(atendee.tag);
-                }
-                if (values[atendee.tag] === undefined) {
-                    values[atendee.tag] = 1;
-                } else {
-                    values[atendee.tag]++;
-                }
-
-            }
-            for (const [index1, record] of keyData.entries()) {
-                extractedValues.push(values[keyData[index1]]);
-            }
-            const canvas = document.getElementById(`graph-${index}`) as any;
-            const canvasContext = canvas.getContext('2d');
-            const chart = new Chart(canvasContext, {
-                type: 'bar',
-                data: {
-                    labels: keyData,
-                    datasets: [{
-                        label: '# of Attendees',
-                        data: extractedValues,
-                        backgroundColor: [
-                            'rgba(255, 99, 132, 0.2)',
-                            'rgba(54, 162, 235, 0.2)',
-                            'rgba(255, 206, 86, 0.2)',
-                            'rgba(75, 192, 192, 0.2)',
-                            'rgba(153, 102, 255, 0.2)',
-                            'rgba(255, 159, 64, 0.2)',
-                            'rgba(255, 99, 132, 0.2)',
-                            'rgba(54, 162, 235, 0.2)',
-                            'rgba(255, 206, 86, 0.2)',
-                            'rgba(75, 192, 192, 0.2)',
-                            'rgba(153, 102, 255, 0.2)',
-                            'rgba(255, 159, 64, 0.2)'
-                        ],
-                        borderColor: [
-                            'rgba(255,99,132,1)',
-                            'rgba(54, 162, 235, 1)',
-                            'rgba(255, 206, 86, 1)',
-                            'rgba(75, 192, 192, 1)',
-                            'rgba(153, 102, 255, 1)',
-                            'rgba(255, 159, 64, 1)',
-                            'rgba(255,99,132,1)',
-                            'rgba(54, 162, 235, 1)',
-                            'rgba(255, 206, 86, 1)',
-                            'rgba(75, 192, 192, 1)',
-                            'rgba(153, 102, 255, 1)',
-                            'rgba(255, 159, 64, 1)'
-                        ],
-                        borderWidth: 1
-                    }]
-                },
-                options: {
-                    responsive: false,
-                    scales: {
-                        xAxes: [{
-                            ticks: {
-                                maxRotation: 90,
-                                minRotation: 80
+        const weeks = JSON.parse(JSON.stringify(this.checkInData));
+        for (const week in weeks) {
+            if (weeks.hasOwnProperty(week)) {
+                const keyData = [];
+                const values: any = {};
+                const extractedValues = [];
+                if (weeks[week].hasOwnProperty("legalcheckins")) {
+                    for (const atendee in weeks[week]["legalcheckins"]) {
+                        if (weeks[week]["legalcheckins"].hasOwnProperty(atendee)) {
+                            if (keyData.indexOf(weeks[week]["legalcheckins"][atendee]["grade"]) === -1) {
+                                keyData.push(weeks[week]["legalcheckins"][atendee]["grade"]);
                             }
-                        }],
-                        yAxes: [{
-                            ticks: {
-                                beginAtZero: true
+                            if (values[weeks[week]["legalcheckins"][atendee]["grade"]] === undefined) {
+                                values[weeks[week]["legalcheckins"][atendee]["grade"]] = 1;
+                            } else {
+                                values[weeks[week]["legalcheckins"][atendee]["grade"]]++;
                             }
-                        }]
+
+                        }
                     }
                 }
-            });
+                for (const [index1, record] of keyData.entries()) {
+                    extractedValues.push(values[keyData[index1]]);
+                }
+                const canvas = document.getElementById(`graph-${week}`) as any;
+                const canvasContext = canvas.getContext('2d');
+                const chart = new Chart(canvasContext, {
+                    type: 'bar',
+                    data: {
+                        labels: keyData,
+                        datasets: [{
+                            label: '# of Attendees',
+                            data: extractedValues,
+                            backgroundColor: graphJsOptions.backgroundColor,
+                            borderColor: graphJsOptions.borderColor,
+                            borderWidth: 1
+                        }]
+                    },
+                    options: graphJsOptions.options
+                });
+            }
         }
-    }*/
+    }
     public importGrades() {
         this.router.navigate("import", this.activityID);
     }
@@ -196,9 +161,9 @@ export class DashboardPage implements AfterRender, OnRefresh {
                     for (const legal in weeks[week]["legalcheckins"]) {
                         if (weeks[week]["legalcheckins"].hasOwnProperty(legal)) {
                             data = data + "<div>" + legal;
-                            data = data  + "<div> Distance :" +  weeks[week]["legalcheckins"][legal]["distance"] + "</div>";
-                            data = data  + "<div> Grade :" +  weeks[week]["legalcheckins"][legal]["grade"] + "</div>";
-                            data = data  + "<div> Free text :" +  weeks[week]["legalcheckins"][legal]["freeText"] + "</div>";
+                            data = data + "<div> Distance :" + weeks[week]["legalcheckins"][legal]["distance"] + "</div>";
+                            data = data + "<div> Grade :" + weeks[week]["legalcheckins"][legal]["grade"] + "</div>";
+                            data = data + "<div> Free text :" + weeks[week]["legalcheckins"][legal]["freeText"] + "</div>";
                             data = data + "</div>";
                         }
                     }

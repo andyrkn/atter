@@ -23,46 +23,49 @@
     </div>
 
     <div class="flex-container column center">
-        <<for (date in checkInData) {>>
-            <div class="card">
-                <div class="card-title text-primary">
-                    <<=date>>
-                </div>
-                <section class="card-content">
 
-                    <main class="names-container">
-                        <<for (checkinType in checkInData[date]) {>>
-                            <div>
-                                <h4 class="text-info">
-                                    <<=checkinType>> :
-                                </h4>
-                                <ol>
-                                    <<for (user in checkInData[date][checkinType]) {>>
-                                        <li>
-                                            <a class="text-primary" href="/#/asign-grade/<<=activityID>>&<<=date>>&<<=checkinType>>&<<=user>>">
-                                                <<=user>>
-                                            </a>
-                                        </li>
-                                        <<}>>
-                                </ol>
-                            </div>
-                            <<}>>
-                    </main>
-                    <aside class="flex-container column center">
-                        <canvas height="230px" width="560px" class="graph" id="graph-0"></canvas>
-                    </aside>
-                </section>
-            </div>
-            <<}>>
-                <div class="import-buttons">
-                    <button class="btn success" data-click="importGrades()">Import grades</button>
-                    <div class="dropdown">
-                        <button class="btn info"> Export grades</button>
-                        <div class="dropdown-content">
-                            <div class="btn info" data-click="exportGradesJSON()">JSON</div>
-                            <div class="btn info" data-click="exportGradesHTML()">HTML</div>
-                        </div>
+        << if(checkInData) {>>
+            <<for (date in checkInData) {>>
+                <div class="card">
+                    <div class="card-title text-primary">
+                        <<=date>>
                     </div>
+                    <section class="card-content">
+
+                        <main class="names-container">
+                            <<for (checkinType in checkInData[date]) {>>
+                                <div>
+                                    <h4 class="text-info">
+                                        <<=checkinType>> :
+                                    </h4>
+                                    <ol>
+                                        <<for (user in checkInData[date][checkinType]) {>>
+                                            <li>
+                                                <a class="text-primary" href="/#/asign-grade/<<=activityID>>&<<=date>>&<<=checkinType>>&<<=user>>">
+                                                    <<=user>>
+                                                </a>
+                                            </li>
+                                            <<}>>
+                                    </ol>
+                                </div>
+                                <<}>>
+                        </main>
+                        <aside class="flex-container column center">
+                            <canvas height="230px" width="460px" class="graph" id="graph-<<=date>>"></canvas>
+                        </aside>
+                    </section>
                 </div>
+                <<}>>
+                    <<}>>
+                        <div class="import-buttons">
+                            <button class="btn success" data-click="importGrades()">Import grades</button>
+                            <div class="dropdown">
+                                <button class="btn info"> Export grades</button>
+                                <div class="dropdown-content">
+                                    <div class="btn info" data-click="exportGradesJSON()">JSON</div>
+                                    <div class="btn info" data-click="exportGradesHTML()">HTML</div>
+                                </div>
+                            </div>
+                        </div>
     </div>
 </section>
