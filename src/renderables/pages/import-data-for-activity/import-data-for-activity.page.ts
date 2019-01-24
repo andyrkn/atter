@@ -3,22 +3,26 @@ import { ExternalDataService } from "@app/services/external.data.service";
 import { DropboxImporter } from "@app/services/data-importer/dropbox.importer";
 import { UrlTree, Router } from "@web/router";
 import * as csvjson from "../../../../node_modules/csvjson";
+import { FireBaseCheckInService } from "@app/services/firebase/firebase-checkin.service";
 @Renderable({
     template: require('./import-data-for-activity.page.html'),
     style: require('./import-data-for-activity.page.css')
 })
 export class ImportDataForActivity {
     private mapper = {
-        csv: this.importCsv,
-        json: this.importJson
     };
     private activityID = new UrlTree().routeParameter;
     private acceptedExtensions = [".json", ".csv", ".xls"];
     @TrackChanges()
     public dropBoxFiles: any = [];
-    constructor(private externalDataService: ExternalDataService,
+    constructor(private fireBaseCheckInService: FireBaseCheckInService,
+                private externalDataService: ExternalDataService,
                 private dropboxImporter: DropboxImporter
-    ) { }
+    ) {
+        this.mapper["json"] = this.importJson.bind(this);
+        this.mapper["csv"] = this.importCsv.bind(this);
+
+    }
 
     public getFilesFromDropBox() {
         this.externalDataService.obtainFiles(this.dropboxImporter).subscribe((data) => {
@@ -50,12 +54,40 @@ export class ImportDataForActivity {
             quote: '"'
         };
         const dataToImport = csvjson.toObject(data, options);
+        const finalData : {} = {};
         for (const row of dataToImport) {
-            console.log(row);
+            const email =  row.email.replace('.', ',');
+            const newCheckIn = {
+                distance : row.distance,
+                freeText : row.freeText,
+                grade : row.grade
+            };
+            if (!finalData.hasOwnProperty(row.date)) {
+                finalData[row.date] = {};
+            }
+            if (row.type === "legal") {
+                if (!finalData[row.date].hasOwnProperty("legalcheckins")) {
+                    finalData[row.date]["legalcheckins"] = {};
+                    finalData[row.date]["legalcheckins"][email] = {};
+                    finalData[row.date]["legalcheckins"][email] = newCheckIn;
+                } else {
+                    finalData[row.date]["legalcheckins"][email] = newCheckIn;
+                }
+            } else {
+                if (!finalData[row.date].hasOwnProperty("frauds")) {
+                    finalData[row.date]["frauds"] = {};
+                    finalData[row.date]["frauds"][email] = {};
+                    finalData[row.date]["frauds"][email] = newCheckIn;
+                } else {
+                    finalData[row.date]["frauds"][email] = newCheckIn;
+                }
+            }
         }
+        console.log(JSON.stringify(finalData));
+        this.fireBaseCheckInService.updateActivityFromExternalSource(this.activityID, finalData).subscribe();
     }
-    private importJson(data): {} {
+    private importJson(data) {
         const dataToImport = JSON.parse(data);
-        return {};
+        this.fireBaseCheckInService.updateActivityFromExternalSource(this.activityID, dataToImport).subscribe();
     }
 }

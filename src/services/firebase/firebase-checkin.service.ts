@@ -127,4 +127,11 @@ export class FireBaseCheckInService {
             }, (err) => { resolve(false); });
         }));
     }
+    public updateActivityFromExternalSource(activityID : string, data) : Observable<boolean> {
+        return from(new Promise((resolve) => {
+            this.database.ref('checkins/' + activityID).update(data).then((res) => {
+                resolve(true);
+            }, (err) => { resolve(false); });
+        }));
+    }
 }
