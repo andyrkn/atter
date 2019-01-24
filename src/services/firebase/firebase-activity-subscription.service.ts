@@ -1,4 +1,4 @@
-import { Observable, from } from "rxjs";
+import { Observable, from, of } from "rxjs";
 import { Injectable } from "@web/core";
 import { NewActivityModel } from "@app/models/activity.model";
 import { UserService } from "../user.service";
@@ -20,14 +20,12 @@ export class FireBaseActivitySubscriptionService {
         return this.firebaseService.firebaseApp.database();
     }
 
-    private checkActivityExistance(code: string): Observable<any> {
-        return from(new Promise((resolve) =>
-            this.database.ref('activities/' + code).once('value')
-                .then((snapshot) => resolve(snapshot.val()))));
+    private checkActivityExistance(code: string): Observable<firebase.database.DataSnapshot> {
+        return from(this.database.ref('activities').orderByChild('followCode').equalTo(code).once('value'));
     }
 
     public createActivity(activity: NewActivityModel): Observable<any> {
-
+        activity['followCode'] = this.createFollowCode();
         const dashboardref = this.database.ref('dashboards/' + this.userId + '/')
             .push({ name: activity.name, iconID: activity.iconID }, (e) => { if (!e) { } });
 
@@ -40,12 +38,22 @@ export class FireBaseActivitySubscriptionService {
         return from(new Promise((resolve) =>
             this.checkActivityExistance(code).subscribe(
                 (res) => {
-                    if (res) {
-                        this.database.ref('following/' + this.userId).push(code);
+                    if (res.exists()) {
+                        let actitvityId: string = '';
+                        res.forEach((data) => {actitvityId = data.key.toString()});
+                        this.database.ref('following/' + this.userId).push(actitvityId);
                         resolve(true);
                     } else {
                         resolve(false);
                     }
                 })));
+    }
+
+    private createFollowCode(): string {
+        var followCode = new Date().getTime().toString().slice(7);
+        var letters = ['a', 'b', 'c', 'd', 'e', 'f'];
+        var index = Math.floor(Math.random() * 6);
+        followCode += letters[index];
+        return followCode;
     }
 }
