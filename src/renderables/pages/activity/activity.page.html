@@ -38,7 +38,7 @@
                                 Attendance: <<= checkin.date >>
                                     << for(const user of checkin.checkins) {>>
                                     <span << if (user.type === 'fraud') {>> class="fraud" << } else {>> class="legal" <<}>> >
-                                        User <<= user.email>> had a <<= user.type>> check-in. << if (user.grade) {>> Grade during this check-in: <<= user.grade>> .<< }>>
+                                        << if(user.email === userEmail){>> You <<} else {>>  User <<= user.email>> <<}>> had a <<= user.type>> check-in. << if (user.grade) {>> Grade during this check-in: <<= user.grade>> .<< }>>
                                         << if (user.freeText) {>> Observations during this check-in: <<= user.freeText>>. << }>>
                                     </span>
                                     <<}>>
@@ -50,6 +50,9 @@
                         <div class="card-content column">
                             << for (const checkin of checkInData) {>>
                                 Attendance: <<= checkin.date >>
+                                << if (checkin.checkins.filter(x => x.email === userEmail).length ===0) {>>
+                                    <span class="fraud">You had no attendance!</span>
+                                    <<}>>
                                     << for(const user of checkin.checkins.filter(x => x.email === userEmail)) {>>
                                     <span << if (user.type === 'fraud') {>> class="fraud" << } else {>> class="legal" <<}>> >
                                         You had a <<= user.type>> check-in. << if (user.grade) {>> Grade during this check-in: <<= user.grade>> .<< }>>

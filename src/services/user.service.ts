@@ -105,14 +105,14 @@ export class UserService {
                 .then((snapshot) => resolve(snapshot.val()))));
     }
     public updateValues(fields: string[], fieldsValue: string[]): Observable<any> {
-        return from(new Promise((resolve) => {
+        return from(new Promise((resolve, reject) => {
             this.getCurrentUser().subscribe((data) => {
                 let i = 0;
                 for (const field of fields) {
                     data[field] = fieldsValue[i];
                     i++;
                 }
-                this.database.ref('users/' + this.user.uid).update(data).then((d) => { resolve(d); });
+                this.database.ref('users/' + this.user.uid).update(data).then((d) => { resolve(d); }).catch((e) => reject(e));
             });
         }));
     }

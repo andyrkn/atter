@@ -42,7 +42,7 @@
                                         <<for (user in checkInData[date][checkinType]) {>>
                                             <li>
                                                 <a class="text-primary" href="/#/asign-grade/<<=activityID>>&<<=date>>&<<=checkinType>>&<<=user>>">
-                                                    <<=user>>
+                                                    <<=user.replace(",", ".")>>
                                                 </a>
                                             </li>
                                             <<}>>

@@ -19,3 +19,7 @@
     width: 25%;
     margin-top: 2.5%;
 }
+
+.updated {
+    color: var(--primary);
+}

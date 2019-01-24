@@ -4,18 +4,21 @@
     <div class="profile-data-container">
 
         <label for="first-name"><b> First name </b> </label>
-        <input class="first-name-input" type="text" placeholder="<<=firstName>>" name="first-name" data-bind="firstName"
+        <input class="first-name-input" type="text" value="<<=firstName>>" name="first-name" data-bind="firstName"
             required>
 
         <label for="last-name"><b> Last name </b> </label>
-        <input class="last-name-input" type="text" placeholder="<<=lastName>>" name="last-name" data-bind="lastName"
+        <input class="last-name-input" type="text" value="<<=lastName>>" name="last-name" data-bind="lastName"
             required>
 
         <label for="email"><b> Email</b> </label>
-        <input class="email-input" type="text" placeholder="<<=email>>" name="email" data-bind="email" readonly>
+        <input class="email-input" type="text" value="<<=email>>" name="email" readonly>
     </div>
 
     <button class="btn danger update" data-click = "updateProfileData()"> Update profile data </button>
+    << if(success) {>>
+        <span class="updated">Profile updated!</span>
+    <<}>>
 
 </div>
 

@@ -9,14 +9,15 @@ import { BehaviorSubject } from "rxjs";
 })
 export class ProfilePage {
     private _userSubject = new BehaviorSubject<any>(null);
-    @TrackChanges()
     public firstName: string = "";
-    @TrackChanges()
     public lastName: string = "";
-    @TrackChanges()
     public email: string = "";
+
     @TrackChanges()
     public existsDropboxToken: boolean = false;
+    @TrackChanges()
+    public success: boolean = false;
+
     constructor(
         private userService: UserService,
         private externalDataService: ExternalDataService,
@@ -35,7 +36,10 @@ export class ProfilePage {
         }
     }
     public updateProfileData() {
-        this.userService.updateValues(["firstName", "lastName"], [this.firstName, this.lastName]).subscribe();
+        this.success = false;
+        this.userService.updateValues(["firstName", "lastName"], [this.firstName, this.lastName]).subscribe(() => {
+            this.success = true;
+        });
     }
     private listenToUserChanges() {
         this.userService.getCurrentUserRealTime(this._userSubject);
