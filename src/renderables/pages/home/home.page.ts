@@ -1,8 +1,6 @@
 import { Renderable, TrackChanges } from "@web/core";
 import { UserService } from "@app/services/user.service";
 import { FireBaseActivityService } from "@app/services/firebase/firebase-activities.service";
-import { ExternalDataService } from "@app/services/external.data.service";
-import { DropboxImporter } from "@app/services/data-importer/dropbox.importer";
 import { BehaviorSubject } from "rxjs";
 @Renderable({
     template: require('./home.page.html'),

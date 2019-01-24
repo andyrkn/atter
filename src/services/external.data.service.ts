@@ -21,23 +21,33 @@ export class ExternalDataService {
         return from(
             new Promise((resolve) => {
                 this.userService.getCurrentUserAuthToken(importer.getTokenLocation()).subscribe((token) => {
-                    importer.obtainFiles(token).subscribe((fileData) => { resolve(fileData); });
-                });
+                    importer.obtainFiles(token).subscribe((fileData) => { resolve(fileData); }
+                        , (error) => { this.userService.updateValues([importer.getName() + this.tokenString], [""]).subscribe(); }
+                    );
+                }
+                );
             }));
     }
     public obtainDataFromFile(importer: BaseImporter, fileName: string): Observable<any> {
         return from(
             new Promise((resolve) => {
                 this.userService.getCurrentUserAuthToken(importer.getTokenLocation()).subscribe((token) => {
-                    importer.obtainDataFromFile(fileName, token).subscribe((fileData) => { resolve(fileData); });
-                });
+                    importer.obtainDataFromFile(fileName, token).subscribe((fileData) => { resolve(fileData); }
+                        , (error) => { this.userService.updateValues([importer.getName() + this.tokenString], [""]).subscribe(); }
+                    );
+                }
+                );
             }));
     }
     public revokeAcces(importer: BaseImporter): Observable<any> {
         return from(
             new Promise((resolve) => {
                 this.userService.getCurrentUserAuthToken(importer.getTokenLocation()).subscribe((token) => {
-                    importer.revokeToken(token).subscribe((fileData) => { resolve(fileData); });
+                    this.userService.updateValues([importer.getName() + this.tokenString], [""]).subscribe(() => {
+                        importer.revokeToken(token).subscribe((fileData) => {
+                            resolve(fileData);
+                        });
+                    });
                 });
             }));
     }

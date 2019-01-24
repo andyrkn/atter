@@ -2,35 +2,53 @@ import { Renderable, TrackChanges } from "@web/core";
 import { UserService } from "@app/services/user.service";
 import { ExternalDataService } from "@app/services/external.data.service";
 import { DropboxImporter } from "@app/services/data-importer/dropbox.importer";
+import { BehaviorSubject } from "rxjs";
 @Renderable({
     template: require('./profile.page.html'),
     style: require('./profile.page.css')
 })
 export class ProfilePage {
+    private _userSubject = new BehaviorSubject<any>(null);
     @TrackChanges()
     public firstName: string = "";
     @TrackChanges()
     public lastName: string = "";
     @TrackChanges()
     public email: string = "";
+    @TrackChanges()
+    public existsDropboxToken: boolean = false;
     constructor(
         private userService: UserService,
         private externalDataService: ExternalDataService,
         private dropboxImporter: DropboxImporter
     ) {
-        this.userService.getCurrentUser().subscribe((data) => {
-            this.firstName = data["firstName"];
-            this.lastName = data["lastName"];
-            this.email = data["email"];
-        });
+        if (this.userService.user) {
+            this.listenToUserChanges();
+        }
     }
 
     public authorizeDropbox() {
-        this.externalDataService.authorizeApp(this.dropboxImporter);
+        if (this.existsDropboxToken === false) {
+            this.externalDataService.authorizeApp(this.dropboxImporter);
+        } else {
+            this.externalDataService.revokeAcces(this.dropboxImporter);
+        }
     }
     public updateProfileData() {
         this.userService.updateValues(["firstName", "lastName"], [this.firstName, this.lastName]).subscribe();
     }
-
-    // TO DO REAL TIME UPDATE
+    private listenToUserChanges() {
+        this.userService.getCurrentUserRealTime(this._userSubject);
+        this._userSubject.subscribe((data) => {
+            if (data !== null) {
+                this.firstName = data.firstName;
+                this.lastName = data.lastName;
+                this.email = data.email;
+                this.existsDropboxToken = false;
+                if (data.dropboxOAuthToken !== "") {
+                    this.existsDropboxToken = true;
+                }
+            }
+        });
+    }
 }

@@ -23,7 +23,7 @@
     <div class="card-title text-primary">Use external data source</div>
     <div class="container">
         <button class="btn success" data-click="authorizeDropbox()">
-                << if(0===0) {>>
+                << if(existsDropboxToken === false) {>>
                     Connect to dropbox
                     << } else {>>
                         Revoke dropbox access
