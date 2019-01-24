@@ -35,7 +35,7 @@
                         <div class="card-content">
                             <<for (checkinType in checkInData[date]) {>>
                                 <<for (user in checkInData[date][checkinType]) {>>
-                                    <<if (user==userId) {>>
+                                    <<if (user==userEmail) {>>
                                         <h3 class="text-info">
                                             <<=date>>
                                                 <span class="text-primary">

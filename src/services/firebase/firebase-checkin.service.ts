@@ -102,9 +102,9 @@ export class FireBaseCheckInService {
 
     public setUserCheckIn(activityID: string, datestring: string, distance: number, legal: boolean): Observable<any> {
         const checkInData = legal ?
-            new LegalCheckInModel(this.userEmail, distance) : new IllegalCheckInModel(this.userEmail, distance);
+            new LegalCheckInModel(distance) : new IllegalCheckInModel(distance);
         let route = legal ? 'legalcheckins/' : 'frauds';
-        route = 'checkins' + '/' + activityID + '/' + datestring + '/' + route + '/' + this.userId;
+        route = 'checkins' + '/' + activityID + '/' + datestring + '/' + route + '/' + this.userEmail.replace('.', ',');
 
         return from(new Promise((resolve) => {
             this.saveCheckIn(activityID, datestring, checkInData, route, resolve);

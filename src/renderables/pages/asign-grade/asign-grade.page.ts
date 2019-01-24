@@ -2,6 +2,7 @@ import { Renderable, TrackChanges } from "@web/core";
 import { UrlTree, Router } from "@web/router";
 import { FireBaseCheckInService } from "@app/services/firebase/firebase-checkin.service";
 import { LegalCheckInModel } from "@app/models/checkInModels/legalCheckIn.model";
+import { UserService } from "@app/services/user.service";
 
 @Renderable({
     template: require('./asign-grade.page.html'),
@@ -10,18 +11,20 @@ import { LegalCheckInModel } from "@app/models/checkInModels/legalCheckIn.model"
 export class AsignGradePage {
 
     @TrackChanges()
-    public user: LegalCheckInModel = new LegalCheckInModel('...', 0);
+    public user: LegalCheckInModel = new LegalCheckInModel(0);
 
     public grade: number = 0;
     public freeText: string = "";
     public tags: string = "";
 
+    public userName : string = "";
     private params: string[];
     private route: string;
 
     constructor(
         private firebaseCheckInService: FireBaseCheckInService,
-        private router: Router
+        private router: Router,
+        private userService: UserService
     ) {
         this.params = new UrlTree().routeParameter.split('&');
         this.route = this.params[0] + '/' + this.params[1] + '/' + this.params[2] + '/' + this.params[3];
@@ -32,6 +35,7 @@ export class AsignGradePage {
             this.tags = this.user.tags ? this.user.tags : "";
             this.freeText = this.user.freeText ? this.user.freeText : "";
         });
+        this.userName = this.userService.user.email;
     }
 
     public submit(): void {

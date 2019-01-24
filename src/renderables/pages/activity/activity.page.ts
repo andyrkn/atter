@@ -26,14 +26,14 @@ export class Activity {
     @TrackChanges()
     public checkInData: any = {};
 
-    public userId: string = "";
+    public userEmail: string = "";
 
     constructor(
         private firebaseActivityService: FireBaseActivityService,
         private firebaseCheckInService: FireBaseCheckInService,
         private geolocationService: GeolocationService,
         private userService: UserService) {
-        this.userId = this.userService.user.uid;
+        this.userEmail = this.userService.user.email;
         this.registerActivitySubject();
     }
 
@@ -42,7 +42,6 @@ export class Activity {
         this.firebaseActivityService.getObservableActivityDetails(this.activityID, this.activitySubject);
 
         this.activitySubject.subscribe((data) => {
-            // console.log(data);
             if (data.owner) { data.owner = data.owner.split('@')[0]; }
             this.canCheckIn = data.ableToCheckIn;
             this.activity = data;

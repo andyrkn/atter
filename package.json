@@ -18,6 +18,7 @@
   "dependencies": {
     "chart.js": "^2.7.3",
     "connect": "^3.6.6",
+    "csvjson": "^5.1.0",
     "diff-dom": "^2.4.0",
     "dropbox": "^4.0.15",
     "firebase": "^5.7.1",
