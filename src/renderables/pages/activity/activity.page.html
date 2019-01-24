@@ -25,27 +25,40 @@
 
                 <div class="card">
                     <div class="card-title text-primary">
-                        Your Attendances
+                        Attendances
                     </div>
-                    << if(!checkInData) { >>
-                        <span>No attendances to be displayed!</span>
-                    <<}>>
-                    <<for (date in checkInData) {>>
-                        <div class="card-content">
-                            <<for (checkinType in checkInData[date]) {>>
-                                <<for (user in checkInData[date][checkinType]) {>>
-                                    <<if (user==userEmail) {>>
-                                        <h3 class="text-info">
-                                            <<=date>>
-                                                <span class="text-primary">
-                                                    <<=checkinType>>
-                                                </span>
-                                        </h3>
-                                        <<}>>
-                                            <<}>>
-                                                </ol>
-                                                <<}>>
+                    << if (checkInData.length === 0 || activity.gradesVisibility=== 'private') { >> 
+                        <span>
+                            There are no attendances to be desplayed!
+                        </span>
+                    << } >>
+                    << if(activity.gradesVisibility === 'public'){ >> 
+                        <div class="card-content column">
+                            << for (const checkin of checkInData) {>>
+                                Attendance: <<= checkin.date >>
+                                    << for(const user of checkin.checkins) {>>
+                                    <span << if (user.type === 'fraud') {>> class="fraud" << } else {>> class="legal" <<}>> >
+                                        User <<= user.email>> had a <<= user.type>> check-in. << if (user.grade) {>> Grade during this check-in: <<= user.grade>> .<< }>>
+                                        << if (user.freeText) {>> Observations during this check-in: <<= user.freeText>>. << }>>
+                                    </span>
+                                    <<}>>
+                                <br>
+                            <<}>>
                         </div>
-                        <<}>>
-
+                    << } >>
+                    << if(activity.gradesVisibility === 'protected') {>> 
+                        <div class="card-content column">
+                            << for (const checkin of checkInData) {>>
+                                Attendance: <<= checkin.date >>
+                                    << for(const user of checkin.checkins.filter(x => x.email === userEmail)) {>>
+                                    <span << if (user.type === 'fraud') {>> class="fraud" << } else {>> class="legal" <<}>> >
+                                        You had a <<= user.type>> check-in. << if (user.grade) {>> Grade during this check-in: <<= user.grade>> .<< }>>
+                                        << if (user.freeText) {>> Observations during this check-in: <<= user.freeText>>. << }>>
+                                    </span>
+                                    <<}>>
+                                <br>
+                            <<}>>
+                        </div>
+                    <<}>>
+                </div>
 </section>

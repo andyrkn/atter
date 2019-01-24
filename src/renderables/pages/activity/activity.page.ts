@@ -24,7 +24,7 @@ export class Activity {
     public activity: any = {};
 
     @TrackChanges()
-    public checkInData: any = {};
+    public checkInData: any[] = [];
 
     public userEmail: string = "";
 
@@ -49,7 +49,26 @@ export class Activity {
 
         this.firebaseCheckInService.getAllCheckins(this.activityID, this._checkInsSubject);
         this._checkInsSubject.subscribe((data) => {
-            this.checkInData = data;
+            this.checkInData = [];
+            // tslint:disable-next-line:forin
+            for (const date in data) {
+                const currentDate = { date: date, checkins: [] };
+                // tslint:disable-next-line:forin
+                for (const type in data[date]) {
+                    // tslint:disable-next-line:forin
+                    for (const user in data[date][type]) {
+                        const checkin = {
+                            email: user.replace(',', '.'),
+                            type: type === 'legalcheckins' ? "legal" : "fraud",
+                            grade: data[date][type][user]['grade'],
+                            freeText: data[date][type][user]['freeText']
+                        };
+                        currentDate.checkins.push(checkin);
+                    }
+                }
+                this.checkInData.push(currentDate);
+            }
+            console.log(this.checkInData);
         });
     }
 

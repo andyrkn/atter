@@ -5,7 +5,7 @@ import { UrlTree, Route, Router } from "@web/router";
 import { FireBaseCheckInService } from "@app/services/firebase/firebase-checkin.service";
 import { FireBaseActivityService } from "@app/services/firebase/firebase-activities.service";
 import { BehaviorSubject } from "rxjs";
-import {graphJsOptions} from "./graphjs-options/graphjs.options";
+import { graphJsOptions } from "./graphjs-options/graphjs.options";
 
 @Renderable({
     template: require('./dashboard.page.html'),
@@ -106,7 +106,9 @@ export class DashboardPage implements AfterRender, OnRefresh {
                     for (const atendee in weeks[week]["legalcheckins"]) {
                         if (weeks[week]["legalcheckins"].hasOwnProperty(atendee)) {
                             if (keyData.indexOf(weeks[week]["legalcheckins"][atendee]["grade"]) === -1) {
-                                keyData.push(weeks[week]["legalcheckins"][atendee]["grade"]);
+                                keyData.push(weeks[week]["legalcheckins"][atendee]["grade"] === undefined ?
+                                    "No grade" :
+                                    weeks[week]["legalcheckins"][atendee]["grade"]);
                             }
                             if (values[weeks[week]["legalcheckins"][atendee]["grade"]] === undefined) {
                                 values[weeks[week]["legalcheckins"][atendee]["grade"]] = 1;
