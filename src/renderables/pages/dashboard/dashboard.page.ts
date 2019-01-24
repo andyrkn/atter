@@ -66,8 +66,7 @@ export class DashboardPage implements AfterRender, OnRefresh {
 
     public changeVisibility(value: string): void {
         this.activityDetails.gradesVisibility = value;
-        // tslint:disable-next-line
-        let newActivity = Object.assign({}, this.activityDetails);
+        const newActivity = { ...this.activityDetails };
         delete newActivity.id;
         this.firebaseActivityService.setActivityGradeVisibiliy(this.activityID, newActivity);
     }
