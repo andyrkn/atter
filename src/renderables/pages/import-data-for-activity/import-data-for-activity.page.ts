@@ -4,6 +4,7 @@ import { DropboxImporter } from "@app/services/data-importer/dropbox.importer";
 import { UrlTree, Router } from "@web/router";
 import * as csvjson from "../../../../node_modules/csvjson";
 import { FireBaseCheckInService } from "@app/services/firebase/firebase-checkin.service";
+import { throws } from "assert";
 @Renderable({
     template: require('./import-data-for-activity.page.html'),
     style: require('./import-data-for-activity.page.css')
@@ -12,12 +13,13 @@ export class ImportDataForActivity {
     private mapper = {
     };
     private activityID = new UrlTree().routeParameter;
-    private acceptedExtensions = [".json", ".csv", ".xls"];
+    private acceptedExtensions = [".json", ".csv"];
     @TrackChanges()
     public dropBoxFiles: any = [];
     constructor(private fireBaseCheckInService: FireBaseCheckInService,
                 private externalDataService: ExternalDataService,
-                private dropboxImporter: DropboxImporter
+                private dropboxImporter: DropboxImporter,
+                private router : Router
     ) {
         this.mapper["json"] = this.importJson.bind(this);
         this.mapper["csv"] = this.importCsv.bind(this);
@@ -44,7 +46,6 @@ export class ImportDataForActivity {
     public getAndImportDataForAFile(index: number) {
         this.externalDataService.obtainDataFromFile(this.dropboxImporter, this.dropBoxFiles[index].name)
             .subscribe((data) => {
-                console.log(data);
                 this.mapper[this.dropBoxFiles[index].name.split('.').pop()](data.text);
             });
     }
@@ -83,11 +84,14 @@ export class ImportDataForActivity {
                 }
             }
         }
-        console.log(JSON.stringify(finalData));
-        this.fireBaseCheckInService.updateActivityFromExternalSource(this.activityID, finalData).subscribe();
+        this.fireBaseCheckInService.updateActivityFromExternalSource(this.activityID, finalData).subscribe(
+             () => {this.router.navigate("dashboard", this.activityID); }
+        );
     }
     private importJson(data) {
         const dataToImport = JSON.parse(data);
-        this.fireBaseCheckInService.updateActivityFromExternalSource(this.activityID, dataToImport).subscribe();
+        this.fireBaseCheckInService.updateActivityFromExternalSource(this.activityID, dataToImport).subscribe(
+            () => {this.router.navigate("dashboard", this.activityID); }
+        );
     }
 }

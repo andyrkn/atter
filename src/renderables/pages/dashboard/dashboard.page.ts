@@ -2,7 +2,7 @@ import { Renderable, TrackChanges, AfterRender, OnRefresh } from "@web/core";
 import * as Chart from 'chart.js';
 
 import { ActivityDetails } from "./activity-details";
-import { UrlTree } from "@web/router";
+import { UrlTree, Route, Router } from "@web/router";
 import { FireBaseCheckInService } from "@app/services/firebase/firebase-checkin.service";
 import { UserService } from "@app/services/user.service";
 import { FireBaseActivityService } from "@app/services/firebase/firebase-activities.service";
@@ -30,7 +30,9 @@ export class DashboardPage implements AfterRender, OnRefresh {
 
     constructor(
         private firebaseCheckInService: FireBaseCheckInService,
-        private firebaseActivityService: FireBaseActivityService) {
+        private firebaseActivityService: FireBaseActivityService,
+        private router : Router
+        ) {
 
         // TODO: check if current user is actually allowed to browse this dashboard
         // console.log(this.userService.ownedactivities);
@@ -156,5 +158,7 @@ export class DashboardPage implements AfterRender, OnRefresh {
             });
         }
     }*/
-
+    public importGrades() {
+        this.router.navigate("import", this.activityID);
+    }
 }
