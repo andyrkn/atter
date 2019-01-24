@@ -143,7 +143,7 @@ export class DashboardPage implements AfterRender, OnRefresh {
         this.router.navigate("import", this.activityID);
     }
     public exportGradesJSON() {
-        this.exportThis(JSON.stringify(this.checkInData), this.activityDetails.name + "-    grades.json", "json");
+        this.exportThis(JSON.stringify(this.checkInData), this.activityDetails.name + "-grades.json", "json");
     }
     public exportGradesHTML() {
         const weeks = JSON.parse(JSON.stringify(this.checkInData));

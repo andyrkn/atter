@@ -40,7 +40,6 @@ export class ImportDataForActivity {
                 }
                }
             }
-            console.log(this.allowedTo);
         });
     }
 
