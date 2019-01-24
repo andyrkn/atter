@@ -42,6 +42,7 @@ export class DashboardPage implements AfterRender, OnRefresh {
 
         this.firebaseCheckInService.getAllCheckins(this.activityID, this._checkInsSubject);
         this._checkInsSubject.subscribe((data) => {
+            console.log("created!");
             this.checkInData = data;
         });
     }

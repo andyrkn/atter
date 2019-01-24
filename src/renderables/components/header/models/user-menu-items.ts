@@ -2,12 +2,12 @@ import { MenuItem } from "./menu-item";
 
 export const userMenuItemes: MenuItem[] = [
     {
-        text: "Profile",
-        url: "#/profile"
+        text: "Home 🏯",
+        url: '#/home'
     },
     {
-        text: "Home",
-        url: '#/home'
+        text: "Profile 🦁",
+        url: "#/profile"
     },
     {
         text: "Log out 😢",

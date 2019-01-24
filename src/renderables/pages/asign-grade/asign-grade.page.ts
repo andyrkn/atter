@@ -15,9 +15,8 @@ export class AsignGradePage {
 
     public grade: number = 0;
     public freeText: string = "";
-    public tags: string = "";
 
-    public userName : string = "";
+    public userName: string = "";
     private params: string[];
     private route: string;
 
@@ -32,7 +31,6 @@ export class AsignGradePage {
         this.firebaseCheckInService.getUserCheckIn(this.route).subscribe((data: LegalCheckInModel) => {
             this.user = data;
             this.grade = this.user.grade ? this.user.grade : 0;
-            this.tags = this.user.tags ? this.user.tags : "";
             this.freeText = this.user.freeText ? this.user.freeText : "";
         });
         this.userName = this.userService.user.email;
@@ -40,11 +38,10 @@ export class AsignGradePage {
 
     public submit(): void {
         this.user.grade = this.grade;
-        this.user.tags = this.tags;
         this.user.freeText = this.freeText;
 
         this.firebaseCheckInService.updateUserCheckIn(this.route, this.user).subscribe((res) => {
-            if (res) { this.router.navigate('/dashboard', this.params[0]); } else { alert("submission failure"); }
+            if (res) { this.router.navigate('/dashboard', this.params[0]); } else { console.log("submission failure"); }
         });
 
     }

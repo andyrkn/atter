@@ -4,33 +4,28 @@
             <div class="card-title text-primary">
                 New Activity
             </div>
-            <div class="card-content flex-container column center">
+            <div class="card-content flex-container column">
                 <label for="activity-name"><b> </b> </label>
                 <input class="user-input" type="text" placeholder="Activity name" data-bind="activityName" required>
-
-                <div class="grading-tags">
-                    <h3 class="grading-header"> Grading Tags</h3>
-                    <div class="button-container">
-                        << for(let type of gradingTypes) {>>
-                            <button class="btn success" data-click="selectGradingType(<<=type>>)">
-                                <<=type>>
-                            </button>
-                            << }>>
-                    </div>
-
                     <h3 class="grading-header">Activity Icon</h3>
                     <div class="available-icons-container">
                         << for(let i=1;i<=6;i++ ) {>>
-                            <div class="activity-container">
-                                <div class="activity-icon-<<=i>>" data-click="selectIcon(<<=i>>)"></div>
-                            </div>
+                            <input class="icons" type="radio" name="icons" value="<<=i>>" id="<<=i>>" << if (i === 1) {>> checked << } >> />
+                            <label for="<<=i>>">
+                                <div class="activity-container">
+                                    <div class="activity-icon-<<=i>>" data-click="selectIcon(<<=i>>)"></div>
+                                </div>
+                            </label>
                             << }>>
                     </div>
-                </div>
-
                 <div class="create-button">
                     <button class="btn success" data-click="createActivity()"> Create </button>
                 </div>
+                << if (error) { >> 
+                    <div class="error">
+                        <<=error>>    
+                    </div>
+                <<}>>
             </div>
         </div>
     </div>

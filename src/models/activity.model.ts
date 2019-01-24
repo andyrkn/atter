@@ -1,7 +1,6 @@
 export class NewActivityModel {
-    constructor(name, gradingType, iconID) {
+    constructor(name, iconID) {
         this.name = name;
-        this.gradingType = gradingType;
         this.iconID = iconID;
         this.ableToCheckIn = false;
     }

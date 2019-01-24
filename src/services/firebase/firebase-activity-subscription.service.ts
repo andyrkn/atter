@@ -26,14 +26,14 @@ export class FireBaseActivitySubscriptionService {
                 .then((snapshot) => resolve(snapshot.val()))));
     }
 
-    public createActivity(activity: NewActivityModel) {
+    public createActivity(activity: NewActivityModel): Observable<any> {
 
         const dashboardref = this.database.ref('dashboards/' + this.userId + '/')
-            .push({ name: activity.name, iconID: activity.iconID }, (e) => { if (!e) { alert("succes"); } });
+            .push({ name: activity.name, iconID: activity.iconID }, (e) => { if (!e) { } });
 
         activity['owner'] = this.userService.user.email;
-        this.database.ref('activities/' + dashboardref.key)
-            .set(activity, (e) => { if (!e) { console.log(e); } });
+        return from(this.database.ref('activities/' + dashboardref.key)
+            .set(activity, (e) => { if (!e) { console.log(e); } }));
     }
 
     public followActivity(code: string): Observable<boolean> {
