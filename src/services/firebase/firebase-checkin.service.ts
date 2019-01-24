@@ -75,7 +75,6 @@ export class FireBaseCheckInService {
     }
 
     private saveCheckIn(activityID, datestring: string, checkInData: any, route: string, resolve) {
-        console.log(checkInData, route);
         this.database.ref(route).set(checkInData)
             .then((res) => { if (res) { resolve(res); } });
     }

@@ -89,3 +89,11 @@ semi-duplicate with home.page.css
 .check-in:hover {
     animation: none;
 }
+
+.legal {
+    color: var(--primary);
+}
+
+.fraud {
+    color: var(--danger);
+}

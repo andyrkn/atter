@@ -41,7 +41,7 @@ export class AsignGradePage {
         this.user.freeText = this.freeText;
 
         this.firebaseCheckInService.updateUserCheckIn(this.route, this.user).subscribe((res) => {
-            if (res) { this.router.navigate('/dashboard', this.params[0]); } else { console.log("submission failure"); }
+            this.router.navigate('/dashboard', this.params[0]);
         });
 
     }
