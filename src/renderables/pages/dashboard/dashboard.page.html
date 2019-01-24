@@ -14,9 +14,10 @@
             </div>
 
             <div class="buttons-container">
-                <button class="btn success"> Make data private</button>
-                <button class="btn info"> Make data protected</button>
-                <button class="btn danger"> Make data public</button>
+                <button class="btn success" data-click="changeVisibilityPrivate()"> Make data private</button>
+                <button class="btn info" data-click="changeVisibilityProtected()"> Make data protected</button>
+                <button class="btn danger" data-click="changeVisibilityPublic()"> Make data public</button>
+                <span>Current visibility: <<= activityDetails.gradesVisibility>></span>
             </div>
         </div>
     </div>

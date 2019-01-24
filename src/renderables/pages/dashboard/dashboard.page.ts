@@ -16,13 +16,13 @@ export class DashboardPage implements AfterRender, OnRefresh {
     private enableValue = 'Enable check-in';
     private disableValue = 'Disable check-in';
     public activityID = new UrlTree().routeParameter;
-    private activityDetails: any = {};
+    @TrackChanges()
+    public activityDetails: any = {};
 
     @TrackChanges()
     private checkInData: any = null;
 
     public maxDistance: number = 0;
-    public activity: ActivityDetails = new ActivityDetails();
 
     @TrackChanges()
     public checkinButtonValue: string = "...";
@@ -43,7 +43,6 @@ export class DashboardPage implements AfterRender, OnRefresh {
 
         this.firebaseCheckInService.getAllCheckins(this.activityID, this._checkInsSubject);
         this._checkInsSubject.subscribe((data) => {
-            console.log("created!");
             this.checkInData = data;
         });
     }
@@ -52,6 +51,25 @@ export class DashboardPage implements AfterRender, OnRefresh {
         value === true ?
             this.checkinButtonValue = this.disableValue : this.checkinButtonValue = this.enableValue;
     }
+
+    public changeVisibilityPrivate(): void {
+        this.changeVisibility('private');
+    }
+    
+    public changeVisibilityProtected(): void {
+        this.changeVisibility('protected');
+    }
+    
+    public changeVisibilityPublic(): void {
+        this.changeVisibility('public');
+    }
+    
+    public changeVisibility(value: string): void {
+        this.activityDetails.gradesVisibility = value;
+        let newActivity = Object.assign({}, this.activityDetails);
+        delete newActivity.id;
+        this.firebaseActivityService.setActivityGradeVisibiliy(this.activityID, newActivity)
+    } 
 
     public onRefresh(): void {
         //    this.drawGraphs();

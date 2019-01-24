@@ -26,6 +26,7 @@ export class FireBaseActivitySubscriptionService {
 
     public createActivity(activity: NewActivityModel): Observable<any> {
         activity['followCode'] = this.createFollowCode();
+        activity['gradesVisibility'] = 'private';
         const dashboardref = this.database.ref('dashboards/' + this.userId + '/')
             .push({ name: activity.name, iconID: activity.iconID }, (e) => { if (!e) { } });
 

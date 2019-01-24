@@ -37,6 +37,10 @@ export class FireBaseActivityService {
         this.database.ref('dashboards/' + this.userId).on('value', (snapshot) => { subject.next(snapshot.val()); });
     }
 
+    public setActivityGradeVisibiliy(id, value): Observable<any> {
+        return from(this.database.ref('activities/' + id).set(value));
+    }
+
     public getFollowedActivities(subject): void {
         this.database.ref('following/' + this.userId).on('value', (snapshot) => {
             subject.next(this.getAllActivitiesDetails(snapshot.val(), subject));
