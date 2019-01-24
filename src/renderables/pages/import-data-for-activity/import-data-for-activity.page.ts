@@ -17,10 +17,18 @@ export class ImportDataForActivity {
     public getFilesFromDropBox() {
         this.externalDataService.obtainFiles(this.dropboxImporter).subscribe((data) => {
             const entries = JSON.parse(data.text).entries;
-            for (const key in entries) {
-                // REMOVE UNWANTED EXTENSIONS
+            this.dropBoxFiles = [];
+            for (const entry of entries) {
+                    let approvedFile = false;
+                    for (const extension of this.acceptedExtensions) {
+                        if (entry.name.includes(extension)) {
+                            approvedFile = true;
+                        }
+                    }
+                    if (approvedFile === true) {
+                        this.dropBoxFiles.push(entry);
+                    }
             }
-            this.dropBoxFiles = entries;
         });
     }
     public getAndImportDataForAFile(index: number) {
