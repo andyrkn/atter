@@ -18,10 +18,6 @@
                                 <<=activity.owner>>
                             </span>
                         </h3>
-
-                        <div>
-                            <button class="btn success">Export grades</button>
-                        </div>
                     </div>
 
                 </div>
@@ -31,6 +27,9 @@
                     <div class="card-title text-primary">
                         Your Attendances
                     </div>
+                    << if(!checkInData) { >>
+                        <span>No attendances to be displayed!</span>
+                    <<}>>
                     <<for (date in checkInData) {>>
                         <div class="card-content">
                             <<for (checkinType in checkInData[date]) {>>

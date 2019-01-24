@@ -55,21 +55,21 @@ export class DashboardPage implements AfterRender, OnRefresh {
     public changeVisibilityPrivate(): void {
         this.changeVisibility('private');
     }
-    
+
     public changeVisibilityProtected(): void {
         this.changeVisibility('protected');
     }
-    
+
     public changeVisibilityPublic(): void {
         this.changeVisibility('public');
     }
-    
+
     public changeVisibility(value: string): void {
         this.activityDetails.gradesVisibility = value;
-        let newActivity = Object.assign({}, this.activityDetails);
+        const newActivity = { ...this.activityDetails };
         delete newActivity.id;
-        this.firebaseActivityService.setActivityGradeVisibiliy(this.activityID, newActivity)
-    } 
+        this.firebaseActivityService.setActivityGradeVisibiliy(this.activityID, newActivity);
+    }
 
     public onRefresh(): void {
         //    this.drawGraphs();
@@ -196,9 +196,9 @@ export class DashboardPage implements AfterRender, OnRefresh {
                     for (const legal in weeks[week]["legalcheckins"]) {
                         if (weeks[week]["legalcheckins"].hasOwnProperty(legal)) {
                             data = data + "<div>" + legal;
-                            data = data  + "<div> Distance :" +  weeks[week]["legalcheckins"][legal]["distance"] + "</div>";
-                            data = data  + "<div> Grade :" +  weeks[week]["legalcheckins"][legal]["grade"] + "</div>";
-                            data = data  + "<div> Free text :" +  weeks[week]["legalcheckins"][legal]["freeText"] + "</div>";
+                            data = data + "<div> Distance :" + weeks[week]["legalcheckins"][legal]["distance"] + "</div>";
+                            data = data + "<div> Grade :" + weeks[week]["legalcheckins"][legal]["grade"] + "</div>";
+                            data = data + "<div> Free text :" + weeks[week]["legalcheckins"][legal]["freeText"] + "</div>";
                             data = data + "</div>";
                         }
                     }

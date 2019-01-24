@@ -41,7 +41,7 @@ export class FireBaseActivitySubscriptionService {
                 (res) => {
                     if (res.exists()) {
                         let actitvityId: string = '';
-                        res.forEach((data) => {actitvityId = data.key.toString()});
+                        res.forEach((data) => { actitvityId = data.key.toString(); });
                         this.database.ref('following/' + this.userId).push(actitvityId);
                         resolve(true);
                     } else {
@@ -51,9 +51,9 @@ export class FireBaseActivitySubscriptionService {
     }
 
     private createFollowCode(): string {
-        var followCode = new Date().getTime().toString().slice(7);
-        var letters = ['a', 'b', 'c', 'd', 'e', 'f'];
-        var index = Math.floor(Math.random() * 6);
+        let followCode = new Date().getTime().toString().slice(7);
+        const letters = ['a', 'b', 'c', 'd', 'e', 'f'];
+        const index = Math.floor(Math.random() * 6);
         followCode += letters[index];
         return followCode;
     }
