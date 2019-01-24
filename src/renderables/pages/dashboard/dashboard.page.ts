@@ -4,7 +4,6 @@ import * as Chart from 'chart.js';
 import { ActivityDetails } from "./activity-details";
 import { UrlTree, Route, Router } from "@web/router";
 import { FireBaseCheckInService } from "@app/services/firebase/firebase-checkin.service";
-import { UserService } from "@app/services/user.service";
 import { FireBaseActivityService } from "@app/services/firebase/firebase-activities.service";
 import { BehaviorSubject } from "rxjs";
 
@@ -31,8 +30,8 @@ export class DashboardPage implements AfterRender, OnRefresh {
     constructor(
         private firebaseCheckInService: FireBaseCheckInService,
         private firebaseActivityService: FireBaseActivityService,
-        private router : Router
-        ) {
+        private router: Router
+    ) {
 
         // TODO: check if current user is actually allowed to browse this dashboard
         // console.log(this.userService.ownedactivities);
@@ -160,5 +159,59 @@ export class DashboardPage implements AfterRender, OnRefresh {
     }*/
     public importGrades() {
         this.router.navigate("import", this.activityID);
+    }
+    public exportGradesJSON() {
+        this.exportThis(JSON.stringify(this.checkInData), this.activityDetails.name + "-    grades.json", "json");
+    }
+    public exportGradesHTML() {
+        const weeks = JSON.parse(JSON.stringify(this.checkInData));
+        let data = "<!DOCTYPE html>";
+        data = data + "<html>";
+        data = data + "<head> <title>" + this.activityDetails.name + "</title> </head>";
+        data = data + "<body>";
+        for (const week in weeks) {
+            if (weeks.hasOwnProperty(week)) {
+                data = data + "<div>" + week + "</div>";
+                if (weeks[week].hasOwnProperty("legalcheckins")) {
+                    data = data + "<div> Legal Checkins";
+
+                    for (const legal in weeks[week]["legalcheckins"]) {
+                        if (weeks[week]["legalcheckins"].hasOwnProperty(legal)) {
+                            data = data + "<div>" + legal;
+                            data = data  + "<div> Distance :" +  weeks[week]["legalcheckins"][legal]["distance"] + "</div>";
+                            data = data  + "<div> Grade :" +  weeks[week]["legalcheckins"][legal]["grade"] + "</div>";
+                            data = data  + "<div> Free text :" +  weeks[week]["legalcheckins"][legal]["freeText"] + "</div>";
+                            data = data + "</div>";
+                        }
+                    }
+                    data = data + "</div>";
+                }
+                if (weeks[week].hasOwnProperty("frauds")) {
+                    data = data + "<div> Frauds";
+
+                    for (const fraud in weeks[week]["frauds"]) {
+                        if (weeks[week]["frauds"].hasOwnProperty(fraud)) {
+                            data = data + "<div>" + fraud + "</div>";
+                        }
+                    }
+                    data = data + "</div>";
+                }
+            }
+        }
+        data = data + "</body>";
+        data = data + "</html>";
+
+        this.exportThis(data, this.activityDetails.name + "-activity.html", "html");
+    }
+
+    private exportThis(text, filename, type) {
+        const element = document.createElement('a');
+        element.setAttribute('href', 'data:text/' + type + ';charset=utf-8,' + encodeURIComponent(text));
+        element.setAttribute('download', filename);
+        element.style.display = 'none';
+
+        document.body.appendChild(element);
+        element.click();
+        document.body.removeChild(element);
     }
 }

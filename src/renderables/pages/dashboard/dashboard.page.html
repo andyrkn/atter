@@ -52,9 +52,15 @@
                 </section>
             </div>
             <<}>>
-            <div class = "import-buttons">
-                <button class="btn success" data-click = "importGrades()">Import grades</button>
-                <button class="btn info">Export grades</button>
-            </div>
-        </div>
+                <div class="import-buttons">
+                    <button class="btn success" data-click="importGrades()">Import grades</button>
+                    <div class="dropdown">
+                        <button class="btn info"> Export grades</button>
+                        <div class="dropdown-content">
+                            <div class="btn info" data-click="exportGradesJSON()">JSON</div>
+                            <div class="btn info" data-click="exportGradesHTML()">HTML</div>
+                        </div>
+                    </div>
+                </div>
+    </div>
 </section>

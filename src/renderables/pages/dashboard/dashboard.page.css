@@ -11,7 +11,7 @@
     justify-content: space-between;
 }
 
-.checkin-content { 
+.checkin-content {
     justify-content: space-evenly;
     align-items: center;
     min-width: 570px;
@@ -31,16 +31,18 @@
 .buttons-container .btn {
     margin: 7px;
 }
+
 .graph {
-    height: 230px; 
-    width: 560px; 
+    height: 230px;
+    width: 560px;
 }
-.import-buttons{
+
+.import-buttons {
     display: flex;
     justify-content: center;
 }
 
-@media (min-width: 767px) and (max-width: 991px) { 
+@media (min-width: 767px) and (max-width: 991px) {
     .privacy-container {
         align-self: unset;
     }
@@ -52,7 +54,6 @@
         align-items: unset;
         min-width: initial;
     }
-
     .card-content {
         flex-direction: column;
         width: 100%;
@@ -62,19 +63,32 @@
         flex-direction: row;
         justify-content: space-around;
     }
-
     .graph {
         align-self: center;
         max-width: 100%;
     }
-
     .buttons-container {
         border-top: 1px solid #ccc;
         padding-top: 20px;
         margin-top: 20px;
     }
-
     .check-in {
         margin-top: 20px;
     }
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-content {
+    display: none;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+}
+
+.dropdown:hover .dropdown-content {
+    display: flex;
+    flex-direction: column;
 }
