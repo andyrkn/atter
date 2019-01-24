@@ -120,11 +120,6 @@ export class FireBaseCheckInService {
     }
 
     public updateUserCheckIn(route: string, data: LegalCheckInModel): Observable<boolean> {
-        console.log(JSON.stringify(data));
-        return from(new Promise((resolve) => {
-            this.database.ref('checkins/' + route).update(data).then((res) => {
-                resolve(true);
-            }, (err) => { resolve(false); });
-        }));
+        return from(this.database.ref('checkins/' + route).update(data));
     }
 }
