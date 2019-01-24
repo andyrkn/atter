@@ -2,7 +2,7 @@ import { MenuItem } from './menu-item';
 
 export const guestMenuItems: MenuItem[] = [
     {
-        text: 'Register',
+        text: 'Register 🙄',
         url: '#/register'
     },
     {

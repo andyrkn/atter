@@ -1,6 +1,7 @@
-import { Renderable } from "@web/core";
+import { Renderable, TrackChanges } from "@web/core";
 import { FireBaseActivitySubscriptionService } from "@app/services/firebase/firebase-activity-subscription.service";
 import { NewActivityModel } from "@app/models/activity.model";
+import { Router } from "@web/router";
 
 @Renderable({
     template: require('./create-new-activity.page.html'),
@@ -9,33 +10,29 @@ import { NewActivityModel } from "@app/models/activity.model";
 export class CreateNewActivityPage {
 
     constructor(
-        private firebaseDataService: FireBaseActivitySubscriptionService
+        private firebaseDataService: FireBaseActivitySubscriptionService,
+        private router: Router
     ) { }
-
-    public gradingTypes = ['Tags', 'Points', 'Free Text'];
+    @TrackChanges()
+    public error: string = "";
     public activityName: string = "";
 
     private selectedIcon: number;
-    private selectedGradingType: string;
 
     public selectIcon(index: number): void {
         this.selectedIcon = index;
     }
-    public selectGradingType(type: string): void {
-        this.selectedGradingType = type;
-    }
     public createActivity(): void {
         if (!this.activityName) {
-            alert("Empty activity name");
+            this.error = "Activity name is empty";
             return;
         }
 
         const activity = new NewActivityModel(
             this.activityName,
-            this.selectedGradingType,
             this.selectedIcon !== undefined ? this.selectedIcon : 1
         );
 
-        this.firebaseDataService.createActivity(activity);
+        this.firebaseDataService.createActivity(activity).subscribe(() => this.router.navigate('home'));
     }
 }
