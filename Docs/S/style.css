@@ -254,3 +254,7 @@ aside[typeof="schema:WPSideBar"] {
         padding: 2em;
     }
 }
+.video{
+    border: none;
+    justify-content: center;
+}

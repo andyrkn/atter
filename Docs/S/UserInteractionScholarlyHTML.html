@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+
+<head>
+    <meta name="viewport" content="width=device-width">
+    <title>Atter</title>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body prefix="schema: http://schema.org/ xsd: http://www.w3.org/2001/XMLSchema# sa: https://ns.science.ai/">
+
+    <article id="main-article" typeof="schema:ScholarlyArticle" resource="#">
+        <h1>Atter</h1>
+
+        <section>
+            <ol>
+                <li property="schema:author" typeof="sa:ContributorRole">
+                    <a property="schema:author" href="https://github.com/andyrkn" typeof="schema:Person">
+                        <span property="schema:familyName">Mihaila</span>
+                        <span property="schema:givenName">Andrei</span>
+                    </a>
+                </li>
+                <li property="schema:contributor" typeof="sa:ContributorRole">
+                    <a property="schema:contributor" href="https://github.com/CristianAndrei" typeof="schema:Person">
+                        <span property="schema:familyName">Ursu</span>
+                        <span property="schema:givenName">Cristian</span>
+                    </a>
+                </li>
+                <li property="schema:contributor" typeof="sa:ContributorRole">
+                    <a property="schema:contributor" href="https://github.com/verciucsergiu/" typeof="schema:Person">
+                        <span property="schema:familyName">Verciuc</span>
+                        <span property="schema:givenName">Sergiu</span>
+                    </a>
+                </li>
+            </ol>
+        </section>
+        <div>
+            <ol style="list-style-type: none;">
+                <li>
+                    <a href ="#atter-pages-register">1. Register Page</a>
+                </li>
+                <li>
+                    <a href ="#atter-pages-login">2. Login Page</a>
+                </li>
+                <li>
+                    <a href ="#atter-pages-home">3. Home Page</a>
+                </li>
+                <li>
+                    <a href ="#atter-pages-create">4. Create Activity Page</a>
+                </li>
+                <li>
+                    <a href ="#atter-pages-follow">5. Follow Activity Page</a>
+                </li>
+                <li>
+                    <a href ="#atter-pages-dashboard">6. Dashboard</a>
+                </li>
+                <li>
+                    <a href ="#atter-pages-profile">7. Profile Page</a>
+                </li>
+                <li>
+                    <a href ="#atter-pages-import">8. Import</a>
+                </li>
+                <li>
+                    <a href ="#atter-demo">8. Demo</a>
+                </li>
+            </ol>
+        </div>
+        <section typeof="sa:Abstract" id="abstract">
+            <hr>
+            <h1>Abstract</h1>
+            <p>
+                Atter is a solution aimed at better coordinating any type of activity. An activity
+                owner is able to track any type of check-in, legal ones or frauds, to grade atendees
+                and to give them feedback per check-in.
+            </p>
+        </section>
+
+        <section typeof="sa:AtterRegisterPage" id="atter-pages-register">
+            <hr>
+            <h3>Register page</h3>
+            <p>
+                The user will be promted for his data in orded to create a new account.
+            </p>
+            <img alt=" " src="assets/register-page.png">
+        </section>
+
+
+        <section typeof="sa:AtterLoginPage" id="atter-pages-login">
+            <hr>
+            <h3>Login page</h3>
+            <p>
+                User data such as email and password will be required for login.
+            </p>
+            <img alt=" " src="assets/login-page.png">
+        </section>
+
+
+        <section typeof="sa:AtterHomePage" id="atter-pages-home">
+            <hr>
+            <h3>Home page</h3>
+            <p>
+                If you are logged in the home page will display two containers. The first one contains the list of user
+                own activities
+                and the second one contains a list of user followd activities.
+                If you are not logged in, simple information about the application will be available
+            </p>
+            <img alt=" " src="assets/home-page.png">
+        </section>
+
+        <section typeof="sa:CreateActivityPage" id="atter-pages-create">
+            <hr>
+            <h3>Create activity page</h3>
+            <p>
+                This is the page for creating a new activity. An user can choose multiple options for his newly created
+                activity.
+            </p>
+            <img alt=" " src="assets/create-page.png">
+        </section>
+
+        <section typeof="sa:FollowActivityPage" id="atter-pages-follow">
+            <hr>
+            <h3>Follow activity page</h3>
+            <p>
+                This page asks for a simple follow code in order to be able to follow an existing activity
+            </p>
+            <img alt=" " src="assets/follow-page.png">
+        </section>
+
+        <section typeof="sa:DashboardPage" id="atter-pages-dashboard">
+            <hr>
+            <h3>Dashboard</h3>
+            <p>
+                Here a owner can see the stats of his activity, legal checkins, frauds, grades, graphs and he can also
+                import or export data to or from the application.
+                A follower will simply see the data the onwer allows him to.
+            </p>
+            <img alt=" " src="assets/dashboard-page.png">
+        </section>
+
+        <section typeof="sa:ProfilePage" id="atter-pages-profile">
+            <hr>
+            <h3>Profile page</h3>
+            <p>
+                As an user you can see your first name, last name and email address. He can modify the first two of
+                them.
+                Also he can require or revoke dropbox access.
+            </p>
+            <img alt=" " src="assets/profile-page.png">
+        </section>
+
+        <section typeof="sa:ImportPage" id="atter-pages-import">
+            <hr>
+            <h3>Import page</h3>
+            <p>
+                If you own the activity then you will be promted to get the files from dropbox.
+                The files that the user wants to import must be situated in "atter-resources" directory
+                which is located in the dropbox home folder.
+                Only files with the .json and .csv extension will be imported.
+                When clicking on a file data will be automatically imported into the activity.
+
+            </p>
+            <img alt=" " src="assets/import-page.png">
+        </section>
+
+        <section id = "atter-demos">
+            <iframe class="video" width="720" height="480" src="https://www.youtube.com/embed/OHb4rnWpAVQ"
+                allowfullscreen></iframe>
+            <a href="https://atter-66514.firebaseapp.com/"> Deployed firebase app</a>
+            <div> Note: Dropbox is not working in the deployed version </div>
+        </section>
+    </article>
+
+
+</body>
+
+</html>
