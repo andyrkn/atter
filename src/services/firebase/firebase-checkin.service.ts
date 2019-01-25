@@ -106,7 +106,7 @@ export class FireBaseCheckInService {
         route = 'checkins' + '/' + activityID + '/' + datestring + '/' + route + '/' + this.userEmail.replace('.', ',');
 
         return from(new Promise((resolve) => {
-            this.saveCheckIn(activityID, datestring, checkInData, route, resolve);
+            this.saveCheckIn(checkInData, route, resolve);
         }));
     }
 
