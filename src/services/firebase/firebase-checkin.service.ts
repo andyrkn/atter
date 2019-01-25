@@ -74,7 +74,7 @@ export class FireBaseCheckInService {
             });
     }
 
-    private saveCheckIn(activityID, datestring: string, checkInData: any, route: string, resolve) {
+    private saveCheckIn(checkInData: any, route: string, resolve) {
         this.database.ref(route).set(checkInData)
             .then((res) => { if (res) { resolve(res); } });
     }
@@ -121,7 +121,8 @@ export class FireBaseCheckInService {
     public updateUserCheckIn(route: string, data: LegalCheckInModel): Observable<boolean> {
         return from(this.database.ref('checkins/' + route).update(data));
     }
-    public updateActivityFromExternalSource(activityID : string, data) : Observable<boolean> {
+
+    public updateActivityFromExternalSource(activityID: string, data): Observable<boolean> {
         return from(new Promise((resolve) => {
             this.database.ref('checkins/' + activityID).update(data).then((res) => {
                 resolve(true);

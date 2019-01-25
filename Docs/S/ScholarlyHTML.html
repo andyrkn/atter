@@ -1,0 +1,827 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+
+<head>
+    <meta name="viewport" content="width=device-width">
+    <title>Atter</title>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body prefix="schema: http://schema.org/ xsd: http://www.w3.org/2001/XMLSchema# sa: https://ns.science.ai/">
+
+    <article id="main-article" typeof="schema:ScholarlyArticle" resource="#">
+        <h1>Atter</h1>
+
+        <section>
+            <ol>
+                <li property="schema:author" typeof="sa:ContributorRole">
+                    <a property="schema:author" href="https://github.com/andyrkn" typeof="schema:Person">
+                        <span property="schema:familyName">Mihaila</span>
+                        <span property="schema:givenName">Andrei</span>
+                    </a>
+                </li>
+                <li property="schema:contributor" typeof="sa:ContributorRole">
+                    <a property="schema:contributor" href="https://github.com/CristianAndrei" typeof="schema:Person">
+                        <span property="schema:familyName">Ursu</span>
+                        <span property="schema:givenName">Cristian</span>
+                    </a>
+                </li>
+                <li property="schema:contributor" typeof="sa:ContributorRole">
+                    <a property="schema:contributor" href="https://github.com/verciucsergiu/" typeof="schema:Person">
+                        <span property="schema:familyName">Verciuc</span>
+                        <span property="schema:givenName">Sergiu</span>
+                    </a>
+                </li>
+            </ol>
+        </section>
+
+        <div>
+            <ol style="list-style-type: none;">
+                <li><a href="#abstract">1. Abstract</a></li>
+                <li><a href="#architecture">2. Application Architecture</a>
+                    <ol style="list-style-type: none;">
+                        <li><a href="#typescript">2.1 Typescript</a></li>
+                        <li><a href="#firebase">2.2 FireBase</a>
+                            <ol style="list-style-type: none;">
+                                <li><a href="#firebase-motivation">2.2.1 Motivation</a></li>
+                                <li><a href="#firebase-architecture">2.2.2 Architecture</a>
+                                    <ol style="list-style-type: none;">
+                                        <li><a href="#firebase-architecture-activities">2.2.2.1 Activities</a></li>
+                                        <li><a href="#firebase-architecture-checkins">2.2.2.2 Check-Ins</a></li>
+                                    </ol>
+                                </li>
+                            </ol>
+                        </li>
+                        <li><a href="#atterframework">2.3 Atter Framework</a>
+                            <ol style="list-style-type: none;">
+                                <li><a href="#atterframework-application">2.3.0 Application Starter</a></li>
+                                <li><a href="#atterframework-applicationcontainer">2.3.1 Application Container</a></li>
+                                <li><a href="#atterframework-router">2.3.2 Router</a></li>
+                                <li><a href="#atterframework-componentmanager">2.3.3 Component Manager</a></li>
+                                <li><a href="#atterframework-routingmanager">2.3.4 Routing Manager</a></li>
+                                <li><a href="#atterframework-renderable">2.3.5 Renderable</a></li>
+                                <li><a href="#atterframework-dicontainer">2.3.6 Dependency Injection Container</a></li>
+                                <li><a href="#atterframework-domprocessors">2.3.7 Dom Processors</a>
+                                    <ol style="list-style-type: none;">
+                                        <li><a href="#atterframework-domprocessors-clickprocessor">2.3.7.1 Click
+                                                Processor</a></li>
+                                        <li><a href="#atterframework-domprocessors-bindprocessor">2.3.7.2 Bind
+                                                Processor</a></li>
+                                        <li><a href="#atterframework-domprocessors-submitprocessor">2.3.7.3 Submit
+                                                Processor</a></li>
+                                    </ol>
+                                </li>
+                                <li><a href="#atterframework-encapsulator">2.3.8 Encapsulator</a></li>
+                                <li><a href="#atterframework-lchooks">2.3.9 Life-Cycle Hooks</a></li>
+                                <li><a href="#atterframework-templateengine">2.3.10 Template Engine</a></li>
+                                <li><a href="#atterframework-decorators">2.3.11 Decorators</a>
+                                    <ol style="list-style-type: none;">
+                                        <li><a href="#atterframework-decorators-injectable">2.3.11.1 Injectable</a></li>
+                                        <li><a href="#atterframework-decorators-renderable">2.3.11.2 Renderable</a></li>
+                                        <li><a href="#atterframework-decorators-trackchanges">2.3.11.3 TrackChanges</a></li>
+                                    </ol>
+                                </li>
+                            </ol>
+                        </li>
+                        <li><a href="#applicationarchitecture">2.4 Application Architecture</a>
+                            <ol style="list-style-type: none;">
+                                <li><a href="#applicationarchitecture-pages">2.4.1 Pages</a>
+                                    <ol style="list-style-type: none;">
+                                        <li><a href="#applicationarchitecture-pages-activity">2.4.1.1 Activity Page</a></li>
+                                        <li><a href="#applicationarchitecture-pages-assign-grade">2.4.1.2 Assign Grade
+                                                Page</a></li>
+                                        <li><a href="#applicationarchitecture-pages-create-new-activity">2.4.1.3 Create
+                                                New
+                                                Activity Page</a></li>
+                                        <li><a href="#applicationarchitecture-pages-dashboard">2.4.1.4 Dashboard Page</a></li>
+                                        <li><a href="#applicationarchitecture-pages-follow-activity">2.4.1.5 Follow
+                                                Activity
+                                                Page</a></li>
+                                        <li><a href="#applicationarchitecture-pages-forgot-password">2.4.1.6 Forgot
+                                                Password
+                                                Page</a></li>
+                                        <li><a href="#applicationarchitecture-pages-home">2.4.1.7 Home Page</a></li>
+                                        <li><a href="#applicationarchitecture-pages-import-data-for-activity">2.4.1.8
+                                                Import
+                                                Data For Activity Page</a></li>
+                                        <li><a href="#applicationarchitecture-pages-log-out">2.4.1.9 Log Out Page</a></li>
+                                        <li><a href="#applicationarchitecture-pages-login">2.4.1.10 Login Page</a></li>
+                                        <li><a href="#applicationarchitecture-pages-not-found">2.4.1.11 Not Found Page</a></li>
+                                        <li><a href="#applicationarchitecture-pages-profile">2.4.1.12 Profile Page</a></li>
+                                        <li><a href="#applicationarchitecture-pages-register">2.4.1.13 Register Page</a></li>
+                                    </ol>
+                                </li>
+                                <li><a href="#applicationarchitecture-components">2.4.2 Components</a>
+                                    <ol style="list-style-type: none;">
+                                        <li><a href="#applicationarchitecture-components-header">2.4.2.1 Header</a></li>
+                                    </ol>
+                                </li>
+                                <li><a href="#applicationarchitecture-services">2.4.3 Services</a>
+                                    <ol style="list-style-type: none;">
+                                        <li><a href="#applicationarchitecture-services-firebase">2.4.3.1 Firebase
+                                                Services</a>
+                                            <ol style="list-style-type: none;">
+                                                <li><a href="#applicationarchitecture-services-firebase-activities">2.4.3.1.1
+                                                        Firebase Activities Service</a></li>
+                                                <li><a href="#applicationarchitecture-services-firebase-activitysubscription">2.4.3.1.2
+                                                        Firebase Activity Subscription Service</a></li>
+                                                <li><a href="#applicationarchitecture-services-firebase-authentication">2.4.3.1.3
+                                                        Firebase Authentication Service</a></li>
+                                                <li><a href="#applicationarchitecture-services-firebase-checkin">2.4.3.1.4
+                                                        Firebase CheckIn Service</a></li>
+                                                <li><a href="#applicationarchitecture-services-firebase-main">2.4.3.1.5
+                                                        Firebase Initialisation Service</a></li>
+                                            </ol>
+                                        </li>
+                                        <li><a href="#applicationarchitecture-services-externaldata">2.4.3.2 External
+                                                Data Service</a></li>
+                                        <li><a href="#applicationarchitecture-services-geolocation">2.4.3.3 Geolocation
+                                                Service</a></li>
+                                        <li><a href="#applicationarchitecture-services-user">2.4.3.4 User Service</a></li>
+                                    </ol>
+                                </li>
+                                <li><a href="#applicationarchitecture-models">2.4.4 Models</a>
+                                    <ol style="list-style-type: none;">
+                                        <li><a href="#applicationarchitecture-models-checkin">2.4.4.1 CheckIn Model</a></li>
+                                        <li><a href="#applicationarchitecture-models-legalcheckin">2.4.4.2 Legal
+                                                CheckIn Model</a></li>
+                                        <li><a href="#applicationarchitecture-models-illegalcheckin">2.4.4.3 Illegal
+                                                CheckIn Model</a></li>
+                                        <li><a href="#applicationarchitecture-models-activity">2.4.4.4 Activity Model</a></li>
+                                        <li><a href="#applicationarchitecture-models-base">2.4.4.5 Base Model</a></li>
+                                        <li><a href="#applicationarchitecture-models-user">2.4.4.6 User Model</a></li>
+                                    </ol>
+                                </li>
+                            </ol>
+                        </li>
+                    </ol>
+                </li>
+                <li><a href="#coolthingstosay">3. Cool things to say?</a></li>
+                <li><a href="#conclusions">4. Conclusions</a></li>
+            </ol>
+        </div>
+
+        <section typeof="sa:Abstract" id="abstract">
+            <hr>
+            <h1>Abstract</h1>
+            <p>
+                Atter is a solution aimed at better coordinating any type of activity. An activity
+                owner is able to track any type of check-in, legal ones or frauds, to grade atendees
+                and to give them feedback per check-in.
+            </p>
+        </section>
+
+        <section typeof="sa:Architecture" id="architecture">
+            <hr>
+            <h1>Application Architecture</h1>
+            <img alt=" " src="assets/intro.jpg">
+            <p>
+                At the beginning of development we realised that atter wants to be a fast, easy to use real-time
+                application. We found it would be a lot easier to implement the app if we would just create a
+                framework that would fit its needs. And so along its framework, TypeScript and Firebase, Atter was
+                born.
+            </p>
+
+            <section typeof="sa:TypeScript" id="typescript">
+                <hr>
+                <h2>Typescript</h2>
+                <p>We chose TypeScript over JavaScript for multiple reasons but the most important one is that
+                    TypeScript provides an optional type system for JavaScript. Types, in our opinion, increase
+                    code
+                    readability and lower human error for the simple reason that the compiler catches errors
+                    instead of
+                    the user at runtime. Further more, types are the best form of documentation that a
+                    developer has at
+                    its disposal. </p>
+                <p>Another reason is that TypeScript is a superset of JavaScript and beacuse of that,
+                    JavaScript works
+                    the same in TypeScript. </p>
+                <p>Our application relies heavily on the decorators that TypeScript brings, in order to collect
+                    metadata and set-up behaviors. We think that is the best approach to this problem that we
+                    would
+                    have encountered if we would be using JavaScript. </p>
+            </section>
+
+            <section typeof="sa:FireBase" id="firebase">
+                <hr>
+                <h2>FireBase</h2>
+
+                <section typeof="sa:FireBaseMotivation" id="firebase-motivation">
+                    <hr>
+                    <h3>Motivation</h3>
+                    <p>We chose FireBase because we needed its real-time database feature. By just subscribing
+                        to the
+                        fields that interest us and trough our framework, we give the user a real-time
+                        experience, not
+                        having to ever refresh the page.
+                    </p>
+                </section>
+
+                <section typeof="sa:FireBaseArchitecture" id="firebase-architecture">
+                    <hr>
+                    <h3>FireBase Architecture</h3>
+                    <p>Our FireBase DataBase is structured in 5 main tables. Our aim was to download as little
+                        data as
+                        possible
+                        per page, in order to have a low response time.
+                    </p>
+                    <img alt=" " src="assets/fb_arch.png">
+                    <p>We will detail the most important tables</p>
+                    <section typeof="sa:FireBaseArchitectureActivities" id="firebase-architecture-activities">
+                        <hr>
+                        <h3>Activities</h3>
+                        <p>
+                            An activity is structured in the following way:
+                        </p>
+                        <img alt=" " src="assets/activity-model.png">
+                        <p>
+                            We can get everything we need to know, like if we are able to
+                            check in, where to check in, the last known position of where the activity took
+                            place and
+                            the
+                            maximum distance
+                            that an atendee can check in from.
+                        </p>
+                    </section>
+
+                    <section typeof="sa:FireBaseArchitectureCheckins" id="firebase-architecture-checkins">
+                        <hr>
+                        <h3>Check Ins</h3>
+                        <img alt=" " src="assets/checkin-model.png">
+                        <p>We group all checkins per activity, and then per event date. We save all frauds and
+                            legal
+                            checkins
+                            and bring them all in the organisers dashboard.
+                        </p>
+                    </section>
+                </section>
+
+            </section>
+
+            <section typeof="sa:AtterFramework" id="atterframework">
+                <hr>
+                <h2>Atter Framework</h2>
+                <p>
+                    Atter is made using its own Single-Page Appliation(SPA), built specifically to support its
+                    needs.
+                    We
+                    choose SPA over MPA(Multiple-Page Application) because SPA is fast, more interactive and
+                    can
+                    provide a
+                    more pleasant experience towards its user. It is also easier to develop a serverless
+                    application
+                    using
+                    SPA.
+                </p>
+                <p>
+                    We are following a traditional way of implementing a SPA, but we did some enhancements
+                    introducing
+                    built-in Dependency Injection system, Component life-cycle Hooks, Style Encapsulation for
+                    each
+                    component, a DOM renderer, and a template
+                    engine that lets us interpolate HTML with JS, greatly reducing the development time and
+                    increasing
+                    the
+                    code readability and reliability
+                </p>
+
+                <section typeof="sa:AtterFrameworkApplication" id="atterframework-application">
+                    <hr>
+                    <h3>App Starter</h3>
+                    <img alt=" " src="assets/start-app.png">
+                    <p>
+                        This is the start point of our application. The orchestrators and containers are
+                        initialised then handlers are assigned to them.
+                    </p>
+                    <p>
+                        Once everything is complete the component and routing manager will start the process to
+                        render the
+                        current location.
+                    </p>
+                </section>
+
+                <section typeof="sa:AtterFrameworkApplicationContainer" id="atterframework-applicationcontainer">
+                    <hr>
+                    <h3>Application Container</h3>
+                    <img alt=" " src="assets/app-container.png">
+                    <p>This is the core of our framework. All the information from our decorators goes here and
+                        from here all the properties get set up.</p>
+                </section>
+
+                <section typeof="sa:AtterFrameworkRouter" id="atterframework-router">
+                    <hr>
+                    <h3>Router</h3>
+                    <img alt=" " src="assets/router.png">
+                    <p>Our router can be injected into any page trough our DI system, and then be used trough
+                        the following syntax:
+                        <code>this.router.navigate('page',params)</code>
+                    </p>
+                    <p>
+                        Following the navigate command, our framework will unload the current page and inject
+                        the requested page.
+                    </p>
+                </section>
+
+                <section typeof="sa:AtterFramework" id="atterframework-componentmanager">
+                    <hr>
+                    <h3>Component Manager</h3>
+                    <img alt=" " src="assets/component-manager.png">
+                    <p>From the component manager we start the handlers of our components. In our case, we only
+                        have a header</p>
+                    <p>Other renderables have different managers and will be covered shortly</p>
+                </section>
+
+                <section typeof="sa:AtterFrameworkRoutingManager" id="atterframework-routingmanager">
+                    <hr>
+                    <h3>Routing Manager</h3>
+                    <img alt=" " src="assets/routing-manager.png">
+                    <p>The Routing Manager is responsable with calling the correct handlers to render pages
+                        when a route is changed,
+                        from any action.
+                    </p>
+                </section>
+
+                <section typeof="sa:AtterFrameworkRenderable" id="atterframework-renderable">
+                    <hr>
+                    <h3>Renderable</h3>
+                    <p>
+                        Renderable is a concept we introduced in our framework. It represents a component or a
+                        page
+                        which can be rendered. The difference is made trough RenderableMetadata which will be
+                        further explained
+                        in <a href="#atterframework-decorators">decorators</a>.
+                    </p>
+                </section>
+
+                <section typeof="sa:AtterFrameworkDIContainer" id="atterframework-dicontainer">
+                    <hr>
+                    <h3>Dependency Injection Container</h3>
+                    <img alt=" " src="assets/dicontainer.png">
+                    <p>In the dependecy container we hold metadata about injectables and renderables, and the
+                        injectables themselves.</p>
+                    <p>Every injectable is instantiated when needed and then kept here until it's needed again,
+                        so it can be used without delay</p>
+                </section>
+
+                <section typeof="sa:AtterFrameworkDOMProcessors" id="atterframework-domprocessors">
+                    <hr>
+                    <h3>DOM Processors</h3>
+                    <img alt=" " src="assets/processor.png">
+                    <p>Our framework brings three DOM Processors which solve different needs and make app
+                        implementing a lot faster. Our processors work by
+                        reading the processed DOM before rendering and then adding the necessary event
+                        listeners.
+                    </p>
+
+                    <p>We look for <code>data-processor</code> tags and then send the elements in the
+                        respective handlers</p>
+
+                    <section typeof="sa:AtterFrameworkDOMProcessorsClick" id="atterframework-domprocessors-clickprocessor">
+                        <hr>
+                        <h3>Click Processor</h3>
+                        <img alt=" " src="assets/p-click.png">
+
+                    </section>
+                    <section typeof="sa:AtterFrameworkDOMProcessorsBind" id="atterframework-domprocessors-bindprocessor">
+                        <hr>
+                        <h3>Bind Processor</h3>
+                        <img alt=" " src="assets/p-bind.png">
+                        <p>Trough this processor we create One Way Data Binding from HTML to TS code. This
+                            allows our forms to be
+                            interactive and the code to be easy to read and write, removing any need to write
+                            event listeners in
+                            page logic.
+                        </p>
+                    </section>
+                    <section typeof="sa:AtterFrameworkDOMProcessorsSubmit" id="atterframework-domprocessors-submitprocessor">
+                        <hr>
+                        <h3>Submit Processor</h3>
+                        <img alt=" " src="assets/p-submit.png">
+                    </section>
+                </section>
+
+                <section typeof="sa:AtterFrameworkEncapsulator" id="atterframework-encapsulator">
+                    <hr>
+                    <h3>Encapsulator</h3>
+                    <img alt=" " src="assets/encapsulator.png">
+                    <p>Everytime we go on a page we encapsulate(unless we already did, then we load it) all the
+                        css style and the html with a tag <code>-data__renderable-x</code>
+                        where <code>x</code> is the count of when we reach the specific page, and then we save
+                        it for
+                        further use
+                    </p>
+                </section>
+
+                <section typeof="sa:AtterFrameworkLCHooks" id="atterframework-lchooks">
+                    <hr>
+                    <h3>Life-Cycle Hooks</h3>
+                    <img alt=" " src="assets/lchooks.png">
+                    <p>
+                        Trough Life-Cycle hooks we can set functions to start at different points during the
+                        life-cycle of
+                        a page. If we want to hook on any of these events we have to implement the requiered
+                        interface like so:
+                    </p>
+                    <img alt=" " src="assets/lchookexample.png">
+                </section>
+
+                <section typeof="sa:AtterFrameworkTemplateEngine" id="atterframework-templateengine">
+                    <hr>
+                    <h3>Template Engine</h3>
+                    <img alt=" " src="assets/template-engine.png">
+                    <p>Our template engine allows us to interpolate javascript code with html code trough our
+                        custom tags <code> &lt;&lt; &gt;&gt;</code>, letting us write very little html code making
+                        development fast and easy
+                    </p>
+                    <p>For example:</p>
+                    <img alt=" " src="assets/interpolationexample.png">
+                    <p>This portion of code will iterate trough the objects declared in our typescript file and
+                        generate all the needed html. We can get any variable value trough <code>&lt;&lt;=var&gt;&gt;</code></p>
+                </section>
+
+                <section typeof="sa:AtterFrameworkDecorators" id="atterframework-decorators">
+                    <hr>
+                    <h3>Decorators</h3>
+                    <p>Our framework relies heavily on the use of decorators, using them to collect metadata
+                        across our app.
+                        Along with reflect-metadata API we get everything we need to know about every class and
+                        function inside the app.
+                    </p>
+                    <p>
+                        The three decorators we use will be detailed below.
+                    </p>
+
+                    <section typeof="sa:AtterFrameworkDecoratorsInjectable" id="atterframework-decorators-injectable">
+                        <hr>
+                        <h3>Injectable</h3>
+                        <img alt=" " src="assets/injectable.png">
+                        <p>Our injectable decorator will get the class itself that will be then collected by
+                            the application container and then sent to the dependecy container. It is used in
+                            the following way:
+                        </p>
+                        <img alt=" " src="assets/injectable-example.png">
+                        <p>Once a class is decorated it can be injected anywhere in the app</p>
+                        <p></p>
+                    </section>
+
+                    <section typeof="sa:AtterFrameworkDecoratorsRenderable" id="atterframework-decorators-renderable">
+                        <hr>
+                        <h3>Renderable</h3>
+                        <img alt=" " src="assets/renderable-decorator.png">
+                        <p>A renderable is differenciated trough the different metadata that we can give to it.
+                            We separate a Page and a Component in the following way:
+                        </p>
+                        <img alt=" " src="assets/renderable-decorator-page.png">
+                        <img alt=" " src="assets/renderable-decorator-compononet.png">
+                        <p>
+                            A component can have a selector while a page cannot. The remaining metadata
+                            consists of the css and html files, which the framework will start processing to
+                            create the final result.
+                        </p>
+                    </section>
+
+                    <section typeof="sa:AtterFrameworkDecoratorsTrackChanges" id="atterframework-decrators-trackchanges">
+                        <hr>
+                        <h3>Track Changes</h3>
+                        <img alt=" " src="assets/trackchanges-decorator.png">
+                        <p>Trough the Track Changes decorator we can add observers on variables and react to
+                            any changes that occur over them accordingly. It is used in the following way:</p>
+                        <img alt=" " src="assets/trackchanges-decorator-example.png">
+                        <p>
+                            Whenever changes happen, the DOM will react accordingly and re-render.
+                        </p>
+                    </section>
+
+                </section>
+
+            </section>
+
+            <section typeof="sa:ApplicationArchitecture" id="applicationarchitecture">
+                <hr>
+                <h2>Application Architecture</h2>
+                <p>Atter is structured in Pages,Compononents and Services </p>
+                <section typeof="sa:ApplicationArchitecturePages" id="applicationarchitecture-pages">
+                    <hr>
+                    <h2>Pages</h2>
+                    <p>One of the 3 components that make Atter. This document will detail each page in our application.</p>
+
+                    <section typeof="sa:ApplicationArchitecturePagesActivity" id="applicationarchitecture-pages-activity">
+                        <hr>
+                        <h3>Activity Page</h3>
+                        <p>This page will react mainly at the change of the following variables:
+                            <code>canCheckIn</code>, <code>activity</code> and <code>checkInData</code>. Where <code>canCheckIn</code>
+                            updates when a teacher sets an activity becomes active, <code>activity</code> holds an
+                            activities data and <code>checkInData</code> holds information about a users frauds and
+                            legal checkins, that will be displayed on the screen.
+                        </p>
+                        <p>
+                            We use two BehaviourSubjects which we subscribe to firebase with to be notified when a
+                            change happens:<code>activitySubject</code>
+                            and <code>_checkInSubject</code>, and then subscribe to them.
+                        </p>
+                    </section>
+
+                    <section typeof="sa:ApplicationArchitecturePagesAssignGrade" id="applicationarchitecture-pages-assign-grade">
+                        <hr>
+                        <h3>Assign Grade Page</h3>
+                        <p>In this page an organiser can grade, or leave feedback to an user.</p>
+                        <p>We take form data trough our data-bind and then update firebase. On succes the organiser
+                            will be sent back to his dashboard.
+                        </p>
+                    </section>
+
+                    <section typeof="sa:ApplicationArchitecturePagesCreateNewActivity" id="applicationarchitecture-pages-create-new-activity">
+                        <hr>
+                        <h3>CreateNewActivity Page</h3>
+                        <p>In Atter, any user can be an organiser, so everyone is able to create an activity trough a
+                            simple form where a name and an activity icon can be selected.
+                        </p>
+                        <p>If the activity is successfully created, the user is send back to the dashboard.</p>
+                    </section>
+
+                    <section typeof="sa:ApplicationArchitecturePagesDashboard" id="applicationarchitecture-pages-dashboard">
+                        <hr>
+                        <h3>Dashboard Page</h3>
+                        <p>
+                            The Dashboard is the main page from where an organiser can control his activity. This page
+                            will react to every check-in(if allowed)
+                            an user does, trough the help of <code>_checkInSubject</code> which is set to change
+                            everytime a checkin happens.
+                        </p>
+                        <p>
+                            The organiser can set a maximum checkin distance, from which a checkin is considered legal,
+                            or a fraud, and then can enable or disable checkins.
+                            Each checkin session will be saved and displayed under the control box, along with graphs
+                            and exporting/importing options.
+                        </p>
+                    </section>
+
+                    <section typeof="sa:ApplicationArchitecturePagesFollowActivity" id="applicationarchitecture-pages-follow-activity">
+                        <hr>
+                        <h3>FollowActivity Page</h3>
+                        <p>With a follow code, any activity can be added to followed activities</p>
+                    </section>
+
+                    <section typeof="sa:ApplicationArchitecturePagesForgotPassword" id="applicationarchitecture-pages-forgot-password">
+                        <hr>
+                        <h3>ForgotPassword Page</h3>
+                    </section>
+
+                    <section typeof="sa:ApplicationArchitecturePagesHome" id="applicationarchitecture-pages-home">
+                        <hr>
+                        <h3>Home Page</h3>
+                        <p>Here a user can see all his dashboards and followed activities.</p>
+                        <p>All data is fetched real-time trough <code>_dashboardsSubject</code> and <code>_followingSubject</code>.</p>
+                    </section>
+
+                    <section typeof="sa:ApplicationArchitecturePagesImportDataForActivity" id="applicationarchitecture-pages-import-data-for-activity">
+                        <hr>
+                        <h3>ImportDataForActivity Page</h3>
+                        <p>After connecting to dropbox, Atter allows data importing in the following formats: <code>json</code>
+                            and <code>csv</code>. On succes the user is redirected to the dashboard.
+                        </p>
+                        <p>
+                            For the csv->json conversion we use <a href="https://www.npmjs.com/package/csvjson">csvjson</a>.
+                        </p>
+
+                    </section>
+
+                    <section typeof="sa:ApplicationArchitecturePagesLogout" id="applicationarchitecture-pages-log-out">
+                        <hr>
+                        <h3>Logout Page</h3>
+                    </section>
+
+                    <section typeof="sa:ApplicationArchitecturePagesLogin" id="applicationarchitecture-pages-login">
+                        <hr>
+                        <h3>Login Page</h3>
+                    </section>
+
+                    <section typeof="sa:ApplicationArchitecturePagesNotFound" id="applicationarchitecture-pages-not-found">
+                        <hr>
+                        <h3>NotFound Page</h3>
+                    </section>
+
+                    <section typeof="sa:ApplicationArchitecturePagesProfile" id="applicationarchitecture-pages-profile">
+                        <hr>
+                        <h3>Profile Page</h3>
+                        <p>
+                            Inside the Profile Page, users can connect to dropbox or update their personal data.
+                        </p>
+                    </section>
+
+                    <section typeof="sa:ApplicationArchitecturePagesRegister" id="applicationarchitecture-pages-register">
+                        <hr>
+                        <h3>Register Page</h3>
+                    </section>
+                </section>
+                <section typeof="sa:ApplicationArchitectureComponents" id="applicationarchitecture-components">
+                    <hr>
+                    <h2>Components</h2>
+                    <p>Components are second type of renderables</p>
+                    <section typeof="sa:ApplicationArchitectureComponentsHeader" id="applicationarchitecture-components-header">
+                        <hr>
+                        <h3>Header</h3>
+                        <p>
+                            The header holds our nav bar and our logo. It will refresh on Login/Logout/Register
+                        </p>
+                    </section>
+                </section>
+
+                <section typeof="sa:ApplicationArchitectureServices" id="applicationarchitecture-services">
+                    <hr>
+                    <h2>Services</h2>
+                    <p>Trough our dependecy injection system, we can create services that we inject anywhere in the
+                        code. They will be covered in this part of the document.</p>
+
+                    <section typeof="sa:ApplicationArchitectureServicesFirebase" id="applicationarchitecture-services-firebase">
+                        <hr>
+                        <h3>Firebase Services</h3>
+                        <p>We separated the way we use FireBase into separate files for better code readability:</p>
+
+                        <section typeof="sa:ApplicationArchitectureServicesFirebaseActivities" id="applicationarchitecture-services-firebase-activities">
+                            <hr>
+                            <h3>Firebase Activities</h3>
+                            <img alt=" " src="assets/firebase-activities.png">
+                            <p>In this service we have most logic related to an activities management</p>
+                            <p>We inject UserService and FirebaseService to get a reference to the database and the
+                                currently logged in user.</p>
+                            <p><code>getAllActivitiesDetails</code> will return all metadata for requested activities.
+                                For
+                                example to fill in the home page. The data received will contain be an array of data
+                                presented in
+                                <a href="#firebase-architecture-activities">activities</a>.
+                            </p>
+                            <p>
+                                <code>getUserActivities</code> returns all dashboard metadata of an user trough an
+                                observable.
+                            </p>
+                            <p>
+                                <code>setActivityGradeVisibiliy</code> will set an activity data as private,protected
+                                ur public.
+                            </p>
+                            <p>
+                                <code>getFollowedActivities</code> will get all activities a user follows and then call
+                                <code>getAllActivitiesDetails</code>.
+                            </p>
+                            <p>
+                                <code>getStaticActivityDetails</code> will return all metadata of an activity without
+                                listening for changes, trough an observable
+                            </p>
+                            <p>
+                                <code>getObservableActivityDetails</code> will subscribe to an activity and listen to
+                                it for changes, then update the subject.
+                            </p>
+                        </section>
+
+                        <section typeof="sa:ApplicationArchitectureServicesFirebaseActivities" id="applicationarchitecture-services-firebase-activitysubscription">
+                            <hr>
+                            <h3>Firebase Activity Subscription</h3>
+                            <img alt=" " src="assets/firebase-activity-subscription.png">
+                            <p><code>checkActivityExistance</code> will check if an activity exists at the specified
+                                ID.</p>
+                            <p><code>createActivity</code> is responsible with creating an activity with a follow code
+                                from <code>createFollowCode</code> while <code>followActivity</code> will follow one.</p>
+                            <p><code>createFollowCode</code></p>
+                        </section>
+
+                        <section typeof="sa:ApplicationArchitectureServicesFirebaseActivities" id="applicationarchitecture-services-firebase-authentication">
+                            <hr>
+                            <h3>Firebase Authentication</h3>
+                            <img alt=" " src="assets/firebase-auth.png">
+                            <p>The authentication service will just do basic <code>register</code>, <code>login</code>
+                                and <code>logout</code> actions over accounts.</p>
+                        </section>
+
+                        <section typeof="sa:ApplicationArchitectureServicesFirebaseActivities" id="applicationarchitecture-services-firebase-checkin">
+                            <hr>
+                            <h3>Firebase Checkin</h3>
+                            <img alt=" " src="assets/firebase-checkin-1.png">
+                            <img alt=" " src="assets/firebase-checkin-2.png">
+                            <p><code>setUserCheckIn</code>, <code>getUserCheckIn</code>, <code>updateUserCheckIn</code>
+                                area responsible with user checkin logic. They all return an observable with the action
+                                result.
+                            </p>
+                            <p><code>updateActivityFromExternalSource</code> and <code>updateActivityData</code> will
+                                update one activity or more and return an observable with the action result.</p>
+                            <p>
+                                <code>getAllCheckins</code> will call <code>getAllCheckIns</code> and return all
+                                checkin data of a certain activity trough an observable.
+                            </p>
+                            <p><code>enableActivityCheckIn</code> will start the process of enabling an activity check
+                                in, it will update the distance and get the current location from <code>prepareCheckInCoordinates</code>
+                                and then update everything
+                                trough <code>prepareCheckInActivityData</code> while <code>disableActivityCheckIn</code>
+                                and <code>prepareActivityDisableCheckIn</code> will do the opposite.</p>
+                        </section>
+
+                        <section typeof="sa:ApplicationArchitectureServicesFirebaseActivities" id="applicationarchitecture-services-firebase-main">
+                            <hr>
+                            <h3>Firebase Initialization</h3>
+                            <img alt=" " src="assets/firebase-init.png">
+                            <p>In this service we run the initialisation of the firebase service and from here we
+                                inject it into every other dependant firebase service</p>
+                        </section>
+
+                    </section>
+
+                    <section typeof="sa:ApplicationArchitectureServicesExternalData" id="applicationarchitecture-services-externaldata">
+                        <hr>
+                        <h3>External Data Service</h3>
+                        <img alt=" " src="assets/service-externaldata.png">
+                        <p>This service is used to import data and connect, and disconnect from external services</p>
+                    </section>
+
+                    <section typeof="sa:ApplicationArchitectureServicesGeolocation" id="applicationarchitecture-services-geolocation">
+                        <hr>
+                        <h3>Geolocation Service</h3>
+                        <img alt=" " src="assets/geolocation-service.png">
+                        <p><code>getCurrentLocation</code> will return an observable with a <a href="#applicationarchitecture-models-coords">coordinates
+                                model</a></p>
+                        <p>Trough the help of <code>calculateDistance</code> we obtain the distance between two <a href="#applicationarchitecture-models-coords">coordinates</a></p>
+                    </section>
+
+                    <section typeof="sa:ApplicationArchitectureServicesUser" id="applicationarchitecture-services-user">
+                        <hr>
+                        <h3>User Service</h3>
+                        <img alt=" " src="assets/user-service-1.png">
+                        <img alt=" " src="assets/user-service-2.png">
+                        <p>Trough <code>getCurrentUserRealTime</code> we subscribe to a firebase user with a subject
+                            that will get changed when any fields are changed in the database.
+                        </p>
+                        <p>
+                            <code>getCurrentUserAuthToken</code> will return an observable towards the users uid stored
+                            on firebase.
+                        </p>
+                        <p>To update a users profile we use <code>updateValues</code>.</p>
+                    </section>
+
+                </section>
+
+                <section typeof="sa:ApplicationArchitectureModels" id="applicationarchitecture-models">
+                    <hr>
+                    <h2>Models</h2>
+
+                    <p>We use models to have bigger control over our functions and for code to be easier to read and
+                        mantain.</p>
+
+                    <section typeof="sa:ApplicationArchitectureModels" id="applicationarchitecture-models-checkin">
+                        <hr>
+                        <h3>Checkin Model</h3>
+                        <img alt=" " src="assets/checkinmodel.png">
+                        <p>The base checkin model we use before we find out if a checkin is legal or not.</p>
+                    </section>
+
+                    <section typeof="sa:ApplicationArchitectureModelsLegal" id="applicationarchitecture-models-legalcheckin">
+                        <hr>
+                        <h3>Legal Checkin Model</h3>
+                        <img alt=" " src="assets/legalcheckinmodel.png">
+                        <p>If a checkin is legal we create a legal checkin model and add all the necessary fields for a
+                            teacher to grade this checkin.</p>
+                    </section>
+
+                    <section typeof="sa:ApplicationArchitectureModelsIllegal" id="applicationarchitecture-models-illegalcheckin">
+                        <hr>
+                        <h3>Illegal CheckIn Model</h3>
+                        <img alt=" " src="assets/illegalcheckinmodel.png">
+                        <p>If a checkin is considered a fraud we only keep the distance from the base checkin model and
+                            submit it like that, not being able to grade a fraud.</p>
+                    </section>
+
+                    <section typeof="sa:ApplicationArchitectureModelsActivity" id="applicationarchitecture-models-activity">
+                        <hr>
+                        <h3>Activity Model</h3>
+                        <img alt=" " src="assets/activitymodel.png">
+                        <p>We use this model to create a new activity</p>
+                    </section>
+
+                    <section typeof="sa:ApplicationArchitectureModelsBase" id="applicationarchitecture-models-base">
+                        <hr>
+                        <h3>Base Model</h3>
+                        <img alt=" " src="assets/basemodel.png">
+                    </section>
+
+                    <section typeof="sa:ApplicationArchitectureModelsUser" id="applicationarchitecture-models-user">
+                        <hr>
+                        <h3>User Model</h3>
+                        <img alt=" " src="assets/usermodel.png">
+                    </section>
+                </section>
+
+            </section>
+        </section>
+
+        <section typeof="sa:Coolthingstosay" id="coolthingstosay">
+            <hr>
+            <h2>Cool things to say?</h2>
+        </section>
+
+        <section typeof="sa:Conclusions" id="conclusions">
+            <hr>
+            <h2>Conclusions</h2>
+        </section>
+
+    </article>
+</body>
+
+</html>

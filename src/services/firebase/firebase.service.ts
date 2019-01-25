@@ -5,6 +5,7 @@ import {
 import {
     firebaseConfig
 } from "./firebase.config";
+
 @Injectable()
 export class FirebaseService {
     private _firebaseApp: firebase.app.App;

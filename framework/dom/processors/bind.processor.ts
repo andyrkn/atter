@@ -1,5 +1,4 @@
 import { Utils } from "@web/utils";
-import { AttributeParser } from "../utils/attribute.parser";
 import { DomProcessor } from "../dom-processor";
 
 export class BindProcessor implements DomProcessor {

@@ -8,6 +8,7 @@ export class Router {
     constructor(navSubject: Subject<NavigationState>) {
         this.navigationSubject = navSubject;
     }
+
     public get navigationState(): Subject<NavigationState> {
         return this.navigationSubject;
     }

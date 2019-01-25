@@ -1,0 +1,256 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    background: #f7f7f7;
+    color: #434343;
+}
+
+body>section, article {
+    padding: 0 10px;
+    margin: 0 auto 120px auto;
+    max-width: 900px;
+}
+
+section:target h2, section:target h3, article:target h1 {
+    color: #2196f3;
+}
+
+article {
+    padding: 80px;
+    background: #fff;
+}
+
+h1, h2, h3 {
+    text-align: center;
+    padding-top: 16px;
+    padding-bottom: 16px;
+    letter-spacing: .75px;
+}
+
+h1 {
+    font-size: 28px;
+}
+
+h2 {
+    font-size: 24px;
+}
+
+h3 {
+    font-size: 20px;
+}
+
+hr {
+    opacity: 0.5;
+    display: block;
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+    margin-left: auto;
+    margin-right: auto;
+    border-style: inset;
+    border-width: 1px;
+}
+
+p {
+    font-size: 16px;
+}
+
+dfn {
+    text-decoration: underline;
+}
+
+a {
+    color: #2196f3;
+}
+
+a, :link, :visited {
+    text-decoration: none;
+    color: #2196f3;
+}
+
+a:active {
+    color: #64b5f6;
+}
+
+article img {
+    max-width: 100%;
+    width: auto;
+    height: auto;
+}
+
+code:not([class]) {
+    color: rgb(255, 255, 255);
+    padding: 2px;
+    background: rgb(59, 59, 59);
+}
+
+article pre[class*="language-"] {
+    max-height: 100%;
+}
+
+section {
+    margin-top: 90px;
+}
+
+section[typeof='sa:ReferenceList'] dt {
+    float: left;
+    margin-right: 5px;
+}
+
+section[typeof='sa:ReferenceList'] dt::after {
+    content: ',';
+}
+
+section[typeof='sa:ReferenceList'] dd {
+    margin-bottom: 16px;
+}
+
+section[typeof='sa:ReferenceList'] cite::before {
+    content: '«';
+}
+
+section[typeof='sa:ReferenceList'] cite::after {
+    content: '»';
+}
+
+article>section:first-of-type {
+    margin-top: 30px;
+}
+
+/* the authors' list */
+
+article>section:first-of-type ol::before {
+    display: block;
+    float: left;
+    width: 150px;
+    margin-left: -150px;
+    font-variant: small-caps;
+    color: #9E9E9E;
+}
+
+article>section:first-of-type ol:first-of-type::before {
+    content: 'Authors';
+}
+
+article>section:first-of-type ol:not(:first-of-type)::before {
+    content: 'Affiliations';
+}
+
+article>section:first-of-type ol {
+    list-style-type: none;
+    margin-left: 150px;
+    counter-reset: affiliations;
+}
+
+article>section:first-of-type ol:not(:first-of-type) li::before {
+    counter-increment: affiliations;
+    content: counter(affiliations, lower-latin) '.';
+    font-size: 12px;
+    display: inline;
+}
+
+article>section:first-of-type li {
+    display: inline;
+}
+
+article>section:first-of-type li::after {
+    content: ',';
+}
+
+article>section:first-of-type li:last-child::after {
+    content: normal;
+}
+
+article>section:first-of-type a[property="sa:roleAffiliation"] {
+    font-size: 12px;
+    vertical-align: super;
+}
+
+/* have less vertical space in structured abstracts */
+
+section[typeof='sa:Abstract']>section {
+    margin: 0;
+}
+
+section[typeof='sa:Abstract']>section>h3 {
+    display: inline;
+    font-variant: small-caps;
+    font-size: inherit;
+    line-height: inherit;
+    margin: 0;
+    padding: 16px 8px 0 0;
+    color: #9E9E9E
+}
+
+aside[typeof="schema:WPSideBar"] {
+    font-style: italic;
+    background: #F0F6FA;
+}
+
+@media screen and (min-width: 1900px) {
+    article {
+        max-width: 1200px;
+        font-size: 16px;
+        line-height: 30px;
+    }
+    header p.title, header p.subtitle, footer p {
+        max-width: 1200px;
+    }
+    footer {
+        font-size: 16px;
+    }
+}
+
+@media screen and (max-width: 979px) {
+    article {
+        width: 100%;
+        padding: 115px 116px 79px 116px;
+        border-top: 1px solid #E0E0E0;
+        border-bottom: 1px solid #E0E0E0;
+        border-left: none;
+        border-right: none;
+    }
+    caption {
+        max-width: calc(100vw - 232px)
+    }
+}
+
+@media screen and (max-width: 799px) {
+    article {
+        padding: 57px 58px 39px 58px;
+    }
+    caption {
+        max-width: calc(100vw - 116px)
+    }
+}
+
+@media screen and (max-width: 399px) {
+    article {
+        padding: 28px 29px 19px 29px;
+    }
+    article>section:first-of-type ol::before {
+        float: none;
+        width: auto;
+        margin-left: 0;
+    }
+    article>section:first-of-type ol {
+        margin-left: 0;
+        padding: 0;
+    }
+    section[typeof="sa:Abstract"] {
+        margin-top: 30px;
+    }
+}
+
+@media print {
+    body {
+        margin: 0;
+        background: #fff;
+    }
+    article {
+        width: 100%;
+        border: none;
+        padding: 2em;
+    }
+}

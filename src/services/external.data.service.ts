@@ -5,11 +5,14 @@ import { Observable, from } from 'rxjs';
 
 @Injectable()
 export class ExternalDataService {
+
     private tokenString = "OAuthToken";
     constructor(private userService: UserService) { }
+
     public authorizeApp(importer: BaseImporter): void {
         importer.authorizeApp();
     }
+
     public obtainOauthToken(importer: BaseImporter, code: string): void {
         importer.obtainOauthToken(code).subscribe((data) => {
             this.userService.updateValues([importer.getName() + this.tokenString], [data.body.access_token]).subscribe(
@@ -17,6 +20,7 @@ export class ExternalDataService {
             );
         });
     }
+
     public obtainFiles(importer: BaseImporter): Observable<any> {
         return from(
             new Promise((resolve) => {
@@ -28,6 +32,7 @@ export class ExternalDataService {
                 );
             }));
     }
+
     public obtainDataFromFile(importer: BaseImporter, fileName: string): Observable<any> {
         return from(
             new Promise((resolve) => {
@@ -39,6 +44,7 @@ export class ExternalDataService {
                 );
             }));
     }
+
     public revokeAcces(importer: BaseImporter): Observable<any> {
         return from(
             new Promise((resolve) => {

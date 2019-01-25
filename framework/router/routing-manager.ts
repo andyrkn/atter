@@ -10,9 +10,7 @@ export class RoutingManager {
     constructor(
         private pagesOrchestrator: RenderableOrchestrator,
         private navigationState: Subject<NavigationState>,
-        private handler: PageManipulatorHandler) {
-
-    }
+        private handler: PageManipulatorHandler) { }
 
     public manage(): void {
         addEventListener('hashchange', () => this.handleRouteChanged(this.pagesOrchestrator, this.navigationState, this.handler));
