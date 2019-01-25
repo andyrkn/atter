@@ -14,4 +14,4 @@ Docs/S/ScholarlyHTML.html
 Docs/S/UserInteractionScholarlyHTML.html
 ```
 ### Firebase hosting
-https://atter-66514.firebaseapp.com/
+https://atter-66514.firebaseapp.com/#/home
