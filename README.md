@@ -1,14 +1,17 @@
 # atter
-local compiling : npm run serve
+to run locally :
+```
+npm run serve
+```
 
 ## Documentation
 https://github.com/andyrkn/atter/tree/master/Docs/S
 ```
-ScholarlyHTML
+Docs/S/ScholarlyHTML.html
 ```
 ## User Guide
 ```
-UserInteractionScholarlyHTML.html
+Docs/S/UserInteractionScholarlyHTML.html
 ```
 ### Firebase hosting
 https://atter-66514.firebaseapp.com/
