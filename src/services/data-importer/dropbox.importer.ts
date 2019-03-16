@@ -9,8 +9,8 @@ export class DropboxImporter extends BaseImporter {
     constructor(private userService: UserService) {
         super();
         this.name = "dropbox";
-        this.appkey = "8w54dor24s7wd5y";
-        this.appsecret = "0qfox8tfdcida8i";
+        this.appkey = "";
+        this.appsecret = "";
         this.redirecturi = "http://localhost:3000/";
         this.authorizeuri = "https://www.dropbox.com/oauth2/authorize";
         this.authentificateuri = "https://api.dropboxapi.com/oauth2/token";
